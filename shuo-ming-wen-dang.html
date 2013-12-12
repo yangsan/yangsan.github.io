@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>kevin's blog</title>
+    <title>说明文档</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Kevin Young">
@@ -69,7 +69,7 @@
 						<i class="icon-folder-open icon-large"></i>测试
 					</a>
                   </li>
-                  <li >
+                  <li class="active">
                     <a href="/category/python.html">
 						<i class="icon-folder-open icon-large"></i>Python
 					</a>
@@ -90,14 +90,60 @@
       <div class="row">
         <div class="span9" id="content">
 <section id="content">
-<h1>Archives for kevin's blog</h1>
+        <article>
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to 说明文档">
+                                        说明文档
+                                </a>
+                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-12-12T00:00:00">
+        <i class="icon-calendar"></i>四 12 十二月 2013
+</abbr>
+<span class="label">By</span>
+<a href="/author/kevin-young.html"><i class="icon-user"></i>Kevin Young</a>
+<span class="label">Category</span>
+<a href="/category/python.html"><i class="icon-folder-open"></i>Python</a>.
 
-<dl>
-	<dt>五 13 十二月 2013</dt>
-	<dd><a href='di-pian-bo-ke.html'>第一篇博客</a></dd>
-	<dt>四 12 十二月 2013</dt>
-	<dd><a href='shuo-ming-wen-dang.html'>说明文档</a></dd>
-</dl>
+
+<span class="label">Tags</span>
+	<a href="/tag/test.html"><i class="icon-tag"></i>test</a>
+	<a href="/tag/publishing.html"><i class="icon-tag"></i>publishing</a>
+</footer><!-- /.post-info -->                </div>
+                <h1>Animation fo Vicsek model</h1>
+<p>This is an animation demo of Standard Vicsek Model</p>
+<p>这是一个标准Vicsek模型的动画演示</p>
+<h1>The Vicsek Model</h1>
+<p>A self-driven particle model was first introduced by Vicsek in 1995. Despite the simplicity of which, the model shows a great variance of collective motion. You can find the original paper <a href="http://prl.aps.org/abstract/PRL/v75/i6/p1226_1">here</a>.</p>
+<p>In the so called 'Vicsek Model' has only one rule: at each time step a given particle driven with a constant absolute velocity assumes the average direction of motion of the particles in its neighborhood of radius r with some random perturbation added.</p>
+<p>In this demo, I want to make the Vicsek model into an animation so that we can actually see what is going on out there.</p>
+<h1>Vicsek模型</h1>
+<p>Tamas Vicsek在1995年提出了一个简单的自驱动粒子系统模型，虽然规则简单，但展现了丰富的性质。</p>
+<p>整个模型只有一条规则：取一批有着相同固定速度的粒子组成一个系统，每个时间步长内，对每个选定的粒子，取以其为中心，半径为r的范围内的所有粒子的平均速度方向并加上一个随机的噪声作为这个粒子的速度。</p>
+<p>这个小程序意在将此模型以动画的形式展示出来。</p>
+<h1>Enviroment Requirment</h1>
+<p>To run this demo, you will need Python with extended lib Numpy and Matplotlib. Or you can try the Enthought Canopy distribution, which will get everything settled.</p>
+<h1>运行环境</h1>
+<p>这个小程序是由Python写成的，要运行还需要Numpy和Matplotlib这两个包的支持。或者你也可以尝试Enthought Canopy，它会自动将环境配置好的。</p>
+<h1>About the codes</h1>
+<p>The 1.0 version of the code was translated from a fortran project I wrote before, so it looks wired and is unefficient.
+In  the 2.0 version, I rewrote some of the key part to fully take advantage of the Numpy extentions. For the sake of computing efficience in python, the last thing you want to do is to use 'for' to iterate the Numpy array. Just use the Numpy unfunc, so that the computing is carried out in the C level.
+I also add one more subplot to show the absolute average velocity of all the agents as an order parameter to describe the system.
+For more details, check out the codes, I left some comments to help understand.</p>
+<h1>关于代码</h1>
+<p>1.0版本的代码是我从之前写的一个fortran程序翻译过来的，所以看上去会比较怪异，效率也很差。
+在2.0版本中我重写大部分代码以充分发挥Numpy这个扩展包的能力。关键在于不要用'for'去循环Numpy的数组，数据的存取会占去很多的时间。尽量用Numpy提供的函数，这样运算是在C语言的级别实现的，效率很高。
+此外在2.0版本中我也新加入了一个子图以显示所有个体的总绝对平均速度。
+更多的细节请查看代码，里面有一些注释。</p>
+                </div><!-- /.entry-content -->
+        </article>
 </section>
         </div><!--/span-->
 
