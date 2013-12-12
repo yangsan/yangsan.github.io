@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>kevin's blog</title><link href="n/" rel="alternate"></link><link href="n/feeds/all.atom.xml" rel="self"></link><id>n/</id><updated>2013-12-13T00:00:00+01:00</updated><entry><title>第一篇博客</title><link href="n/di-pian-bo-ke.html" rel="alternate"></link><updated>2013-12-13T00:00:00+01:00</updated><author><name>Kevin Young</name></author><id>tag:n,2013-12-13:di-pian-bo-ke.html</id><summary type="html">&lt;h1&gt;测试一下博客&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pelican&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;&lt;/h2&gt;
+&lt;p&gt;这应该是一个静态博客&lt;/p&gt;</summary></entry></feed>
