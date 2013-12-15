@@ -3,21 +3,26 @@ Date: 2013-12-14
 Tags: blog
 Slug: why_I_write_blog
 
+主要原因有三个：
+
 - 提高写作能力
-- 迫使你阅读、思考
+- 迫使自己阅读、思考
 - 打造个人品牌
 
 ---
 
 ##1.提高写作能力
 
-测试一下内部链接
-[如何搭建自己的博客]({filename}../blog/howtobuildyourblog.md)
+提高写作能力的方法无他，唯有多写。
 
-测试语法高亮
+##2.迫使自己阅读思考
 
-	:::python
-	import time
-	for i in text:
-		if 1>0:
-			print 'fine'
+只有多阅读多思考才能不断地有东西写。
+
+##3.打造个人品牌
+
+---
+扩展阅读：
+
+[我是如何搭建起这个博客的]({filename}../blog/howtobuildyourblog.md)
+
