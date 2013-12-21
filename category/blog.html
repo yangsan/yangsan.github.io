@@ -58,8 +58,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="../articles/blog/build_your_blog.html"><h1>利用Pelican和Github简单迅速地搭建自己的博客</h1></a>
-2013-12-14
+            <a href="../articles/blog/rule-of-creation.html"><h1>创作的法则</h1></a>
+2013-12-21
 
 by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
  
@@ -68,7 +68,38 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
  
         </div>
         
-        <div><h1>思路</h1>
+        <div><p>上次提到要折腾博客，重写主题，也看了html和css的语法框架，工具这块并没有太过难懂的东西，但到了真要动手去做的时候我觉得无从下手了。说到底我没有任何经验，对工具的了解之于创造出好的作品来说没有太大的助益，绕过所有的修饰核心必须是创作者的意图本身。</p>
+<p>我想过如何才能给自己交出一份满意的答卷，拿设计网页来说，除却设计者本身的品味以外我认为还是有几条提纲挈领的法则可以参考的。</p>
+<p>灵感来源于之前看的《纽约摄影学院教程》。作为摄影界的经典，教程一开始就指出优秀的摄影作品具有三个特点：</p>
+<ul>
+<li>它必须有一个鲜明的主题</li>
+<li>它必须能将观者的注意力引向主题本身</li>
+<li>它必须去除了不必要甚至是干扰主题的元素</li>
+</ul>
+<p>这既是评价一个作品优劣的标准，也给创造出好的作品指明了方向。显然，这些法则也适用于设计网页。</p>
+<p>当然我更愿意把设计网页比作绘画，不同于摄影的，这是一个无中生有的过程，每个像素的存在都是创作者刻意而为之的结果，所以也必须体现了创作者的意图，为创作目的而服务。</p>
+<p>具体到我目前的问题上，我希望我的博客页面被关注的焦点是内容本身，剩余的元素在服务于这个目的的同时也将提供必要的装饰，所有对读者造成干扰和疑惑的部分将被移除。</p>
+<p>我认为一个影响比较大的思维误区在于认为美应该是极尽华丽的，这样想当然不无道理，毕竟一个光秃秃的html文件是无法和美关联起来的，但更多的元素意味着更难以驾驭，如果还被滥用，导致的结果将是形式大于内容。</p>
+<p>另一方面，简洁和实用的设计其实也可以带来美的体验，甚至更为长久，如果能够做到自成一体逻辑贯通而使使用者注意不到设计的用心，那将是另一种境界了。</p></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../articles/blog/build_your_blog.html"><h2>利用Pelican和Github简单迅速地搭建自己的博客</h2></a>
+        <div class= "well small"> 2013-12-14
+
+by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
+ 
+
+
+ </div>
+        <div class="summary"><h1>思路</h1>
 <p>一般而言，搭建一个独立博客需要三样东西：</p>
 <ul>
 <li>博客软件</li>
@@ -98,190 +129,9 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 <p>如果你没听说过也不要紧，<a href="http://joinwee.com/lesson/10/">这里</a>有一份简短的介绍，详细的语法说明则可以在<a href="http://wowubuntu.com/markdown/">这里</a>找到。</p>
 <h4>3.对git/github有所了解</h4>
 <p>如果不了解也同样没有关系，<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">这个</a>一站式的教程可以帮到你。</p>
-<p>说一些无关的话。git虽然本身是给程序员准备的工具，但其强大的功能和便捷的使用配合上同样便捷又不乏扩展性的markdown语言对于写作而言同样是一个出色的解决方案，这份教程以及这个博客可以作为例证。为什么？请接着看。</p>
-<hr />
-<h1>动手</h1>
-<p>这里提一下，我的配置环境是ubuntu13.04。windows则需要多一些折腾，请自行google。</p>
-<h2>安装Pelican</h2>
-<p>这里假设你已经安装好了python2.x的环境，并装好了<code>pip</code>。可以直接用下面的命令安装pelican</p>
-<div class="highlight"><pre><span class="n">pip</span> <span class="n">install</span> <span class="n">pelican</span>
-</pre></div>
-
-
-<p>要使用markdown，还需要一个markdown的支持</p>
-<div class="highlight"><pre><span class="n">pip</span> <span class="n">install</span> <span class="n">markdown</span>
-</pre></div>
-
-
-<h2>首次配置</h2>
-<p>选定一个目录存放你的博客文件，我的叫blog</p>
-<div class="highlight"><pre><span class="n">mkdir</span> <span class="n">blog</span>
-<span class="n">cd</span> <span class="n">blog</span>
-</pre></div>
-
-
-<p>在你的blog目录下使用命令</p>
-<div class="highlight"><pre><span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span>
-</pre></div>
-
-
-<p>接下来会询问你一系列问题，除了名字等必须要填的，其他建议使用默认值，随后还可以通过配置pelicanconf.py文件进行修改。</p>
-<p>运行结束之后会生成的目录结构</p>
-<div class="highlight"><pre><span class="n">blog</span><span class="o">/</span>
-<span class="err">├──</span> <span class="n">content</span>         <span class="err">#这里存放你的博客文档</span>
-<span class="err">│</span>   <span class="err">└──</span> <span class="p">(</span><span class="n">pages</span><span class="p">)</span>         <span class="err">#这里存放一些静态页面</span>
-<span class="err">├──</span> <span class="n">output</span>              <span class="err">#输出结果文档</span>
-<span class="err">├──</span> <span class="n">develop_server</span><span class="p">.</span><span class="n">sh</span>
-<span class="err">├──</span> <span class="n">Makefile</span>
-<span class="err">├──</span> <span class="n">pelicanconf</span><span class="p">.</span><span class="n">py</span>      <span class="err">#配置文件</span>
-<span class="err">└──</span> <span class="n">publishconf</span><span class="p">.</span><span class="n">py</span>
-</pre></div>
-
-
-<p>至此，文件系统部分已经配置完成了，接下来可以试着写一篇文档了</p>
-<h2>第一篇博文</h2>
-<p>这里采取markdown演示，创建一个first.md文档放到content目录下。Pelican对内容的格式有些要求，每一篇博文的开头都应该是这样的：</p>
-<div class="highlight"><pre><span class="nl">Title:</span> <span class="err">第一篇博客</span>
-<span class="nl">Date:</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">12</span> <span class="mi">10</span><span class="o">:</span><span class="mi">16</span>
-<span class="nl">Category:</span> <span class="err">测试</span>
-<span class="nl">Tags:</span> <span class="err">心情</span>
-<span class="nl">Author:</span> <span class="err">煎挠橙</span>
-
-<span class="err">这里开始可以书写正文了</span>
-<span class="n">blabla</span><span class="p">....</span>
-</pre></div>
-
-
-<p>所以你应该看明白了，必须要通过每篇博文开头的部分来告诉pelican这篇文章的标题、标签、分类等信息，以便最终呈现在博客页面上。其中，标题、时间是必填的，如果缺失将无法被系统转换成网页。</p>
-<h2>生成页面</h2>
-<p>写完你的第一篇博文后，你应该还在content目录下，先回到blog根目录下</p>
-<div class="highlight"><pre><span class="n">cd</span> <span class="p">..</span>
-</pre></div>
-
-
-<p>使用下面的命令pelican系统会将你放在content目录下的md文档转换成网页文件</p>
-<div class="highlight"><pre><span class="n">make</span> <span class="n">html</span>
-</pre></div>
-
-
-<p>当然，你也可以让pelican在每次检测到文件变化的时候都重新生成一次网页，使用下面的命令</p>
-<div class="highlight"><pre><span class="n">make</span> <span class="n">regenerate</span>
-</pre></div>
-
-
-<p>实际上此时如果你去output目录下就会看到生成的页面已经躺在那里了，但为了方便本地的调试，你可以用下面的命令开启一个本地的服务器</p>
-<div class="highlight"><pre><span class="n">make</span> <span class="n">serve</span>
-</pre></div>
-
-
-<p>这样，通过访问 http://127.0.0.1:8000 你就已经可以看到你的博客页面了！</p>
-<p>调试完毕后你应该关闭之前开启的服务器</p>
-<div class="highlight"><pre><span class="p">.</span><span class="o">/</span><span class="n">develop_server</span><span class="p">.</span><span class="n">sh</span> <span class="n">stop</span>
-</pre></div>
-
-
-<p>至此，尽管有些丑，但你已经完成了自己博客的创建，随后只需要把你的文章放进content目录下面并运行以上命令就可以轻松生成博客了。如果需要备份，也只需要将content目录下的文件备份好就行，非常省心。</p>
-<p>当然此时别人还无法访问到你的页面，下面就教你如何把你的博客放到网上去。</p>
-<h2>在github上创建个人页面</h2>
-<p>首先你要有个github账号。github为每个账号提供一个子域名以供存放个人页面，使用的方法是创建一个新的版本库，命名为</p>
-<div class="highlight"><pre><span class="n">username</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span>
-</pre></div>
-
-
-<p>其中username必须为你的github用户名，否则将无法启动页面。</p>
-<p>这时你新创建的版本库是空的，你会获得一个地址</p>
-<div class="highlight"><pre><span class="nl">https:</span><span class="c1">//github.com/username/username.github.io.git</span>
-</pre></div>
-
-
-<p>先记下来。</p>
-<p>接下来要做的是将你本地output目录下的所有内容都推送到你刚刚建立的远程版本库中。在本地，进到output目录下面</p>
-<div class="highlight"><pre><span class="n">cd</span> <span class="n">output</span>
-</pre></div>
-
-
-<p>在这里新建一个本地的版本库</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">init</span>
-</pre></div>
-
-
-<p>建议按照github的惯例添加一个新的readme文档</p>
-<div class="highlight"><pre><span class="n">touch</span> <span class="n">README</span><span class="p">.</span><span class="n">md</span>
-</pre></div>
-
-
-<p>接下来可以将目录下面所有的文件都添加进缓存区</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">add</span> <span class="p">.</span>
-</pre></div>
-
-
-<p>可以提交了</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="err">&#39;</span><span class="n">First</span> <span class="n">commit</span><span class="err">&#39;</span>
-</pre></div>
-
-
-<p>下面将你的本地仓库和远程仓库关联起来，还记的之前获得的一个地址吧，用在这里</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="o">:</span><span class="c1">//github.com/username/username.github.io.git</span>
-</pre></div>
-
-
-<p>最后将本地仓库推送到github上就好，由于是第一次，用上<code>-u</code>字段</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">master</span>
-</pre></div>
-
-
-<p>待推送成功，稍等片刻，登陆</p>
-<div class="highlight"><pre><span class="n">username</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span>
-</pre></div>
-
-
-<p>应该就能看到你的博客了，没错，它已经正式上线了。此后每次变更博客内容或设置，只需事后将output目录下的内容推送到github就可以了，听上去和做上去都很简单。</p>
-<p>这样，如果你不在意域名的问题，你的博客就算搭建成功了，而且没有花费一分钱！但是基本主题这么丑，博客的各种功能也都还没有这怎么行呢，接着看。</p>
-<hr />
-<h1>锦上添花</h1>
-<h2>使用主题</h2>
-<p>pelican目前提供了数款主题可供选择。先到pelican这个项目的github页面上把主题的版本库clone到本地，在你选定的本地目录下面</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="o">:</span><span class="c1">//github.com/getpelican/pelican-themes.git</span>
-</pre></div>
-
-
-<p>进pelican-themes目录</p>
-<div class="highlight"><pre><span class="n">cd</span> <span class="n">pelican</span><span class="o">-</span><span class="n">themes</span>
-</pre></div>
-
-
-<p>你可以浏览该目录下的文件，每个子目录存放了一个主题，里面会留有一个截图供你预览。比如我看中了bootstrap这一款，使用命令</p>
-<div class="highlight"><pre><span class="n">pelican</span><span class="o">-</span><span class="n">themes</span> <span class="o">-</span><span class="n">i</span> <span class="n">bootstrap</span>
-</pre></div>
-
-
-<p>安装该主题。这时使用命令</p>
-<div class="highlight"><pre><span class="n">pelican</span><span class="o">-</span><span class="n">themes</span> <span class="o">-</span><span class="n">l</span>
-</pre></div>
-
-
-<p>查看已安装主题，应该就能看到刚刚安装的bootstrap主题了。这还不够，你还需要在pelicanconf.py文档中加上一句</p>
-<div class="highlight"><pre><span class="n">THEME</span> <span class="o">=</span> <span class="err">&#39;</span><span class="n">bootstrap</span><span class="err">&#39;</span>
-</pre></div>
-
-
-<p>这样你在生成博客页面时新主题就被应用上了。</p>
-<h2>添加静态的页面</h2>
-<p>pelican提供了一种不同于一般博客文章的'页面'方便你存放一些不常变更的信息，比如about页面和contact页面。</p>
-<p>创建方法也很简单，只需要在content目录下再新建一个名为pages的目录，将你想要展示的内容放进去就行，格式和普通的博客文章相同。</p>
-<h2>安装评论系统</h2>
-<p>由于pelican生成的是静态页面，没有数据库的支持所以本身无法实现评论的功能，不过我们还有第三方的服务可以选择。</p>
-<p>这里推荐disqus，功能齐备，免费。</p>
-<p>到<a href="www.disqus.com">官方页面</a>上注册一个账号。找到'Add Disqus to your site'选项，在跳转后的页面上填写的网站名字，你填写的名字也将是你的'shortname'，记好了。</p>
-<p>接下来在你的pelicanconf.py文档中添加一下字段</p>
-<div class="highlight"><pre><span class="n">DISQUS_SITENAME</span> <span class="o">=</span> <span class="n">shortname</span>
-</pre></div>
-
-
-<p>用你自己的'shortname'替换进去，剩下的交给pelican。</p></div>
-        <hr />
-    </div>
-		
+<p>说一些无关的话。git虽然本身是给程序员准备的工具 ...</p> <a class="btn btn-info xsmall" href="../articles/blog/build_your_blog.html">read more</a></div>
+    </div>	
+				
 
  
         
@@ -306,9 +156,12 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 <hr />
 <h2>1.提高写作能力</h2>
 <p>提高写作能力的方法无他，唯有多写。</p>
+<p>写作能力的提升意味着更好的交流与沟通能力，不管是学习工作亦或者生活都有重要意义。</p>
 <h2>2.迫使自己阅读思考</h2>
-<p>只有多阅读多思考才能不断地有东西写。</p>
+<p>对于维护一个博客来讲，只是想写是远远不够的。你必须不断地不补充新的知识，新的体验才能保证你有的写。</p>
+<p>另一方面，一篇文章写的不好唯一的原因就是没想好。所以当你试图让自己的文章质量保持在一个水平线以上，并且意识到贴在网上的文章将被所有人一览无余的时候，你将不得不逼迫自己去思考组织书写。</p>
 <h2>3.打造个人品牌</h2>
+<p>将你的所有思考放到网上，将有更大的机会帮你找到志同道合的人，而且也再没有单一的一份简历能比你悉心经营多年的博客更能说明你的能力和心性。</p>
 <hr />
 <p>扩展阅读：</p>
 <p><a href="../articles/blog/build_your_blog.html">我是如何搭建起这个博客的</a></p> <a class="btn btn-info xsmall" href="../articles/blog/why_I_write_blog.html">read more</a></div>
