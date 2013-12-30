@@ -1,74 +1,66 @@
 <!DOCTYPE html>
-<html lang="zh">
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
-    <meta charset="utf-8">
-    <title>煎挠橙的blog</title>
-    <meta name="description" content="">
-    <meta name="author" content="煎挠橙">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>煎挠橙的blog - how to</title>
+  <meta name="author" content="煎挠橙">
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-    <script src="../theme/html5.js"></script>
-    <![endif]-->
 
-    <!-- Le styles -->
-    <link href="../theme/bootstrap.min.css" rel="stylesheet">
-    <link href="../theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="../theme/local.css" rel="stylesheet">
-    <link href="../theme/pygments.css" rel="stylesheet">
 
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="../favicon.png" rel="icon">
+  <link href="../theme/css/main.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="../theme/js/modernizr-2.0.js"></script>
+  <script src="../theme/js/ender.js"></script>
+  <script src="../theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
 </head>
 
 <body>
+  <header role="banner"><hgroup>
+  <h1><a href="../">煎挠橙的blog</a></h1>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="yangsan.github.io/" rel="subscribe-rss">RSS</a></li>
+</ul>
 
-<div class="navbar">
-    <div class="navbar-inner">
-    <div class="container">
+<!-- TODO: add search here
+<form action="" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:.." />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+-->
 
-         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-         </a>
+<ul class="main-navigation">
+      <li><a href="../pages/about-me.html">About me</a></li>
+      <li><a href="../pages/todolist.html">Todolist</a></li>
+    <!-- TODO: add categories here? -->
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="../articles/blog/build_your_blog.html">利用Pelican和Github简单迅速地搭建自己的博客</a>
+      </h1>
+      <p class="meta"><time datetime="2013-12-14T00:00:00" pubdate>2013-12-14</time></p>
+</header>
 
-        <a class="brand" href="..">煎挠橙的blog</a>
-
-        <div class="nav-collapse">
-        <ul class="nav">
-            
-            <li><a href="../pages/about-me.html">About me</a></li>
-            <li><a href="../pages/todolist.html">Todolist</a></li>
-        </ul>
-        </div>
-        
-    </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="content">
-    <div class="row">
-
-        <div class="span9">
-        
-
-        
-
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="../articles/blog/build_your_blog.html"><h1>利用Pelican和Github简单迅速地搭建自己的博客</h1></a>
-2013-12-14
-
-by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
- 
-
-
- 
-        </div>
-        
-        <div><h1>思路</h1>
+  <div class="entry-content"><h1>思路</h1>
 <p>一般而言，搭建一个独立博客需要三样东西：</p>
 <ul>
 <li>博客软件</li>
@@ -94,274 +86,86 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 <h2>磨刀</h2>
 <p>这份教程中提到的方法虽然简单，但仍旧需要你有一些基础，主要有</p>
 <h4>1.<code>python</code>基础</h4>
-<p>你至少应该能够配置<code>python</code>的环境，能够顺利的安装<code>python</code>的插件,了解一些简单的<code>python</code>语法。</p>
-<h4>2.了解<code>Markdown</code></h4>
-<p>如果你没听说过也不要紧，<a href="http://joinwee.com/lesson/10/">这里</a>有一份简短的介绍，详细的语法说明则可以在<a href="http://wowubuntu.com/markdown/">这里</a>找到。</p>
-<h4>3.对<code>git</code>/<code>github</code>有所了解</h4>
-<p>如果不了解也同样没有关系，<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">这个</a>一站式的教程可以帮到你。</p>
-<p>这里多说一点。<code>git</code>本身就是追踪文本的系统，虽然设定上是给程序做版本管理的，但未尝不能拿来管理文章。甚至，我相信<code>git</code>+<code>markdown</code>等轻量级标记语言代表了一种写作的未来。</p>
-<hr />
-<h1>动手</h1>
-<p>这里提一下，我的配置环境是ubuntu13.04。windows则需要多一些折腾，请自行google。</p>
-<h2>安装<code>Pelican</code></h2>
-<p>这里假设你已经安装好了python2.x的环境，并装好了<code>pip</code>。可以直接用下面的命令安装<code>pelican</code></p>
-<div class="highlight"><pre><span class="n">pip</span> <span class="n">install</span> <span class="n">pelican</span>
-</pre></div>
-
-
-<p>要使用<code>markdown</code>，还需要一个<code>markdown</code>的支持</p>
-<div class="highlight"><pre><span class="n">pip</span> <span class="n">install</span> <span class="n">markdown</span>
-</pre></div>
-
-
-<h2>首次配置</h2>
-<p>选定一个目录存放你的博客文件，我的叫<code>blog</code></p>
-<div class="highlight"><pre><span class="n">mkdir</span> <span class="n">blog</span>
-<span class="n">cd</span> <span class="n">blog</span>
-</pre></div>
-
-
-<p>在你的<code>blog</code>目录下使用命令</p>
-<div class="highlight"><pre><span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span>
-</pre></div>
-
-
-<p>接下来会询问你一系列问题，除了名字等必须要填的，其他建议使用默认值，随后还可以通过配置<code>pelicanconf.py</code>文件进行修改。</p>
-<p>运行结束之后会生成的目录结构</p>
-<div class="highlight"><pre><span class="n">blog</span><span class="o">/</span>
-<span class="err">├──</span> <span class="n">content</span>
-<span class="err">│</span>   <span class="err">└──</span> <span class="p">(</span><span class="n">pages</span><span class="p">)</span>
-<span class="err">├──</span> <span class="n">output</span>
-<span class="err">├──</span> <span class="n">develop_server</span><span class="p">.</span><span class="n">sh</span>
-<span class="err">├──</span> <span class="n">Makefile</span>
-<span class="err">├──</span> <span class="n">pelicanconf</span><span class="p">.</span><span class="n">py</span>     
-<span class="err">└──</span> <span class="n">publishconf</span><span class="p">.</span><span class="n">py</span>
-</pre></div>
-
-
-<p><code>pelican</code>的逻辑是，你把写好的用markdown写好的纯文本文档放进<code>content</code>这个目录下面，运行程序，就可以将你的整个博客页面生成到<code>output</code>中去了。</p>
-<p>至此，文件系统部分已经配置完成了，接下来可以试着写一篇文档了</p>
-<h2>第一篇博文</h2>
-<p>创建一个叫<code>first.md</code>的文档放到<code>content</code>目录下。<code>Pelican</code>对内容的格式有些要求，每一篇博文的开头都应该是这样的：</p>
-<div class="highlight"><pre><span class="nl">Title:</span> <span class="err">第一篇博客</span>
-<span class="nl">Date:</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">12</span> <span class="mi">10</span><span class="o">:</span><span class="mi">16</span>
-<span class="nl">Category:</span> <span class="err">测试</span>
-<span class="nl">Tags:</span> <span class="err">心情</span>
-<span class="nl">Author:</span> <span class="err">煎挠橙</span>
-
-<span class="err">这里开始可以书写正文了</span>
-<span class="n">blabla</span><span class="p">....</span>
-</pre></div>
-
-
-<p>所以你应该看明白了，必须要通过每篇博文开头的部分来告诉<code>pelican</code>这篇文章的标题、标签、分类等信息，以便最终呈现在博客页面上。其中，标题、时间是必填的，如果缺失则会被<code>pelican</code>忽略掉。</p>
-<h2>生成页面</h2>
-<p>写完你的第一篇博文后，你应该还在<code>content</code>目录下，先回到blog根目录下</p>
-<div class="highlight"><pre><span class="n">cd</span> <span class="p">..</span>
-</pre></div>
-
-
-<p>使用下面的命令<code>pelican</code>系统会将你放在<code>content</code>目录下的<code>.md</code>文档转换成网页文件</p>
-<div class="highlight"><pre><span class="n">make</span> <span class="n">html</span>
-</pre></div>
-
-
-<p>当然，你也可以让<code>pelican</code>在每次检测到文件变化的时候都重新生成一次网页，使用下面的命令</p>
-<div class="highlight"><pre><span class="n">make</span> <span class="n">regenerate</span>
-</pre></div>
-
-
-<p>实际上此时如果你去<code>output</code>目录下就会看到生成的页面已经躺在那里了，但为了方便本地的调试，你可以用下面的命令开启一个本地的服务器</p>
-<div class="highlight"><pre><span class="n">make</span> <span class="n">serve</span>
-</pre></div>
-
-
-<p>这样，通过访问 http://127.0.0.1:8000 你就已经可以看到你的博客页面了！</p>
-<p>调试完毕后你应该关闭之前开启的服务器</p>
-<div class="highlight"><pre><span class="p">.</span><span class="o">/</span><span class="n">develop_server</span><span class="p">.</span><span class="n">sh</span> <span class="n">stop</span>
-</pre></div>
-
-
-<p>至此，尽管有些丑，但你已经完成了自己博客的创建，随后只需要把你的文章放进<code>content</code>目录下面并运行以上命令就可以轻松生成博客了。如果需要备份，也只需要将<code>content</code>目录下的文件备份好就行，非常省心。</p>
-<p>当然此时别人还无法访问到你的页面，下面就教你如何把你的博客放到网上去。</p>
-<h2>在<code>github</code>上创建个人页面</h2>
-<p>首先你要有个<code>github</code>账号。<code>github</code>为每个账号提供一个子域名以供存放个人页面，使用的方法是创建一个新的版本库，命名为</p>
-<div class="highlight"><pre><span class="n">username</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span>
-</pre></div>
-
-
-<p>其中<code>username</code>必须为你的<code>github</code>用户名，否则将无法启动页面。</p>
-<p>这时你新创建的版本库是空的，你会获得一个地址</p>
-<div class="highlight"><pre><span class="nl">https:</span><span class="c1">//github.com/username/username.github.io.git</span>
-</pre></div>
-
-
-<p>先记下来。</p>
-<p>接下来要做的是将你本地<code>output</code>目录下的所有内容都推送到你刚刚建立的远程版本库中。在本地，进到<code>output</code>目录下面</p>
-<div class="highlight"><pre><span class="n">cd</span> <span class="n">output</span>
-</pre></div>
-
-
-<p>在这里新建一个本地的版本库</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">init</span>
-</pre></div>
-
-
-<p>建议按照<code>github</code>的惯例添加一个新的<code>readme</code>文档</p>
-<div class="highlight"><pre><span class="n">touch</span> <span class="n">README</span><span class="p">.</span><span class="n">md</span>
-</pre></div>
-
-
-<p>接下来可以将目录下面所有的文件都添加进缓存区</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">add</span> <span class="p">.</span>
-</pre></div>
-
-
-<p>可以提交了</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="err">&#39;</span><span class="n">First</span> <span class="n">commit</span><span class="err">&#39;</span>
-</pre></div>
-
-
-<p>下面将你的本地仓库和远程仓库关联起来，还记的之前获得的一个地址吧，用在这里</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="o">:</span><span class="c1">//github.com/username/username.github.io.git</span>
-</pre></div>
-
-
-<p>最后将本地仓库推送到<code>github</code>上就好，由于是第一次，用上<code>-u</code>字段</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">master</span>
-</pre></div>
-
-
-<p>待推送成功，稍等片刻，登陆</p>
-<div class="highlight"><pre><span class="n">username</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span>
-</pre></div>
-
-
-<p>应该就能看到你的博客了，没错，它已经正式上线了。此后每次变更博客内容或设置，只需事后将<code>output</code>目录下的内容推送到<code>github</code>就可以了，听上去和做上去都很简单。</p>
-<p>这样，如果你不在意域名的问题，你的博客就算搭建成功了，而且没有花费一分钱！但是基本主题这么丑，博客的各种功能也都还没有这怎么行呢，接着看。</p>
-<hr />
-<h1>锦上添花</h1>
-<h2>使用主题</h2>
-<p><code>pelican</code>目前提供了数款主题可供选择。先到<code>pelican</code>这个项目的<code>github</code>页面上把主题的版本库<code>clone</code>到本地，在你选定的本地目录下面</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="o">:</span><span class="c1">//github.com/getpelican/pelican-themes.git</span>
-</pre></div>
-
-
-<p>进<code>pelican-themes</code>目录</p>
-<div class="highlight"><pre><span class="n">cd</span> <span class="n">pelican</span><span class="o">-</span><span class="n">themes</span>
-</pre></div>
-
-
-<p>你可以浏览该目录下的文件，每个子目录存放了一个主题，里面会留有一个截图供你预览。比如我看中了<code>bootstrap</code>这一款，使用命令</p>
-<div class="highlight"><pre><span class="n">pelican</span><span class="o">-</span><span class="n">themes</span> <span class="o">-</span><span class="n">i</span> <span class="n">bootstrap</span>
-</pre></div>
-
-
-<p>安装该主题。这时使用命令</p>
-<div class="highlight"><pre><span class="n">pelican</span><span class="o">-</span><span class="n">themes</span> <span class="o">-</span><span class="n">l</span>
-</pre></div>
-
-
-<p>查看已安装主题，应该就能看到刚刚安装的<code>bootstrap</code>主题了。这还不够，你还需要在<code>pelicanconf.py</code>文档中加上一句</p>
-<div class="highlight"><pre><span class="n">THEME</span> <span class="o">=</span> <span class="err">&#39;</span><span class="n">bootstrap</span><span class="err">&#39;</span>
-</pre></div>
-
-
-<p>这样你在生成博客页面时新主题就被应用上了。</p>
-<h2>添加静态的页面</h2>
-<p><code>pelican</code>提供了一种不同于一般博客文章的'页面'方便你存放一些需要置顶的信息，比如<code>about</code>页面和<code>contact</code>页面。</p>
-<p>创建方法也很简单，只需要在<code>content</code>目录下再新建一个名为<code>pages</code>的目录，将你想要展示的内容放进去就行，格式和普通的博客文章相同。</p>
-<h2>安装评论系统</h2>
-<p>由于<code>pelican</code>生成的是静态页面，没有数据库的支持所以本身无法实现评论的功能，不过我们还有第三方的服务可以选择。</p>
-<p>这里推荐<code>disqus</code>，功能齐备，免费。</p>
-<p>到<a href="www.disqus.com">官方页面</a>上注册一个账号。找到'Add Disqus to your site'选项，在跳转后的页面上填写的网站名字，你填写的名字也将是你的'shortname'，记好了。</p>
-<p>接下来在你的<code>pelicanconf.py</code>文档中添加一下字段</p>
-<div class="highlight"><pre><span class="n">DISQUS_SITENAME</span> <span class="o">=</span> <span class="n">shortname</span>
-</pre></div>
-
-
-<p>用你自己的'shortname'替换进去，剩下的交给<code>pelican</code>。</p></div>
-        <hr />
-    </div>
-		
+<p>你至少应该能够配置<code>python</code>的环境，能够顺利的安装 ...</p></div>
+  <footer>
+    <a rel="full-article" href="../articles/blog/build_your_blog.html">Read On &crarr;</a>
+  </footer>
+  		</article>
 <div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
-    <li class="active"><a href="../tag/how-to.html">1</a></li>
-
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
-
-</ul>
-</div>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="../articles/blog/build_your_blog.html">利用Pelican和Github简单迅速地搭建自己的博客</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="../category/blog.html">blog</a></li>
+        <li><a href="../category/matplotlib.html">matplotlib</a></li>
+    </ul>
+  </section>
  
-  
-        </div>
-        
-        <div class="span3">
 
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Site
-                </li>
-            
-                <li><a href="../archives.html">Archives</a>
-                <li><a href="../tags.html">Tags</a>
-                <li><a href="yangsan.github.io/" rel="alternate">Atom feed</a></li>
-            </ul>
-            </div>
+  <section>
+  <h1>Tags</h1>
+    <a href="../tag/pelican.html">pelican</a>,    <a href="../tag/github.html">github</a>,    <a href="../tag/how-to.html">how to</a>,    <a href="../tag/python.html">python</a>,    <a href="../tag/matplotlib.html">matplotlib</a>,    <a href="../tag/blog.html">blog</a>,    <a href="../tag/ke-shi-hua.html">可视化</a>,    <a href="../tag/git.html">git</a>,    <a href="../tag/markdown.html">markdown</a>,    <a href="../tag/chuang-zuo.html">创作</a>  </section>
 
 
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Categories
-                </li>
-                
-                <li><a href="../category/blog.html">blog</a></li>
-                   
-            </ul>
-            </div>
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="yangsan.github.io/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            <li><a href="http://weibo.com/kevinyoungc" target="_blank">微博</a></li>
+            <li><a href="https://github.com/yangsan" target="_blank">github</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>Blogroll</h2>
+        <ul>
+            <li><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
+            <li><a href="http://python.org/" target="_blank">Python.org</a></li>
+            <li><a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a></li>
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - 煎挠橙 -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-46467923-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
 
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Links
-                </li>
-            
-                <li><a href="http://getpelican.com/">Pelican</a></li>
-                <li><a href="http://python.org/">Python.org</a></li>
-                <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-            </ul>
-            </div>
-
-
-            <div class="social">
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Social
-                </li>
-           
-                <li><a href="http://weibo.com/kevinyoungc">微博</a></li>
-                <li><a href="https://github.com/yangsan">github</a></li>
-            </ul>
-            </div>
-            </div>
-
-        </div>  
-    </div>     </div> 
-<footer>
-<br />
-<p><a href="..">煎挠橙的blog</a> &copy; 煎挠橙 2012</p>
-</footer>
-
-</div> <!-- /container -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
-<script>var _gaq=[['_setAccount','UA-46467923-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
- 
+    ga('create', 'UA-46467923-1');
+    ga('send', 'pageview');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'yangsan';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
 </body>
 </html>

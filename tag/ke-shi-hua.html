@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>煎挠橙的blog - 创作</title>
+  <title>煎挠橙的blog - 可视化</title>
   <meta name="author" content="煎挠橙">
 
 
@@ -55,28 +55,25 @@
   		<article>
 <header>
       <h1 class="entry-title">
-        <a href="../articles/blog/rule-of-creation.html">创作的法则</a>
+        <a href="../articles/matplotlib/aDelaunaytrigen.html">用Matplotlib做一个交互式的德劳尼三角生成器</a>
       </h1>
-      <p class="meta"><time datetime="2013-12-21T00:00:00" pubdate>2013-12-21</time></p>
+      <p class="meta"><time datetime="2013-12-30T00:00:00" pubdate>2013-12-30</time></p>
 </header>
 
-  <div class="entry-content"><p>之前提到要自己折腾博客的主题，也就是重写网页，不过我本身没有经验，看了html和css的基本语法以后还是无从下手，不过经过一些思考，我觉得还是有一些线索可以追寻的。</p>
-<h1>来自摄影师的启发</h1>
-<p>摄影教材中的经典《纽约摄影学院教程》一开始就指出优秀的摄影作品具有三个特点：</p>
-<ul>
-<li>它必须有一个鲜明的主题</li>
-<li>它必须能将观者的注意力引向主题本身</li>
-<li>它必须去除了不必要甚至是干扰主题的元素</li>
-</ul>
-<p>这既是评价一个作品优劣的标准，也给创造出好的作品指明了方向。显然，这些法则也适用于设计网页。</p>
-<p>当然我更愿意把设计网页比作绘画，不同于摄影的，这是一个无中生有的过程，每个像素的存在都是创作者刻意而为之的结果，所以也必须体现了创作者的意图，为创作目的而服务。</p>
-<h1>实用为美</h1>
-<p>在什么是美的问题上，我认为很多人走入了一个误区，以为美应该是极尽华丽的。但一个事物被创造出来却只有很少一部分单纯是为了给人提供美的感受的————更多的是要服务于一个目。</p>
-<p>比如近来遇到的一个事例：街上很多店铺门前的地板喜欢选用光亮的瓷砖材质，平时还没什么问题，遇上下雨下雪就变得很滑，行人猝不及防的即使不摔倒也不免心惊胆战一下。既然是地板，首要的目的应该是供人行走，亮丽则在其次。刻意的追求感官效果，本末倒置了。</p>
-<p>另一方面，华丽意味着更多的元素，进而意味着更难以驾驭，一个不好怕是会起反效果。</p>
-<p>我想说的是，对于美，或许有另外一条逼近的路径：当一个事物被设计成能够最大限度的服务于其存在的目的时，同样得到了美的结果。也即，最实用的就是最美的 ...</p></div>
+  <div class="entry-content"><p>正在看的一篇文献里用到了德劳尼三角形的算法来界定包含了一些点的空间，搜索了一下，<a href="http://www.cs.cornell.edu/Info/People/chew/Delaunay.html">这里</a>有一个在线的小程序，让你可以通过鼠标在演示界面上点击的形式确定点的位置并动态的生成德劳尼三角形。</p>
+<p>唯一的问题在于这个小程序是<code>java</code>写的，而我不懂<code>java</code>，遂准备用<code>python</code>自己写一个，随后也方便给同事们展示。</p>
+<h2>Matplotlib的Event</h2>
+<p>其实这样的交互式程序应该用<code>GUI</code>包来完成，为此我甚至把<code>Tkinter</code>的文档都翻了一遍，偶然的机会我注意到常被用来画图的<code>matplotlib</code>居然也可以实现交互功能，简直喜出望外。</p>
+<p>官方的文档请参考<a href="http://matplotlib.org/1.3.1/users/event_handling.html">这里</a>，除了必要的介绍还有几个例子供学习。显然<code>matplotlib</code>提供的交互功能与真正的<code>GUI</code>包比起来孱弱很多，不过能在作图的过程中加上一两个交互的特性确实是锦上添花的事情。</p>
+<h3>链接Event</h3>
+<p><code>matplotlib</code>里面<code>event</code>的用法和<code>GUI</code>包的设定大同小异，都需要声明把特定的事件名称和一个函数关联起来：</p>
+<div class="highlight"><pre><span class="n">fig</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">mpl_connect</span><span class="p">(</span><span class="err">&#39;</span><span class="n">button_press_event</span><span class="err">&#39;</span><span class="p">,</span><span class="n">click</span><span class="p">)</span>
+</pre></div>
+
+
+<p>这里<code>fig</code>是一个 ...</p></div>
   <footer>
-    <a rel="full-article" href="../articles/blog/rule-of-creation.html">Read On &crarr;</a>
+    <a rel="full-article" href="../articles/matplotlib/aDelaunaytrigen.html">Read On &crarr;</a>
   </footer>
   		</article>
 <div class="pagination">
@@ -88,7 +85,7 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="../articles/blog/rule-of-creation.html">创作的法则</a>
+          <a href="../articles/matplotlib/aDelaunaytrigen.html">用Matplotlib做一个交互式的德劳尼三角生成器</a>
       </li>
     </ul>
   </section>
