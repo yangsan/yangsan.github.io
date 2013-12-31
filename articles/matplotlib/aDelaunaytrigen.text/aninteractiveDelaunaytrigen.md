@@ -13,7 +13,7 @@ Slug: aDelaunaytrigen
 
 官方的文档请参考[这里](http://matplotlib.org/1.3.1/users/event_handling.html)，除了必要的介绍还有几个例子供学习。显然`matplotlib`提供的交互功能与真正的`GUI`包比起来孱弱很多，不过能在作图的过程中加上一两个交互的特性确实是锦上添花的事情。
 
-###链接Event
+##链接Event
 
 `matplotlib`里面`event`的用法和`GUI`包的设定大同小异，都需要声明把特定的事件名称和一个函数关联起来：
 
@@ -39,13 +39,15 @@ Slug: aDelaunaytrigen
 	ax.figure.canvas.draw()
 
 
-###德劳尼三角形
+##德劳尼三角化
+
+数学上，德劳尼三角化是针对一个点集而言的，通过构造三角形划分空间的一种方法。平面上一个点集的德劳尼三角化保证了每个三角形外切圆里面都不含有其他的点，实际上使得形成的三角形的所有角都最大化。
 
 可能是由于德劳尼三角化的用途比较广泛，只是随便搜了一下就发现`scipy`已经提供了现成的包`scipy.spatial.Delaunay`，你只需要把点集的坐标送进去，结果就出来了。实在太容易了，搞得我怪不好意思的。
 
-官方文档可以参考[这里](http://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html)
+官方文档可以参考[这里](http://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html)。
 
-###代码实现
+##代码实现
 
 
 	:::Python	
@@ -71,11 +73,8 @@ Slug: aDelaunaytrigen
         		tri = Delaunay(pointsarray)
         		ax.triplot(pointsarray[:,0],pointsarray[:,1],tri.simplices)	#把得到的三角形画出来
     		ax.plot(pointsarray[:,0],pointsarray[:,1],'ro')		#把每个点也标出来
-    		ax.figure.canvas.draw()		#重画
+    		ax.figure.canvas.draw()		#每次点击都重画一下
     
 	cid = fig.canvas.mpl_connect('button_press_event',click)	#链接的声明
 
 	plt.show()
-
-
-
