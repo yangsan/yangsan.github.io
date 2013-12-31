@@ -1,66 +1,74 @@
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html lang="zh">
 <head>
-  <meta charset="utf-8">
-  <title>煎挠橙的blog - matplotlib</title>
-  <meta name="author" content="煎挠橙">
+    <meta charset="utf-8">
+    <title>煎挠橙的blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="煎挠橙">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="../theme/html5.js"></script>
+    <![endif]-->
 
+    <!-- Le styles -->
+    <link href="../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../theme/local.css" rel="stylesheet">
+    <link href="../theme/pygments.css" rel="stylesheet">
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link href="../favicon.png" rel="icon">
-  <link href="../theme/css/main.css" media="screen, projection"
-        rel="stylesheet" type="text/css">
-  <script src="../theme/js/modernizr-2.0.js"></script>
-  <script src="../theme/js/ender.js"></script>
-  <script src="../theme/js/octopress.js" type="text/javascript"></script>
-
-  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
-        rel="stylesheet" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
-        rel="stylesheet" type="text/css">
 </head>
 
 <body>
-  <header role="banner"><hgroup>
-  <h1><a href="../">煎挠橙的blog</a></h1>
-</hgroup></header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="yangsan.github.io/" rel="subscribe-rss">RSS</a></li>
-</ul>
 
-<!-- TODO: add search here
-<form action="" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:.." />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
--->
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
 
-<ul class="main-navigation">
-      <li><a href="../pages/about-me.html">About me</a></li>
-      <li><a href="../pages/todolist.html">Todolist</a></li>
-    <!-- TODO: add categories here? -->
-</ul></nav>
-  <div id="main">
-    <div id="content">
-<div class="blog-index">
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="../articles/matplotlib/aDelaunaytrigen.html">用Matplotlib做一个交互式的德劳尼三角生成器</a>
-      </h1>
-      <p class="meta"><time datetime="2013-12-30T00:00:00" pubdate>2013-12-30</time></p>
-</header>
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
 
-  <div class="entry-content"><p>正在看的一篇文献里用到了德劳尼三角形的算法来界定包含了一些点的空间，搜索了一下，<a href="http://www.cs.cornell.edu/Info/People/chew/Delaunay.html">这里</a>有一个在线的小程序，让你可以通过鼠标在演示界面上点击的形式确定点的位置并动态的生成德劳尼三角形。</p>
+        <a class="brand" href="..">煎挠橙的blog</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            
+            <li><a href="../pages/about-me.html">About me</a></li>
+            <li><a href="../pages/todolist.html">Todolist</a></li>
+        </ul>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+        
+
+        
+
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="../articles/matplotlib/aDelaunaytrigen.html"><h1>用Matplotlib做一个交互式的德劳尼三角生成器</h1></a>
+2013-12-30
+
+by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
+ 
+
+
+ 
+        </div>
+        
+        <div><p>正在看的一篇文献里用到了德劳尼三角形的算法来界定包含了一些点的空间，搜索了一下，<a href="http://www.cs.cornell.edu/Info/People/chew/Delaunay.html">这里</a>有一个在线的小程序，让你可以通过鼠标在演示界面上点击的形式确定点的位置并动态的生成德劳尼三角形。</p>
 <p>唯一的问题在于这个小程序是<code>java</code>写的，而我不懂<code>java</code>，遂准备用<code>python</code>自己写一个，随后也方便给同事们展示。</p>
 <h2>Matplotlib的Event</h2>
 <p>其实这样的交互式程序应该用<code>GUI</code>包来完成，为此我甚至把<code>Tkinter</code>的文档都翻了一遍，偶然的机会我注意到常被用来画图的<code>matplotlib</code>居然也可以实现交互功能，简直喜出望外。</p>
@@ -71,86 +79,137 @@
 </pre></div>
 
 
-<p>这里<code>fig</code>是一个 ...</p></div>
-  <footer>
-    <a rel="full-article" href="../articles/matplotlib/aDelaunaytrigen.html">Read On &crarr;</a>
-  </footer>
-  		</article>
+<p>这里<code>fig</code>是一个<code>axes</code>的实例，链接<code>event</code>和函数则要用到<code>axes</code>实例的<code>canvas</code>属性的<code>mpl_connect</code>方法。<code>'button_press_event'</code>是鼠标左键点击事件的名称，<code>click</code>则是需要调用的函数了。</p>
+<p>上面的关联完成以后每次你在画布上点击鼠标都会触发一次<code>click</code>这个函数，并同时向<code>click</code>传递一个<code>event</code>的参数，所以在定义<code>click</code>时要注意：
+    :::Python
+    def click(event):
+        ...
+        ax.figure.canvas.draw()</p>
+<p>传递过来的<code>event</code>中比较有用的属性有下面几个：</p>
+<ul>
+<li><code>x</code>&amp;<code>y</code>：在画布的像素坐标系中鼠标的坐标</li>
+<li><code>xdata</code>&amp;<code>ydata</code>：在数据坐标系中鼠标的坐标</li>
+<li><code>inaxes</code>：鼠标所在的<code>axes</code></li>
+</ul>
+<p>另外一个需要注意的地方是每次对显示的内容做了更改后都要把图重新画一下，用到下面的语句：</p>
+<div class="highlight"><pre><span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+
+
+<h3>德劳尼三角形</h3>
+<p>可能是由于德劳尼三角化的用途比较广泛，只是随便搜了一下就发现<code>scipy</code>已经提供了现成的包<code>scipy.spatial.Delaunay</code>，你只需要把点集的坐标送进去，结果就出来了。实在太容易了，搞得我怪不好意思的。</p>
+<p>官方文档可以参考<a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html">这里</a></p>
+<h3>代码实现</h3>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="kn">import</span> <span class="n">Delaunay</span>
+
+<span class="n">points</span> <span class="o">=</span> <span class="p">[]</span> <span class="c">#创建一个空列表用于存放点的坐标</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>   <span class="c">#定义事件触发的函数，也就是实际上画图的部分</span>
+        <span class="k">global</span> <span class="n">ax</span><span class="p">,</span><span class="n">points</span>    <span class="c">#使用全局函数传递参数，我知道这是懒省事，别打...</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>    <span class="c">#每次画新图之前先把老的清除，要不然会堆叠在一起</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+        <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">event</span><span class="o">.</span><span class="n">xdata</span><span class="p">,</span><span class="n">event</span><span class="o">.</span><span class="n">ydata</span><span class="p">])</span>    <span class="c">#将每次得到的点击位置加入到列表中</span>
+    <span class="n">pointsarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>    <span class="c">#把列表转换成ndarray</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">3</span><span class="p">:</span>       <span class="c">#Delaunay这个包只能在多于三个点的情况下工作</span>
+            <span class="n">tri</span> <span class="o">=</span> <span class="n">Delaunay</span><span class="p">(</span><span class="n">pointsarray</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">triplot</span><span class="p">(</span><span class="n">pointsarray</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">pointsarray</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">tri</span><span class="o">.</span><span class="n">simplices</span><span class="p">)</span> <span class="c">#把得到的三角形画出来</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pointsarray</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">pointsarray</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s">&#39;ro&#39;</span><span class="p">)</span>     <span class="c">#把每个点也标出来</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>     <span class="c">#重画</span>
+
+<span class="n">cid</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">mpl_connect</span><span class="p">(</span><span class="s">&#39;button_press_event&#39;</span><span class="p">,</span><span class="n">click</span><span class="p">)</span>    <span class="c">#链接的声明</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div></div>
+        <hr />
+    </div>
+		
 <div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
-  <br />
-</div></div>
-<aside class="sidebar">
-  <section>
-    <h1>Recent Posts</h1>
-    <ul id="recent_posts">
-      <li class="post">
-          <a href="../articles/matplotlib/aDelaunaytrigen.html">用Matplotlib做一个交互式的德劳尼三角生成器</a>
-      </li>
-    </ul>
-  </section>
-  <section>
-      
-    <h1>Categories</h1>
-    <ul id="recent_posts">
-        <li><a href="../category/blog.html">blog</a></li>
-        <li><a href="../category/matplotlib.html">matplotlib</a></li>
-    </ul>
-  </section>
+    <li class="active"><a href="../tag/matplotlib.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
  
+  
+        </div>
+        
+        <div class="span3">
 
-  <section>
-  <h1>Tags</h1>
-    <a href="../tag/pelican.html">pelican</a>,    <a href="../tag/github.html">github</a>,    <a href="../tag/how-to.html">how to</a>,    <a href="../tag/python.html">python</a>,    <a href="../tag/matplotlib.html">matplotlib</a>,    <a href="../tag/blog.html">blog</a>,    <a href="../tag/ke-shi-hua.html">可视化</a>,    <a href="../tag/git.html">git</a>,    <a href="../tag/markdown.html">markdown</a>,    <a href="../tag/chuang-zuo.html">创作</a>  </section>
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Site
+                </li>
+            
+                <li><a href="../archives.html">Archives</a>
+                <li><a href="../tags.html">Tags</a>
+                <li><a href="yangsan.github.io/" rel="alternate">Atom feed</a></li>
+            </ul>
+            </div>
 
 
-    <section>
-        <h1>Social</h2>
-        <ul>
-            <li><a href="yangsan.github.io/" type="application/rss+xml" rel="alternate">RSS</a></li>
-            <li><a href="http://weibo.com/kevinyoungc" target="_blank">微博</a></li>
-            <li><a href="https://github.com/yangsan" target="_blank">github</a></li>
-        </ul>
-    </section>
-    <section>
-        <h1>Blogroll</h2>
-        <ul>
-            <li><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
-            <li><a href="http://python.org/" target="_blank">Python.org</a></li>
-            <li><a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a></li>
-        </ul>
-    </section>
-</aside>    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - 煎挠橙 -
-  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
-</p></footer>
-    <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-46467923-1']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+                <li><a href="../category/blog.html">blog</a></li>
+                <li><a href="../category/matplotlib.html">matplotlib</a></li>
+                   
+            </ul>
+            </div>
 
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-46467923-1');
-    ga('send', 'pageview');
-</script>
-	<script type="text/javascript">
-	  var disqus_shortname = 'yangsan';
-	  (function() {
-	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	   })();
-	</script>
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Links
+                </li>
+            
+                <li><a href="http://getpelican.com/">Pelican</a></li>
+                <li><a href="http://python.org/">Python.org</a></li>
+                <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+            </ul>
+            </div>
+
+
+            <div class="social">
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Social
+                </li>
+           
+                <li><a href="http://weibo.com/kevinyoungc">微博</a></li>
+                <li><a href="https://github.com/yangsan">github</a></li>
+            </ul>
+            </div>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="..">煎挠橙的blog</a> &copy; 煎挠橙 2012</p>
+</footer>
+
+</div> <!-- /container -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
+<script>var _gaq=[['_setAccount','UA-46467923-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+ 
 </body>
 </html>
