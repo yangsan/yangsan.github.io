@@ -9,14 +9,14 @@
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
-    <script src="../theme/html5.js"></script>
+    <script src="../../theme/html5.js"></script>
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="../theme/bootstrap.min.css" rel="stylesheet">
-    <link href="../theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="../theme/local.css" rel="stylesheet">
-    <link href="../theme/pygments.css" rel="stylesheet">
+    <link href="../../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../../theme/local.css" rel="stylesheet">
+    <link href="../../theme/pygments.css" rel="stylesheet">
 
 </head>
 
@@ -32,13 +32,13 @@
              <span class="icon-bar"></span>
          </a>
 
-        <a class="brand" href="..">煎挠橙的blog</a>
+        <a class="brand" href="../..">煎挠橙的blog</a>
 
         <div class="nav-collapse">
         <ul class="nav">
             
-            <li><a href="../pages/about-me.html">About me</a></li>
-            <li><a href="../pages/todolist.html">Todolist</a></li>
+            <li><a href="../../pages/about-me.html">About me</a></li>
+            <li><a href="../../pages/todolist.html">Todolist</a></li>
         </ul>
         </div>
         
@@ -51,23 +51,17 @@
     <div class="row">
 
         <div class="span9">
-        
-
-        
-
-
     <div class='article'>
         <div class="content-title">
-            <a href="../articles/python/python_enviroment.html"><h1>ubuntu下python虚拟环境的配置问题</h1></a>
+            <h1>ubuntu下python虚拟环境的配置问题</h1>
 2014-01-15
 
-by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
+by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
  
 
 
- 
         </div>
-        
+	
         <div><p>昨天重做了一下系统，今天配置的时候有些新收获，写在这里。</p>
 <h1>Enthought Canopy</h1>
 <p>自己用python首要是做计算的，昨天试着自己配置一下几个常用的包，弄了半天卡在依赖关系上了，没办法又用回<a href="https://www.enthought.com/">Enthought</a>的Canopy。</p>
@@ -118,50 +112,23 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 
 
 <p>这这样做的结果就是把你的<code>$PATH</code>指到了当前的虚拟环境里，后面可以像正常的用法那样使用python了。结束的时候用命令<code>deactivate</code>就又把路径指回去了。</p></div>
-        <hr />
+	
+        <hr>
+    	   
+        <h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'yangsan'; 
+    var disqus_title = 'ubuntu下python虚拟环境的配置问题';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
-		
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/matplotlib/aDelaunaytrigen.html"><h2>用Matplotlib做一个交互式的德劳尼三角生成器</h2></a>
-        <div class= "well small"> 2013-12-30
-
-by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
- 
-
-
- </div>
-        <div class="summary"><p>正在看的一篇文献里用到了德劳尼三角形的算法来界定包含了一些点的空间，搜索了一下，<a href="http://www.cs.cornell.edu/Info/People/chew/Delaunay.html">这里</a>有一个在线的小程序，让你可以通过鼠标在演示界面上点击的形式确定点的位置并动态的生成德劳尼三角形。</p>
-<p>唯一的问题在于这个小程序是<code>java</code>写的，而我不懂<code>java</code>，遂准备用<code>python</code>自己写一个，随后也方便给同事们展示。</p>
-<h2>Matplotlib的Event</h2>
-<p>其实这样的交互式程序应该用<code>GUI</code>包来完成，为此我甚至把<code>Tkinter</code>的文档都翻了一遍，偶然的机会我注意到常被用来画图的<code>matplotlib</code>居然也可以实现交互功能，简直喜出望外。</p>
-<p>官方的文档请参考<a href="http://matplotlib.org/1.3.1/users/event_handling.html">这里</a>，除了必要的介绍还有几个例子供学习。显然<code>matplotlib</code>提供的交互功能与真正的<code>GUI</code>包比起来孱弱很多，不过能在作图的过程中加上一两个交互的特性确实是锦上添花的事情。</p>
-<h2>链接Event</h2>
-<p><code>matplotlib</code>里面<code>event</code>的用法和<code>GUI</code>包的设定大同小异，都需要声明把特定的事件名称和一个函数关联起来：</p>
-<div class="highlight"><pre><span class="n">fig</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">mpl_connect</span><span class="p">(</span><span class="err">&#39;</span><span class="n">button_press_event</span><span class="err">&#39;</span><span class="p">,</span><span class="n">click</span><span class="p">)</span>
-</pre></div>
-
-
-<p>这里<code>fig</code>是一个 ...</p> <a class="btn btn-info xsmall" href="../articles/matplotlib/aDelaunaytrigen.html">read more</a></div>
-    </div>	
-				
-<div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-
-    <li class="active"><a href="../tag/python.html">1</a></li>
-
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
-
-</ul>
-</div>
- 
-  
         </div>
         
         <div class="span3">
@@ -172,8 +139,8 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
                 Site
                 </li>
             
-                <li><a href="../archives.html">Archives</a>
-                <li><a href="../tags.html">Tags</a>
+                <li><a href="../../archives.html">Archives</a>
+                <li><a href="../../tags.html">Tags</a>
                 <li><a href="yangsan.github.io/" rel="alternate">Atom feed</a></li>
             </ul>
             </div>
@@ -185,10 +152,10 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
                 Categories
                 </li>
                 
-                <li><a href="../category/blog.html">blog</a></li>
-                <li><a href="../category/linux.html">linux</a></li>
-                <li><a href="../category/matplotlib.html">matplotlib</a></li>
-                <li><a href="../category/python.html">python</a></li>
+                <li><a href="../../category/blog.html">blog</a></li>
+                <li><a href="../../category/linux.html">linux</a></li>
+                <li><a href="../../category/matplotlib.html">matplotlib</a></li>
+                <li><a href="../../category/python.html">python</a></li>
                    
             </ul>
             </div>
@@ -224,7 +191,7 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
     </div>     </div> 
 <footer>
 <br />
-<p><a href="..">煎挠橙的blog</a> &copy; 煎挠橙 2012</p>
+<p><a href="../..">煎挠橙的blog</a> &copy; 煎挠橙 2012</p>
 </footer>
 
 </div> <!-- /container -->
