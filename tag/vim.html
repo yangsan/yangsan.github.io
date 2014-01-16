@@ -9,14 +9,14 @@
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
-    <script src="./theme/html5.js"></script>
+    <script src="../theme/html5.js"></script>
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="./theme/bootstrap.min.css" rel="stylesheet">
-    <link href="./theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="./theme/local.css" rel="stylesheet">
-    <link href="./theme/pygments.css" rel="stylesheet">
+    <link href="../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../theme/local.css" rel="stylesheet">
+    <link href="../theme/pygments.css" rel="stylesheet">
 
 </head>
 
@@ -32,13 +32,13 @@
              <span class="icon-bar"></span>
          </a>
 
-        <a class="brand" href=".">煎挠橙的blog</a>
+        <a class="brand" href="..">煎挠橙的blog</a>
 
         <div class="nav-collapse">
         <ul class="nav">
             
-            <li><a href="./pages/about-me.html">About me</a></li>
-            <li><a href="./pages/todolist.html">Todolist</a></li>
+            <li><a href="../pages/about-me.html">About me</a></li>
+            <li><a href="../pages/todolist.html">Todolist</a></li>
         </ul>
         </div>
         
@@ -58,10 +58,10 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="./articles/linux/setupvim.html"><h1>编辑器之神vim养成</h1></a>
+            <a href="../articles/linux/setupvim.html"><h1>编辑器之神vim养成</h1></a>
 2014-01-16
 
-by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
+by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
  
 
 
@@ -290,138 +290,13 @@ Text，不过没有上手。编辑器之神vim的大名倒是早有耳闻，不�
         <hr />
     </div>
 		
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./articles/python/python_enviroment.html"><h2>ubuntu下python虚拟环境的配置问题</h2></a>
-        <div class= "well small"> 2014-01-15
-
-by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
- 
-
-
- </div>
-        <div class="summary"><p>昨天重做了一下系统，今天配置的时候有些新收获，写在这里。</p>
-<h1>Enthought Canopy</h1>
-<p>自己用python首要是做计算的，昨天试着自己配置一下几个常用的包，弄了半天卡在依赖关系上了，没办法又用回<a href="https://www.enthought.com/">Enthought</a>的Canopy。</p>
-<p>Canopy是一个集成环境，把IDE和扩展包管理器等东西绑在了一起，做计算用的包也都有，装完所有东西都齐活了可以直接使用，非常舒服，后续的升级维护也很方便。</p>
-<p>但有一个问题是Canopy会推荐你将其设置为系统默认的python环境，好处是你在终端里面也可以用Canopy下面的包，这样就免得你再次配置，非常方便。问题是，如果后面用python做其他方面的开发，直接就乱套了。</p>
-<h3>Canopy的虚拟环境</h3>
-<p>Canopy采用了虚拟环境，所以并不影响系统本身的python环境，思路大致是把机器的环境复制一份出来放在其他路径下，运行维护就跟机器的环境再不相关了。</p>
-<p>如果你也安装了Canopy，可以看一下，一般机器的python环境都在</p>
-<div class="highlight"><pre><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="mf">.7</span>
-</pre></div>
-
-
-<p>下面，Canopy默认情况下则把环境装在了</p>
-<div class="highlight"><pre><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">Enthought</span><span class="o">/</span><span class="n">Canopy</span>
-</pre></div>
-
-
-<p>下，两者没有什么关联。</p>
-<p>而之前提到的将Canopy设置为系统默认python环境，则是Canopy在<code>~/.bashrc</code>文件最后加了一句</p>
-<div class="highlight"><pre><span class="n">VIRTUAL_ENV_DISABLE_PROMPT</span><span class="o">=</span><span class="mi">1</span> <span class="n">source ...</span></pre></div> <a class="btn btn-info xsmall" href="./articles/python/python_enviroment.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./articles/linux/setup ubuntu.html"><h2>ubuntu的简单配置</h2></a>
-        <div class= "well small"> 2014-01-15
-
-by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
- 
-
-
- </div>
-        <div class="summary"><p>接触ubuntu不过两个月，之前装了一个试玩，熟练之后越发的喜欢了，准备把工作环境迁移过来。不过之前只给了ubuntu 30g的磁盘空间，明显不够用，而且gnome3各种反人类，昨天心血来潮把原来的系统删了，扩了一下磁盘，重装。今天重新配置，顺便写在这里，后面方便查阅。</p>
-<h1>装系统</h1>
-<h3>分区</h3>
-<p>我搞的是双系统，windows虽然讨厌，但还真离不开。没装ubuntu之前，硬盘分了两个区，c盘是主分区，用来装系统，剩下的扩展分区是一个d盘，存数据。</p>
-<p>要再装个ubuntu的话就得再分一个区出来，做法很简单，（如果有的话）在windows下面，找到磁盘管理器，在原来的d盘上右键，压缩磁盘，跳出来的对话框可以调整大小，我弄了130g出来，点确定，过一会儿就能看到多了一个130g的空闲分区，windows下面的操作就到此为止了。</p>
-<p>注意虽然压缩磁盘对原有的数据没影响，但磁盘操作都有丢数据的风险，最好提前做好备份。</p>
-<h3>做u盘安装盘</h3>
-<p>先去找一个顺眼的ubuntu的iso镜像，官网上就能下，这次我选了xubuntu，就是ubuntu换了张皮，但很多细节做的很舒服。</p>
-<p>而后google一下UNetbootin，是个跨平台的ubuntu安装盘制作工具。找个空u盘，插电脑上 ...</p> <a class="btn btn-info xsmall" href="./articles/linux/setup ubuntu.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./articles/matplotlib/aDelaunaytrigen.html"><h2>用Matplotlib做一个交互式的德劳尼三角生成器</h2></a>
-        <div class= "well small"> 2013-12-30
-
-by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
- 
-
-
- </div>
-        <div class="summary"><p>正在看的一篇文献里用到了德劳尼三角形的算法来界定包含了一些点的空间，搜索了一下，<a href="http://www.cs.cornell.edu/Info/People/chew/Delaunay.html">这里</a>有一个在线的小程序，让你可以通过鼠标在演示界面上点击的形式确定点的位置并动态的生成德劳尼三角形。</p>
-<p>唯一的问题在于这个小程序是<code>java</code>写的，而我不懂<code>java</code>，遂准备用<code>python</code>自己写一个，随后也方便给同事们展示。</p>
-<h2>Matplotlib的Event</h2>
-<p>其实这样的交互式程序应该用<code>GUI</code>包来完成，为此我甚至把<code>Tkinter</code>的文档都翻了一遍，偶然的机会我注意到常被用来画图的<code>matplotlib</code>居然也可以实现交互功能，简直喜出望外。</p>
-<p>官方的文档请参考<a href="http://matplotlib.org/1.3.1/users/event_handling.html">这里</a>，除了必要的介绍还有几个例子供学习。显然<code>matplotlib</code>提供的交互功能与真正的<code>GUI</code>包比起来孱弱很多，不过能在作图的过程中加上一两个交互的特性确实是锦上添花的事情。</p>
-<h2>链接Event</h2>
-<p><code>matplotlib</code>里面<code>event</code>的用法和<code>GUI</code>包的设定大同小异，都需要声明把特定的事件名称和一个函数关联起来：</p>
-<div class="highlight"><pre><span class="n">fig</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">mpl_connect</span><span class="p">(</span><span class="err">&#39;</span><span class="n">button_press_event</span><span class="err">&#39;</span><span class="p">,</span><span class="n">click</span><span class="p">)</span>
-</pre></div>
-
-
-<p>这里<code>fig</code>是一个 ...</p> <a class="btn btn-info xsmall" href="./articles/matplotlib/aDelaunaytrigen.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./articles/blog/rule-of-creation.html"><h2>创作的法则</h2></a>
-        <div class= "well small"> 2013-12-21
-
-by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
- 
-
-
- </div>
-        <div class="summary"><p>之前提到要自己折腾博客的主题，也就是重写网页，不过我本身没有经验，看了html和css的基本语法以后还是无从下手，不过经过一些思考，我觉得还是有一些线索可以追寻的。</p>
-<h1>来自摄影师的启发</h1>
-<p>摄影教材中的经典《纽约摄影学院教程》一开始就指出优秀的摄影作品具有三个特点：</p>
-<ul>
-<li>它必须有一个鲜明的主题</li>
-<li>它必须能将观者的注意力引向主题本身</li>
-<li>它必须去除了不必要甚至是干扰主题的元素</li>
-</ul>
-<p>这既是评价一个作品优劣的标准，也给创造出好的作品指明了方向。显然，这些法则也适用于设计网页。</p>
-<p>当然我更愿意把设计网页比作绘画，不同于摄影的，这是一个无中生有的过程，每个像素的存在都是创作者刻意而为之的结果，所以也必须体现了创作者的意图，为创作目的而服务。</p>
-<h1>实用为美</h1>
-<p>在什么是美的问题上，我认为很多人走入了一个误区，以为美应该是极尽华丽的。但一个事物被创造出来却只有很少一部分单纯是为了给人提供美的感受的————更多的是要服务于一个目。</p>
-<p>比如近来遇到的一个事例：街上很多店铺门前的地板喜欢选用光亮的瓷砖材质，平时还没什么问题，遇上下雨下雪就变得很滑，行人猝不及防的即使不摔倒也不免心惊胆战一下。既然是地板，首要的目的应该是供人行走，亮丽则在其次。刻意的追求感官效果，本末倒置了。</p>
-<p>另一方面，华丽意味着更多的元素，进而意味着更难以驾驭，一个不好怕是会起反效果。</p>
-<p>我想说的是，对于美，或许有另外一条逼近的路径：当一个事物被设计成能够最大限度的服务于其存在的目的时，同样得到了美的结果。也即，最实用的就是最美的 ...</p> <a class="btn btn-info xsmall" href="./articles/blog/rule-of-creation.html">read more</a></div>
-    </div>	
-				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
-    <li class="active"><a href="./index.html">1</a></li>
-    <li class=""><a href="./index2.html">2</a></li>
+    <li class="active"><a href="../tag/vim.html">1</a></li>
 
-    <li class="next"><a href="./index2.html">Next &rarr;</a></li>
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
 
 </ul>
 </div>
@@ -437,8 +312,8 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
                 Site
                 </li>
             
-                <li><a href="./archives.html">Archives</a>
-                <li><a href="./tags.html">Tags</a>
+                <li><a href="../archives.html">Archives</a>
+                <li><a href="../tags.html">Tags</a>
                 <li><a href="yangsan.github.io/" rel="alternate">Atom feed</a></li>
             </ul>
             </div>
@@ -450,10 +325,10 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
                 Categories
                 </li>
                 
-                <li><a href="./category/blog.html">blog</a></li>
-                <li><a href="./category/linux.html">linux</a></li>
-                <li><a href="./category/matplotlib.html">matplotlib</a></li>
-                <li><a href="./category/python.html">python</a></li>
+                <li><a href="../category/blog.html">blog</a></li>
+                <li><a href="../category/linux.html">linux</a></li>
+                <li><a href="../category/matplotlib.html">matplotlib</a></li>
+                <li><a href="../category/python.html">python</a></li>
                    
             </ul>
             </div>
@@ -489,7 +364,7 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
     </div>     </div> 
 <footer>
 <br />
-<p><a href=".">煎挠橙的blog</a> &copy; 煎挠橙 2012</p>
+<p><a href="..">煎挠橙的blog</a> &copy; 煎挠橙 2012</p>
 </footer>
 
 </div> <!-- /container -->
