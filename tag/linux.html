@@ -58,7 +58,7 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="../articles/linux/setup ubuntu.html"><h1>ubuntu的简单配置</h1></a>
+            <a href="../articles/linux/setup-ubuntu.html"><h1>ubuntu的简单配置</h1></a>
 2014-01-15
 
 by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
@@ -83,25 +83,27 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 <p>ubuntu似乎内置了iBus输入法，把语言支持弄好就可以用了，但也只是能用而已。</p>
 <p>好消息是，最近有高手把搜狗输入法移植了过来，不用考虑了，装吧。</p>
 <p>首先把iBus卸载了</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">remove</span> <span class="n">ibus</span>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get remove ibus
 </pre></div>
 
 
 <p>接着在<code>sources.list</code>添加源</p>
-<div class="highlight"><pre><span class="k">deb</span> <span class="s">http://ppa.launchpad.net/fcitx-team/nightly/ubuntu</span> <span class="kp">quantal</span> <span class="kp">main</span> 
-<span class="kp">deb-src</span> <span class="kp">http://ppa.launchpad.net/fcitx-team/nightly/ubuntu</span> <span class="kp">quantal</span> <span class="kp">main</span>
+<div class="highlight"><pre>deb http://ppa.launchpad.net/fcitx-team/nightly/ubuntu quantal main 
+deb-src http://ppa.launchpad.net/fcitx-team/nightly/ubuntu quantal main
 </pre></div>
 
 
 <p>在终端中，输入</p>
-<div class="highlight"><pre><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
-<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">fcitx</span> <span class="n">fcitx</span><span class="o">-</span><span class="n">config</span><span class="o">-</span><span class="n">gtk</span> <span class="n">fcitx</span><span class="o">-</span><span class="n">sunpinyin</span> <span class="n">fcitx</span><span class="o">-</span><span class="n">googlepinyin</span> <span class="n">fcitx</span><span class="o">-</span><span class="n">module</span><span class="o">-</span><span class="n">cloudpinyin</span>  <span class="n">fcitx</span><span class="o">-</span><span class="n">sogoupinyin</span>
+<div class="highlight"><pre>sudo apt-get update
+sudo apt-get install fcitx fcitx-config-gtk fcitx-sunpinyin fcitx-googlepinyin fcitx-module-cloudpinyin  fcitx-sogoupinyin
 </pre></div>
 
 
 <p>后一句的意思是安装fcitx输入法，安装fcitx输入法配置工具，安装搜狗输入法。</p>
 <p>装好以后在系统语言设置里面把fcitx设置为默认输入法，在fcitx的配置工具里把搜狗输入法挪到第二位。注销一下，大功告成。</p>
-<p>这篇博客就是用搜狗写的，很舒服，不枉一番折腾。</p></div>
+<p>这篇博客就是用搜狗写的，很舒服，不枉一番折腾。</p>
+<h1>编辑器——vim</h1>
+<p>另外写了一个帖子，在<a href="../articles/linux/setupvim.html">这里</a>。</p></div>
         <hr />
     </div>
 		

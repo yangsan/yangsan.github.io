@@ -75,81 +75,81 @@ Text，不过没有上手。编辑器之神vim的大名倒是早有耳闻，不�
 <p>vim的配置我认为在于两个方面，一是vim本身提供的各种设置选项，通过写配置文件<code>~/.vimrc</code>来调整，二是安装插件，这个就看想象力了。两者相结合，vim登神。</p>
 <h2>写配置文件</h2>
 <p>我把我的配置文件贴在下面，写注释花了不少时间，不过是值得的。</p>
-<div class="highlight"><pre><span class="s2">&quot;不要兼容vi</span>
-<span class="s2">set nocompatible</span>
+<div class="highlight"><pre><span class="c">&quot;不要兼容vi</span>
+<span class="k">set</span> <span class="nb">nocompatible</span>
 
-<span class="s2">&quot;</span><span class="err">允许鼠标的使用</span>
-<span class="nb">set</span> <span class="n">mouse</span><span class="o">=</span><span class="nx">a</span>
+<span class="c">&quot;允许鼠标的使用</span>
+<span class="k">set</span> <span class="nb">mouse</span><span class="p">=</span><span class="k">a</span>
 
-<span class="s2">&quot;打开自动高亮</span>
-<span class="s2">syntax on</span>
+<span class="c">&quot;打开自动高亮</span>
+<span class="nb">syntax</span> <span class="k">on</span>
 
-<span class="s2">&quot;</span><span class="err">选择色彩方案</span>
-<span class="nx">colorscheme</span> <span class="nx">desert</span>
-<span class="nb">set</span> <span class="n">background</span><span class="o">=</span><span class="nx">dark</span>
-<span class="nb">set</span> <span class="n">t_Co</span><span class="o">=</span><span class="mi">256</span>
+<span class="c">&quot;选择色彩方案</span>
+<span class="k">colorscheme</span> desert
+<span class="k">set</span> <span class="nb">background</span><span class="p">=</span><span class="nb">dark</span>
+<span class="k">set</span> <span class="nb">t_Co</span><span class="p">=</span><span class="m">256</span>
 
-<span class="s2">&quot;设置窗口大小</span>
-<span class="s2">set lines=40</span>
-<span class="s2">set columns=130</span>
+<span class="c">&quot;设置窗口大小</span>
+<span class="k">set</span> <span class="nb">lines</span><span class="p">=</span><span class="m">40</span>
+<span class="k">set</span> <span class="nb">columns</span><span class="p">=</span><span class="m">130</span>
 
-<span class="s2">&quot;</span><span class="err">文件被改变时自动读取</span>
-<span class="nb">set</span> <span class="nx">autoread</span>
+<span class="c">&quot;文件被改变时自动读取</span>
+<span class="k">set</span> <span class="nb">autoread</span>
 
-<span class="s2">&quot;显示行号</span>
-<span class="s2">set number</span>
-
-
-<span class="s2">&quot;</span><span class="nb">Set</span> <span class="mi">7</span> <span class="nx">lines</span> <span class="k">to</span> <span class="nx">the</span> <span class="nx">curso</span> <span class="o">-</span> <span class="nx">when</span> <span class="nx">moving</span> <span class="nx">vertically</span> <span class="nx">using</span> <span class="nx">j</span><span class="p">/</span><span class="nx">k</span>
-<span class="s2">&quot;set so=7</span>
-
-<span class="s2">&quot;</span><span class="err">打开</span><span class="nx">wildmenu</span><span class="err">，用于命令行补完。比如在命令行输入</span> <span class="p">:</span><span class="nx">color</span> <span class="o">&lt;</span><span class="nx">Tab</span><span class="o">&gt;</span> <span class="err">会出现一排电脑上可用的色彩方案，按</span><span class="o">&lt;</span><span class="nx">Tab</span><span class="o">&gt;</span><span class="err">就能切换</span>
-<span class="nb">set</span> <span class="nx">wildmenu</span>
-
-<span class="s2">&quot;总显示当前位置，见右下角</span>
-<span class="s2">set ruler</span>
-
-<span class="s2">&quot;</span><span class="err">高亮搜索结果</span>
-<span class="nb">set</span> <span class="nx">hlsearch</span>
-
-<span class="s2">&quot;在输入搜索文字时，实时匹配</span>
-<span class="s2">set incsearch</span>
-
-<span class="s2">&quot;</span><span class="err">显示配对的括号</span>
-<span class="nb">set</span> <span class="nx">showmatch</span>
-
-<span class="s2">&quot;统一编码</span>
-<span class="s2">set encoding=utf8</span>
+<span class="c">&quot;显示行号</span>
+<span class="k">set</span> <span class="k">number</span>
 
 
-<span class="s2">&quot;</span><span class="err">将</span><span class="nx">tab</span><span class="err">换成空格</span>
-<span class="nb">set</span> <span class="nx">expandtab</span>
+<span class="c">&quot;Set 7 lines to the curso - when moving vertically using j/k</span>
+<span class="c">&quot;set so=7</span>
 
-<span class="s2">&quot;智能tab</span>
-<span class="s2">set smarttab</span>
+<span class="c">&quot;打开wildmenu，用于命令行补完。比如在命令行输入 :color &lt;Tab&gt; 会出现一排电脑上可用的色彩方案，按&lt;Tab&gt;就能切换</span>
+<span class="k">set</span> <span class="nb">wildmenu</span>
 
-<span class="s2">&quot;</span><span class="mi">1</span><span class="nx">tab</span><span class="o">==</span><span class="mi">4</span><span class="err">空格</span>
-<span class="nb">set</span> <span class="n">shiftwidth</span><span class="o">=</span><span class="mi">4</span>
-<span class="nb">set</span> <span class="n">tabstop</span><span class="o">=</span><span class="mi">4</span>
+<span class="c">&quot;总显示当前位置，见右下角</span>
+<span class="k">set</span> <span class="nb">ruler</span>
 
-<span class="s2">&quot;自动断行</span>
-<span class="s2">set lbr</span>
-<span class="s2">set tw=500</span>
+<span class="c">&quot;高亮搜索结果</span>
+<span class="k">set</span> <span class="nb">hlsearch</span>
 
-<span class="s2">&quot;</span><span class="err">自动缩进</span>
-<span class="nb">set</span> <span class="nx">ai</span>
+<span class="c">&quot;在输入搜索文字时，实时匹配</span>
+<span class="k">set</span> <span class="nb">incsearch</span>
 
-<span class="s2">&quot;智能缩进</span>
-<span class="s2">set si</span>
+<span class="c">&quot;显示配对的括号</span>
+<span class="k">set</span> <span class="nb">showmatch</span>
 
-<span class="s2">&quot;</span><span class="err">自动换行</span>
-<span class="nb">set</span> <span class="nx">wrap</span>
+<span class="c">&quot;统一编码</span>
+<span class="k">set</span> <span class="nb">encoding</span><span class="p">=</span>utf8
 
-<span class="s2">&quot;在分屏中间方便移动的映射</span>
-<span class="s2">map &lt;C-j&gt; &lt;C-W&gt;j</span>
-<span class="s2">map &lt;C-k&gt; &lt;C-W&gt;k</span>
-<span class="s2">map &lt;C-h&gt; &lt;C-W&gt;h</span>
-<span class="s2">map &lt;C-l&gt; &lt;C-W&gt;l</span>
+
+<span class="c">&quot;将tab换成空格</span>
+<span class="k">set</span> <span class="nb">expandtab</span>
+
+<span class="c">&quot;智能tab</span>
+<span class="k">set</span> <span class="nb">smarttab</span>
+
+<span class="c">&quot;1tab==4空格</span>
+<span class="k">set</span> <span class="nb">shiftwidth</span><span class="p">=</span><span class="m">4</span>
+<span class="k">set</span> <span class="nb">tabstop</span><span class="p">=</span><span class="m">4</span>
+
+<span class="c">&quot;自动断行</span>
+<span class="k">set</span> <span class="nb">lbr</span>
+<span class="k">set</span> <span class="nb">tw</span><span class="p">=</span><span class="m">500</span>
+
+<span class="c">&quot;自动缩进</span>
+<span class="k">set</span> <span class="nb">ai</span>
+
+<span class="c">&quot;智能缩进</span>
+<span class="k">set</span> <span class="k">si</span>
+
+<span class="c">&quot;自动换行</span>
+<span class="k">set</span> <span class="nb">wrap</span>
+
+<span class="c">&quot;在分屏中间方便移动的映射</span>
+map <span class="p">&lt;</span>C<span class="p">-</span><span class="k">j</span><span class="p">&gt;</span> <span class="p">&lt;</span>C<span class="p">-</span>W<span class="p">&gt;</span><span class="k">j</span>
+map <span class="p">&lt;</span>C<span class="p">-</span><span class="k">k</span><span class="p">&gt;</span> <span class="p">&lt;</span>C<span class="p">-</span>W<span class="p">&gt;</span><span class="k">k</span>
+map <span class="p">&lt;</span>C<span class="p">-</span><span class="k">h</span><span class="p">&gt;</span> <span class="p">&lt;</span>C<span class="p">-</span>W<span class="p">&gt;</span><span class="k">h</span>
+map <span class="p">&lt;</span>C<span class="p">-</span><span class="k">l</span><span class="p">&gt;</span> <span class="p">&lt;</span>C<span class="p">-</span>W<span class="p">&gt;</span><span class="k">l</span>
 </pre></div>
 
 
@@ -157,135 +157,135 @@ Text，不过没有上手。编辑器之神vim的大名倒是早有耳闻，不�
 <p>安装插件的方法比较多，这里推荐用vundle，github项目主页在<a href="https://github.com/gmarik/vundle">这里</a>。需要注意的是vundle需要git的支持。</p>
 <h3>vundle的安装</h3>
 <p>把vundle从github上克隆下来：</p>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="o">:</span><span class="c1">//github.com/gmarik/vundle.git ~/.vim/bundle/vundle</span>
+<div class="highlight"><pre><span class="nv">$ </span>git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 </pre></div>
 
 
 <p>剩下的配置在<code>.vimrc</code>里写</p>
-<div class="highlight"><pre><span class="s">&quot;Vundle vim的插件管理程序{</span>
-<span class="s">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span>
-<span class="n">filetype</span> <span class="n">off</span>
-<span class="n">set</span> <span class="n">rtp</span><span class="o">+=~/</span><span class="p">.</span><span class="n">vim</span><span class="o">/</span><span class="n">bundle</span><span class="o">/</span><span class="n">vundle</span><span class="o">/</span>
-<span class="n">call</span> <span class="n">vundle</span><span class="err">#</span><span class="n">rc</span><span class="p">()</span>
-<span class="s">&quot; 让Bundle管理Vundle</span>
-<span class="n">Bundle</span> <span class="err">&#39;</span><span class="n">gmarik</span><span class="o">/</span><span class="n">vundle</span><span class="err">&#39;</span>
-<span class="s">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span><span class="err">以上为必须的部分</span>
+<div class="highlight"><pre><span class="c">&quot;Vundle vim的插件管理程序{</span>
+<span class="c">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span>
+<span class="k">filetype</span> off
+<span class="k">set</span> <span class="nb">rtp</span><span class="p">+=~</span><span class="sr">/.vim/</span>bundle<span class="sr">/vundle/</span>
+<span class="k">call</span> vundle#rc<span class="p">()</span>
+<span class="c">&quot; 让Bundle管理Vundle</span>
+Bundle <span class="s1">&#39;gmarik/vundle&#39;</span>
+<span class="c">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;以上为必须的部分</span>
 
-<span class="n">filetype</span> <span class="n">plugin</span> <span class="n">indent</span> <span class="n">on</span>     <span class="s">&quot; 必须的</span>
+<span class="k">filetype</span> plugin indent <span class="k">on</span>     <span class="c">&quot; 必须的</span>
 </pre></div>
 
 
 <p>这样vundle就配置好了，如果需要安装插件则可以在上面的语句后面添加如下的语句，我以安装<code>autoclose</code>这个插件为例</p>
-<div class="highlight"><pre><span class="n">Bundle</span> <span class="err">&#39;</span><span class="n">AutoClose</span><span class="err">&#39;</span>
+<div class="highlight"><pre>Bundle <span class="s1">&#39;AutoClose&#39;</span>
 </pre></div>
 
 
 <p>保存之后再打开一个vim的窗口，在命令行里输入<code>:BundleList</code>，可以看到你的插件列表，输入<code>:BundleInstall</code>就可以对列表里面的插件安装/升级了。</p>
 <h3>插件来源</h3>
 <p>首先你可以去<a href="http://vim-scripts.org/vim/scripts.html">vim-scripts.org</a>上搜搜看，现在插件作者们都在把自己的作品往这上面迁移，还是比较全的。找到心仪的插件后复制一下名字，在<code>.vimrc</code>后面添加语句</p>
-<div class="highlight"><pre><span class="n">Bundle</span> <span class="err">&#39;插件名&#39;</span>
+<div class="highlight"><pre>Bundle <span class="s1">&#39;插件名&#39;</span>
 </pre></div>
 
 
 <p>按上面的步骤安装就好。</p>
 <p>另外托管在github上的项目也是支持的，下面的两种写法都是合法的，注意名字中间不要有空格</p>
-<div class="highlight"><pre><span class="n">Bundle</span> <span class="err">&#39;</span><span class="n">klen</span><span class="o">/</span><span class="n">python</span><span class="o">-</span><span class="n">mode</span><span class="err">&#39;</span>
-<span class="n">Bundle</span> <span class="err">&#39;</span><span class="n">git</span><span class="o">:</span><span class="c1">//github.com/davidhalter/jedi-vim&#39;</span>
+<div class="highlight"><pre>Bundle <span class="s1">&#39;klen/python-mode&#39;</span>
+Bundle <span class="s1">&#39;git://github.com/davidhalter/jedi-vim&#39;</span>
 </pre></div>
 
 
 <h3>我的配置文件</h3>
 <p>下面是我配置文件里装插件的部分</p>
-<div class="highlight"><pre><span class="s2">&quot;Vundle vim的插件管理程序{</span>
+<div class="highlight"><pre><span class="c">&quot;Vundle vim的插件管理程序{</span>
 
-<span class="s2">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span>
-<span class="s2">filetype off</span>
-<span class="s2">set rtp+=~/.vim/bundle/vundle/</span>
-<span class="s2">call vundle#rc()</span>
-<span class="s2">&quot;</span> <span class="err">让</span><span class="nx">Bundle</span><span class="err">管理</span><span class="nx">Vundle</span>
-<span class="nx">Bundle</span> <span class="s1">&#39;gmarik/vundle&#39;</span>
-<span class="s2">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span><span class="err">以上为必须的部分</span>
-
-
-<span class="s2">&quot;安装的插件从这里开始：</span>
+<span class="c">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</span>
+<span class="k">filetype</span> off
+<span class="k">set</span> <span class="nb">rtp</span><span class="p">+=~</span><span class="sr">/.vim/</span>bundle<span class="sr">/vundle/</span>
+<span class="k">call</span> vundle#rc<span class="p">()</span>
+<span class="c">&quot; 让Bundle管理Vundle</span>
+Bundle <span class="s1">&#39;gmarik/vundle&#39;</span>
+<span class="c">&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;以上为必须的部分</span>
 
 
-<span class="s2">&quot;</span><span class="err">强大的状态栏</span>
-<span class="nx">Bundle</span> <span class="s1">&#39;Lokaltog/powerline&#39;</span><span class="p">,{</span><span class="s1">&#39;rtp&#39;</span><span class="p">:</span><span class="s1">&#39;powerline/bindings/vim/&#39;</span><span class="p">}</span>
-<span class="s2">&quot;设置字体</span>
-<span class="s2">set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9</span>
-<span class="s2">&quot;</span><span class="err">总是显示</span>
-<span class="nb">set</span> <span class="n">laststatus</span><span class="o">=</span><span class="mi">2</span>
+<span class="c">&quot;安装的插件从这里开始：</span>
 
 
-<span class="s2">&quot;自动配对括号引号</span>
-<span class="s2">Bundle &#39;AutoClose&#39;</span>
-
-<span class="s2">&quot;</span><span class="err">显示树状文件目录</span>
-<span class="nx">Bundle</span> <span class="s1">&#39;The-NERD-tree&#39;</span>
-<span class="s2">&quot;定义一下启动nerd tree的热键，我用的是Ctrl+n</span>
-<span class="s2">map &lt;C-n&gt; :NERDTreeToggle&lt;CR&gt;</span>
-<span class="s2">&quot;</span><span class="err">自动打开</span><span class="nx">nerdtree</span>
-<span class="s2">&quot;autocmd vimenter * NERDTree</span>
-<span class="s2">&quot;</span><span class="err">在只剩一个</span><span class="nx">nerdtree</span><span class="err">的情况下关闭窗口</span>
-<span class="nx">autocmd</span> <span class="nx">bufenter</span> <span class="o">*</span> <span class="k">if</span> <span class="p">(</span><span class="nx">winnr</span><span class="p">(</span><span class="s2">&quot;$&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nb">exists</span><span class="p">(</span><span class="s2">&quot;b:NERDTreeType&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">b</span><span class="p">:</span><span class="nx">NERDTreeType</span> <span class="o">==</span> <span class="s2">&quot;primary&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="nx">q</span> <span class="o">|</span> <span class="nx">endif</span>
+<span class="c">&quot;强大的状态栏</span>
+Bundle <span class="s1">&#39;Lokaltog/powerline&#39;</span><span class="p">,</span>{<span class="s1">&#39;rtp&#39;</span>:<span class="s1">&#39;powerline/bindings/vim/&#39;</span>}
+<span class="c">&quot;设置字体</span>
+<span class="k">set</span> <span class="nb">guifont</span><span class="p">=</span>DejaVu\ Sans\ Mono\ <span class="k">for</span>\ Powerline\ <span class="m">9</span>
+<span class="c">&quot;总是显示</span>
+<span class="k">set</span> <span class="nb">laststatus</span><span class="p">=</span><span class="m">2</span>
 
 
-<span class="s2">&quot;python的自动补全插件</span>
-<span class="s2">Bundle &#39;git://github.com/davidhalter/jedi-vim&#39;</span>
-<span class="s2">&quot;</span><span class="err">设置补全热键</span>
-<span class="k">let</span> <span class="n">g</span><span class="p">:</span><span class="nx">jedi</span><span class="vi">#completions_command</span> <span class="o">=</span> <span class="s2">&quot;&lt;C-l&gt;&quot;</span>
+<span class="c">&quot;自动配对括号引号</span>
+Bundle <span class="s1">&#39;AutoClose&#39;</span>
+
+<span class="c">&quot;显示树状文件目录</span>
+Bundle <span class="s1">&#39;The-NERD-tree&#39;</span>
+<span class="c">&quot;定义一下启动nerd tree的热键，我用的是Ctrl+n</span>
+map <span class="p">&lt;</span>C<span class="p">-</span><span class="k">n</span><span class="p">&gt;</span> :NERDTreeToggle<span class="p">&lt;</span>CR<span class="p">&gt;</span>
+<span class="c">&quot;自动打开nerdtree</span>
+<span class="c">&quot;autocmd vimenter * NERDTree</span>
+<span class="c">&quot;在只剩一个nerdtree的情况下关闭窗口</span>
+autocmd bufenter * <span class="k">if</span> <span class="p">(</span>winnr<span class="p">(</span><span class="s2">&quot;$&quot;</span><span class="p">)</span> <span class="p">==</span> <span class="m">1</span> &amp;&amp; exists<span class="p">(</span><span class="s2">&quot;b:NERDTreeType&quot;</span><span class="p">)</span> &amp;&amp; <span class="k">b</span>:NERDTreeType <span class="p">==</span> <span class="s2">&quot;primary&quot;</span><span class="p">)</span> <span class="p">|</span> <span class="k">q</span> <span class="p">|</span> <span class="k">endif</span>
 
 
-<span class="s2">&quot;python-mode插件</span>
-<span class="s2">Bundle &#39;klen/python-mode&#39;</span>
-<span class="s2">&quot;</span><span class="err">缩进</span>
-<span class="k">let</span> <span class="n">g</span><span class="p">:</span><span class="n">pymode_indent</span> <span class="o">=</span> <span class="mi">1</span> 
-<span class="s2">&quot;折叠</span>
-<span class="s2">let g:pymode_folding = 1</span>
-<span class="s2">&quot;</span><span class="err">快速运动</span>
-<span class="k">let</span> <span class="n">g</span><span class="p">:</span><span class="n">pymode_motion</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="s2">&quot;文档</span>
-<span class="s2">let g:pymode_doc = 1</span>
-<span class="s2">let g:pymode_doc_key = &#39;K&#39;</span>
-<span class="s2">&quot;</span><span class="err">支持虚拟环境</span>
-<span class="k">let</span> <span class="n">g</span><span class="p">:</span><span class="n">pymode_virtualenv</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="s2">&quot;运行程序</span>
-<span class="s2">let g:pymode_run = 1</span>
-<span class="s2">let g:pymode_run_bind = &#39;&lt;F8&gt;&#39;</span>
-<span class="s2">&quot;</span><span class="err">断点</span>
-<span class="k">let</span> <span class="n">g</span><span class="p">:</span><span class="n">pymode_breakpoint</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="k">let</span> <span class="n">g</span><span class="p">:</span><span class="n">pymode_breakpoint_key</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
-<span class="s2">&quot;拼写检查</span>
-<span class="s2">let g:pymode_lint = 1</span>
-<span class="s2">let g:pymode_lint_on_write = 1</span>
-<span class="s2">let g:pymode_lint_message = 1</span>
-<span class="s2">let g:pymode_lint_checker = [&#39;pyflakes&#39;,&#39;pep8&#39;]</span>
-<span class="s2">&quot;</span><span class="err">自动补全，这里没有启用，和前面的</span><span class="nx">jide</span><span class="na">-vim</span><span class="err">冲突</span>
-<span class="s2">&quot;&quot;</span><span class="kt">map</span> <span class="o">&lt;</span><span class="nx">C</span><span class="na">-l</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">C</span><span class="na">-Space</span><span class="o">&gt;</span>
-<span class="k">let</span> <span class="n">g</span><span class="p">:</span><span class="n">pymode_rope</span> <span class="o">=</span> <span class="mi">0</span> 
-<span class="s2">&quot;&quot;</span><span class="k">let</span> <span class="n">g</span><span class="p">:</span><span class="n">pymode_rope_completion_bind</span> <span class="o">=</span> <span class="s1">&#39;&lt;C-Space&gt;&#39;</span>
-<span class="s2">&quot;高亮</span>
-<span class="s2">let g:pymode_syntax = 1</span>
-<span class="s2">let g:pymode_syntax_all = 1</span>
-<span class="s2">let g:pymode_syntax_indent_errors = g:pymode_syntax_all</span>
-<span class="s2">let g:pymode_syntax_space_errors = g:pymode_syntax_all</span>
+<span class="c">&quot;python的自动补全插件</span>
+Bundle <span class="s1">&#39;git://github.com/davidhalter/jedi-vim&#39;</span>
+<span class="c">&quot;设置补全热键</span>
+<span class="k">let</span> <span class="k">g</span>:jedi#completions_command <span class="p">=</span> <span class="s2">&quot;&lt;C-l&gt;&quot;</span>
 
 
-<span class="s2">&quot;</span><span class="nx">markdown</span><span class="err">高亮插件</span>
-<span class="nx">Bundle</span> <span class="s1">&#39;plasticboy/vim-markdown&#39;</span>
+<span class="c">&quot;python-mode插件</span>
+Bundle <span class="s1">&#39;klen/python-mode&#39;</span>
+<span class="c">&quot;缩进</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_indent <span class="p">=</span> <span class="m">1</span> 
+<span class="c">&quot;折叠</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_folding <span class="p">=</span> <span class="m">1</span>
+<span class="c">&quot;快速运动</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_motion <span class="p">=</span> <span class="m">1</span>
+<span class="c">&quot;文档</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_doc <span class="p">=</span> <span class="m">1</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_doc_key <span class="p">=</span> <span class="s1">&#39;K&#39;</span>
+<span class="c">&quot;支持虚拟环境</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_virtualenv <span class="p">=</span> <span class="m">1</span>
+<span class="c">&quot;运行程序</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_run <span class="p">=</span> <span class="m">1</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_run_bind <span class="p">=</span> <span class="s1">&#39;&lt;F8&gt;&#39;</span>
+<span class="c">&quot;断点</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_breakpoint <span class="p">=</span> <span class="m">1</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_breakpoint_key <span class="p">=</span> <span class="s1">&#39;b&#39;</span>
+<span class="c">&quot;拼写检查</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_lint <span class="p">=</span> <span class="m">1</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_lint_on_write <span class="p">=</span> <span class="m">1</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_lint_message <span class="p">=</span> <span class="m">1</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_lint_checker <span class="p">=</span> [<span class="s1">&#39;pyflakes&#39;</span><span class="p">,</span><span class="s1">&#39;pep8&#39;</span>]
+<span class="c">&quot;自动补全，这里没有启用，和前面的jide-vim冲突</span>
+<span class="c">&quot;&quot;map &lt;C-l&gt; &lt;C-Space&gt;</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_rope <span class="p">=</span> <span class="m">0</span> 
+<span class="c">&quot;&quot;let g:pymode_rope_completion_bind = &#39;&lt;C-Space&gt;&#39;</span>
+<span class="c">&quot;高亮</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_syntax <span class="p">=</span> <span class="m">1</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_syntax_all <span class="p">=</span> <span class="m">1</span>
+<span class="k">let</span> <span class="k">g</span>:pymode_syntax_indent_errors <span class="p">=</span> <span class="k">g</span>:pymode_syntax_all
+<span class="k">let</span> <span class="k">g</span>:pymode_syntax_space_errors <span class="p">=</span> <span class="k">g</span>:pymode_syntax_all
 
 
-<span class="nx">filetype</span> <span class="nx">plugin</span> <span class="nx">indent</span> <span class="k">on</span>     <span class="s2">&quot; 必须的</span>
-<span class="s2">&quot;</span> <span class="nx">Brief</span> <span class="nx">help</span>
-<span class="s2">&quot; :BundleList          - list configured bundles</span>
-<span class="s2">&quot;</span> <span class="p">:</span><span class="nx">BundleInstall</span><span class="p">(</span><span class="o">!</span><span class="p">)</span>    <span class="o">-</span> <span class="nb">install</span> <span class="p">(</span><span class="nx">update</span><span class="p">)</span> <span class="nx">bundles</span>
-<span class="s2">&quot; :BundleSearch(!) foo - search (or refresh cache first) for foo</span>
-<span class="s2">&quot;</span> <span class="p">:</span><span class="nx">BundleClean</span><span class="p">(</span><span class="o">!</span><span class="p">)</span>      <span class="o">-</span> <span class="nx">confirm</span> <span class="p">(</span><span class="ow">or</span> <span class="nx">auto</span><span class="na">-approve</span><span class="p">)</span> <span class="nx">removal</span> <span class="nx">of</span> <span class="nx">unused</span> <span class="nx">bundles</span>
-<span class="s2">&quot;</span>
-<span class="s2">&quot;</span> <span class="nx">see</span> <span class="p">:</span><span class="nx">h</span> <span class="nx">vundle</span> <span class="nb">for</span> <span class="nx">more</span> <span class="nx">details</span> <span class="ow">or</span> <span class="nx">wiki</span> <span class="nb">for</span> <span class="nx">FAQ</span>
-<span class="s2">&quot; NOTE: comments after Bundle commands are not allowed.</span>
-<span class="s2">&quot;</span><span class="p">}</span>
+<span class="c">&quot;markdown高亮插件</span>
+Bundle <span class="s1">&#39;plasticboy/vim-markdown&#39;</span>
+
+
+<span class="k">filetype</span> plugin indent <span class="k">on</span>     <span class="c">&quot; 必须的</span>
+<span class="c">&quot; Brief help</span>
+<span class="c">&quot; :BundleList          - list configured bundles</span>
+<span class="c">&quot; :BundleInstall(!)    - install (update) bundles</span>
+<span class="c">&quot; :BundleSearch(!) foo - search (or refresh cache first) for foo</span>
+<span class="c">&quot; :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles</span>
+<span class="c">&quot;</span>
+<span class="c">&quot; see :h vundle for more details or wiki for FAQ</span>
+<span class="c">&quot; NOTE: comments after Bundle commands are not allowed.</span>
+<span class="c">&quot;}</span>
 </pre></div></div>
         <hr />
     </div>
@@ -297,7 +297,7 @@ Text，不过没有上手。编辑器之神vim的大名倒是早有耳闻，不�
  
 
     <div class='article'>
-        <a href="../articles/linux/setup ubuntu.html"><h2>ubuntu的简单配置</h2></a>
+        <a href="../articles/linux/setup-ubuntu.html"><h2>ubuntu的简单配置</h2></a>
         <div class= "well small"> 2014-01-15
 
 by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
@@ -313,7 +313,7 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 <p>注意虽然压缩磁盘对原有的数据没影响，但磁盘操作都有丢数据的风险，最好提前做好备份。</p>
 <h3>做u盘安装盘</h3>
 <p>先去找一个顺眼的ubuntu的iso镜像，官网上就能下，这次我选了xubuntu，就是ubuntu换了张皮，但很多细节做的很舒服。</p>
-<p>而后google一下UNetbootin，是个跨平台的ubuntu安装盘制作工具。找个空u盘，插电脑上 ...</p> <a class="btn btn-info xsmall" href="../articles/linux/setup ubuntu.html">read more</a></div>
+<p>而后google一下UNetbootin，是个跨平台的ubuntu安装盘制作工具。找个空u盘，插电脑上 ...</p> <a class="btn btn-info xsmall" href="../articles/linux/setup-ubuntu.html">read more</a></div>
     </div>	
 				
 <div class="pagination">

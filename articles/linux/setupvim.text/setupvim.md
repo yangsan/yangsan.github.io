@@ -17,6 +17,7 @@ vim的配置我认为在于两个方面，一是vim本身提供的各种设置�
 
 我把我的配置文件贴在下面，写注释花了不少时间，不过是值得的。
 
+    :::vim
     "不要兼容vi
     set nocompatible
 
@@ -100,11 +101,13 @@ vim的配置我认为在于两个方面，一是vim本身提供的各种设置�
 ###vundle的安装
 
 把vundle从github上克隆下来：
-
+    
+    :::bash
     $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 剩下的配置在`.vimrc`里写
 
+    :::vim
     "Vundle vim的插件管理程序{
     """"""""
     filetype off
@@ -118,6 +121,7 @@ vim的配置我认为在于两个方面，一是vim本身提供的各种设置�
 
 这样vundle就配置好了，如果需要安装插件则可以在上面的语句后面添加如下的语句，我以安装`autoclose`这个插件为例
 
+    :::vim
     Bundle 'AutoClose'
 
 保存之后再打开一个vim的窗口，在命令行里输入`:BundleList`，可以看到你的插件列表，输入`:BundleInstall`就可以对列表里面的插件安装/升级了。
@@ -126,12 +130,14 @@ vim的配置我认为在于两个方面，一是vim本身提供的各种设置�
 
 首先你可以去[vim-scripts.org](http://vim-scripts.org/vim/scripts.html)上搜搜看，现在插件作者们都在把自己的作品往这上面迁移，还是比较全的。找到心仪的插件后复制一下名字，在`.vimrc`后面添加语句
     
+    :::vim
     Bundle '插件名'
 
 按上面的步骤安装就好。
 
 另外托管在github上的项目也是支持的，下面的两种写法都是合法的，注意名字中间不要有空格
 
+    :::vim
     Bundle 'klen/python-mode'
     Bundle 'git://github.com/davidhalter/jedi-vim'
 
@@ -139,6 +145,7 @@ vim的配置我认为在于两个方面，一是vim本身提供的各种设置�
 
 下面是我配置文件里装插件的部分
 
+    :::vim
     "Vundle vim的插件管理程序{
 
     """"""""
