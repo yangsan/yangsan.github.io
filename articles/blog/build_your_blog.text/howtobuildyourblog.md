@@ -62,27 +62,32 @@ Slug: build_your_blog
 
 这里假设你已经安装好了python2.x的环境，并装好了`pip`。可以直接用下面的命令安装`pelican`
 
+    :::bash
 	pip install pelican
 
 要使用`markdown`，还需要一个`markdown`的支持
 
+    :::bash
 	pip install markdown
 
 ##首次配置
 
 选定一个目录存放你的博客文件，我的叫`blog`
 
+    :::bash
 	mkdir blog
 	cd blog
 
 在你的`blog`目录下使用命令
 
+    :::bash
 	pelican-quickstart
 
 接下来会询问你一系列问题，除了名字等必须要填的，其他建议使用默认值，随后还可以通过配置`pelicanconf.py`文件进行修改。
 
 运行结束之后会生成的目录结构
 
+    :::bash
 	blog/
 	├── content
 	│   └── (pages)
@@ -100,6 +105,7 @@ Slug: build_your_blog
 
 创建一个叫`first.md`的文档放到`content`目录下。`Pelican`对内容的格式有些要求，每一篇博文的开头都应该是这样的：
 
+    :::markdown
 	Title: 第一篇博客
 	Date: 2013-12-12 10:16
 	Category: 测试
@@ -115,18 +121,22 @@ Slug: build_your_blog
 
 写完你的第一篇博文后，你应该还在`content`目录下，先回到blog根目录下
 
+    :::bash
 	cd ..
 
 使用下面的命令`pelican`系统会将你放在`content`目录下的`.md`文档转换成网页文件
 
+    :::bash
 	make html
 
 当然，你也可以让`pelican`在每次检测到文件变化的时候都重新生成一次网页，使用下面的命令
 
+    :::bash
 	make regenerate
 
 实际上此时如果你去`output`目录下就会看到生成的页面已经躺在那里了，但为了方便本地的调试，你可以用下面的命令开启一个本地的服务器
 
+    :::bash
 	make serve
 
 这样，通过访问 http://127.0.0.1:8000 你就已经可以看到你的博客页面了！
@@ -134,6 +144,7 @@ Slug: build_your_blog
 
 调试完毕后你应该关闭之前开启的服务器
 
+    :::bash
 	./develop_server.sh stop
 
 至此，尽管有些丑，但你已经完成了自己博客的创建，随后只需要把你的文章放进`content`目录下面并运行以上命令就可以轻松生成博客了。如果需要备份，也只需要将`content`目录下的文件备份好就行，非常省心。
@@ -144,42 +155,51 @@ Slug: build_your_blog
 
 首先你要有个`github`账号。`github`为每个账号提供一个子域名以供存放个人页面，使用的方法是创建一个新的版本库，命名为
 
+    :::bash
 	username.github.io
 
 其中`username`必须为你的`github`用户名，否则将无法启动页面。
 
 这时你新创建的版本库是空的，你会获得一个地址
 
+    :::bash
 	https://github.com/username/username.github.io.git
 
 先记下来。
 
 接下来要做的是将你本地`output`目录下的所有内容都推送到你刚刚建立的远程版本库中。在本地，进到`output`目录下面
 
+    :::bash
 	cd output
 
 在这里新建一个本地的版本库
 
+    :::bash
 	git init
 
 建议按照`github`的惯例添加一个新的`readme`文档
 
+    :::bash
 	touch README.md
 
 接下来可以将目录下面所有的文件都添加进缓存区
 
+    :::bash
 	git add .
 
 可以提交了
 
+    :::bash
 	git commit -m 'First commit'
 
 下面将你的本地仓库和远程仓库关联起来，还记的之前获得的一个地址吧，用在这里
 
+    :::bash
 	git remote add origin https://github.com/username/username.github.io.git
 
 最后将本地仓库推送到`github`上就好，由于是第一次，用上`-u`字段
 
+    :::bash
 	git push -u origin master
 
 待推送成功，稍等片刻，登陆
@@ -198,22 +218,27 @@ Slug: build_your_blog
 
 `pelican`目前提供了数款主题可供选择。先到`pelican`这个项目的`github`页面上把主题的版本库`clone`到本地，在你选定的本地目录下面
 
+    :::bash
 	git clone https://github.com/getpelican/pelican-themes.git
 
 进`pelican-themes`目录
 
+    :::bash
 	cd pelican-themes
 
 你可以浏览该目录下的文件，每个子目录存放了一个主题，里面会留有一个截图供你预览。比如我看中了`bootstrap`这一款，使用命令
 
+    :::bash
 	pelican-themes -i bootstrap
 
 安装该主题。这时使用命令
 
+    :::bash
 	pelican-themes -l
 
 查看已安装主题，应该就能看到刚刚安装的`bootstrap`主题了。这还不够，你还需要在`pelicanconf.py`文档中加上一句
 
+    :::python
 	THEME = 'bootstrap'
 
 这样你在生成博客页面时新主题就被应用上了。
@@ -234,6 +259,7 @@ Slug: build_your_blog
 
 接下来在你的`pelicanconf.py`文档中添加一下字段
 
+    :::python
 	DISQUS_SITENAME = shortname
 
 用你自己的'shortname'替换进去，剩下的交给`pelican`。

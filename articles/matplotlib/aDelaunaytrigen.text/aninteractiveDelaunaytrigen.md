@@ -17,11 +17,13 @@ Slug: aDelaunaytrigen
 
 `matplotlib`里面`event`的用法和`GUI`包的设定大同小异，都需要声明把特定的事件名称和一个函数关联起来：
 
+    :::python
 	fig.canvas.mpl_connect('button_press_event',click)
 
 这里`fig`是一个`axes`的实例，链接`event`和函数则要用到`axes`实例的`canvas`属性的`mpl_connect`方法。`'button_press_event'`是鼠标左键点击事件的名称，`click`则是需要调用的函数了。
 
 上面的关联完成以后每次你在画布上点击鼠标都会触发一次`click`这个函数，并同时向`click`传递一个`event`的参数，所以在定义`click`时要注意：
+
 	:::Python
 	def click(event):
 		...

@@ -20,16 +20,19 @@ Canopy采用了虚拟环境，所以并不影响系统本身的python环境，�
 
 如果你也安装了Canopy，可以看一下，一般机器的python环境都在
 
+    :::bash
 	/usr/lib/python2.7
 
 下面，Canopy默认情况下则把环境装在了
 
+    :::bash
 	/home/Enthought/Canopy
 
 下，两者没有什么关联。
 
 而之前提到的将Canopy设置为系统默认python环境，则是Canopy在`~/.bashrc`文件最后加了一句
 
+    :::bash
 	VIRTUAL_ENV_DISABLE_PROMPT=1 source ~/Enthought/Canopy_32bit/User/bin/activate
 
 这样你每次开终端都是自动进入Canopy的虚拟环境下，这时如果做一些其他的工作，直接就和Canopy这套东西搅在一起了，后面会有匪夷所思的情况出现，之前因为不懂，我为此吐血三升。
@@ -42,22 +45,26 @@ Canopy采用了虚拟环境，所以并不影响系统本身的python环境，�
 
 做法其实也很简单，主要用到[virtualenv](http://www.virtualenv.org/)这个包，可以装到系统的python环境中
 
+    :::bash
 	$sudo pip install virtualenv
 
 ###基本用法
 
 需要一个新的虚拟环境的时候就
 
+    :::bash
 	$virtualenv ENV
 
 这样实际上创建了`ENV/lib/pythonx.x/site-packages`，之后这个虚拟环境激活的状态下所有的包都是安装到这里的。
 
 同时也创建了`ENV/bin/python`，这是一个python的解释器，如果你运行它，用的将是这个虚拟的环境。比如
 
+    :::bash
 	$path/to/ENV/bin/pip
 
 当然，为了方便，也可以
 
+    :::bash
 	$source bin/activate
 
 这这样做的结果就是把你的`$PATH`指到了当前的虚拟环境里，后面可以像正常的用法那样使用python了。结束的时候用命令`deactivate`就又把路径指回去了。

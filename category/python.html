@@ -76,18 +76,18 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 <h3>Canopy的虚拟环境</h3>
 <p>Canopy采用了虚拟环境，所以并不影响系统本身的python环境，思路大致是把机器的环境复制一份出来放在其他路径下，运行维护就跟机器的环境再不相关了。</p>
 <p>如果你也安装了Canopy，可以看一下，一般机器的python环境都在</p>
-<div class="highlight"><pre><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="mf">.7</span>
+<div class="highlight"><pre>/usr/lib/python2.7
 </pre></div>
 
 
 <p>下面，Canopy默认情况下则把环境装在了</p>
-<div class="highlight"><pre><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">Enthought</span><span class="o">/</span><span class="n">Canopy</span>
+<div class="highlight"><pre>/home/Enthought/Canopy
 </pre></div>
 
 
 <p>下，两者没有什么关联。</p>
 <p>而之前提到的将Canopy设置为系统默认python环境，则是Canopy在<code>~/.bashrc</code>文件最后加了一句</p>
-<div class="highlight"><pre><span class="n">VIRTUAL_ENV_DISABLE_PROMPT</span><span class="o">=</span><span class="mi">1</span> <span class="n">source</span> <span class="o">~/</span><span class="n">Enthought</span><span class="o">/</span><span class="n">Canopy_32bit</span><span class="o">/</span><span class="n">User</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">activate</span>
+<div class="highlight"><pre><span class="nv">VIRTUAL_ENV_DISABLE_PROMPT</span><span class="o">=</span>1 <span class="nb">source</span> ~/Enthought/Canopy_32bit/User/bin/activate
 </pre></div>
 
 
@@ -96,24 +96,24 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 <h1>python的虚拟环境</h1>
 <p>我在重新配置pelican的时候注意到文档里面推荐把它装到一个虚拟环境里去。实际上推荐每一个新项目都放在独立的虚拟环境中，这样互不干扰最好。</p>
 <p>做法其实也很简单，主要用到<a href="http://www.virtualenv.org/">virtualenv</a>这个包，可以装到系统的python环境中</p>
-<div class="highlight"><pre><span class="err">$</span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">virtualenv</span>
+<div class="highlight"><pre><span class="nv">$sudo</span> pip install virtualenv
 </pre></div>
 
 
 <h3>基本用法</h3>
 <p>需要一个新的虚拟环境的时候就</p>
-<div class="highlight"><pre><span class="err">$</span><span class="n">virtualenv</span> <span class="n">ENV</span>
+<div class="highlight"><pre><span class="nv">$virtualenv</span> ENV
 </pre></div>
 
 
 <p>这样实际上创建了<code>ENV/lib/pythonx.x/site-packages</code>，之后这个虚拟环境激活的状态下所有的包都是安装到这里的。</p>
 <p>同时也创建了<code>ENV/bin/python</code>，这是一个python的解释器，如果你运行它，用的将是这个虚拟的环境。比如</p>
-<div class="highlight"><pre><span class="err">$</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">ENV</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">pip</span>
+<div class="highlight"><pre><span class="nv">$path</span>/to/ENV/bin/pip
 </pre></div>
 
 
 <p>当然，为了方便，也可以</p>
-<div class="highlight"><pre><span class="err">$</span><span class="n">source</span> <span class="n">bin</span><span class="o">/</span><span class="n">activate</span>
+<div class="highlight"><pre><span class="nv">$source</span> bin/activate
 </pre></div>
 
 

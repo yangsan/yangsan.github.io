@@ -99,37 +99,37 @@ by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
 <p>这里提一下，我的配置环境是ubuntu13.04。windows则需要多一些折腾，请自行google。</p>
 <h2>安装<code>Pelican</code></h2>
 <p>这里假设你已经安装好了python2.x的环境，并装好了<code>pip</code>。可以直接用下面的命令安装<code>pelican</code></p>
-<div class="highlight"><pre><span class="n">pip</span> <span class="n">install</span> <span class="n">pelican</span>
+<div class="highlight"><pre>pip install pelican
 </pre></div>
 
 
 <p>要使用<code>markdown</code>，还需要一个<code>markdown</code>的支持</p>
-<div class="highlight"><pre><span class="n">pip</span> <span class="n">install</span> <span class="n">markdown</span>
+<div class="highlight"><pre>pip install markdown
 </pre></div>
 
 
 <h2>首次配置</h2>
 <p>选定一个目录存放你的博客文件，我的叫<code>blog</code></p>
-<div class="highlight"><pre><span class="n">mkdir</span> <span class="n">blog</span>
-<span class="n">cd</span> <span class="n">blog</span>
+<div class="highlight"><pre>mkdir blog
+<span class="nb">cd </span>blog
 </pre></div>
 
 
 <p>在你的<code>blog</code>目录下使用命令</p>
-<div class="highlight"><pre><span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span>
+<div class="highlight"><pre>pelican-quickstart
 </pre></div>
 
 
 <p>接下来会询问你一系列问题，除了名字等必须要填的，其他建议使用默认值，随后还可以通过配置<code>pelicanconf.py</code>文件进行修改。</p>
 <p>运行结束之后会生成的目录结构</p>
-<div class="highlight"><pre><span class="n">blog</span><span class="o">/</span>
-<span class="err">├──</span> <span class="n">content</span>
-<span class="err">│</span>   <span class="err">└──</span> <span class="p">(</span><span class="n">pages</span><span class="p">)</span>
-<span class="err">├──</span> <span class="n">output</span>
-<span class="err">├──</span> <span class="n">develop_server</span><span class="p">.</span><span class="n">sh</span>
-<span class="err">├──</span> <span class="n">Makefile</span>
-<span class="err">├──</span> <span class="n">pelicanconf</span><span class="p">.</span><span class="n">py</span>     
-<span class="err">└──</span> <span class="n">publishconf</span><span class="p">.</span><span class="n">py</span>
+<div class="highlight"><pre>blog/
+├── content
+│   └── <span class="o">(</span>pages<span class="o">)</span>
+├── output
+├── develop_server.sh
+├── Makefile
+├── pelicanconf.py     
+└── publishconf.py
 </pre></div>
 
 
@@ -151,28 +151,28 @@ by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
 <p>所以你应该看明白了，必须要通过每篇博文开头的部分来告诉<code>pelican</code>这篇文章的标题、标签、分类等信息，以便最终呈现在博客页面上。其中，标题、时间是必填的，如果缺失则会被<code>pelican</code>忽略掉。</p>
 <h2>生成页面</h2>
 <p>写完你的第一篇博文后，你应该还在<code>content</code>目录下，先回到blog根目录下</p>
-<div class="highlight"><pre><span class="n">cd</span> <span class="p">..</span>
+<div class="highlight"><pre><span class="nb">cd</span> ..
 </pre></div>
 
 
 <p>使用下面的命令<code>pelican</code>系统会将你放在<code>content</code>目录下的<code>.md</code>文档转换成网页文件</p>
-<div class="highlight"><pre><span class="n">make</span> <span class="n">html</span>
+<div class="highlight"><pre>make html
 </pre></div>
 
 
 <p>当然，你也可以让<code>pelican</code>在每次检测到文件变化的时候都重新生成一次网页，使用下面的命令</p>
-<div class="highlight"><pre><span class="n">make</span> <span class="n">regenerate</span>
+<div class="highlight"><pre>make regenerate
 </pre></div>
 
 
 <p>实际上此时如果你去<code>output</code>目录下就会看到生成的页面已经躺在那里了，但为了方便本地的调试，你可以用下面的命令开启一个本地的服务器</p>
-<div class="highlight"><pre><span class="n">make</span> <span class="n">serve</span>
+<div class="highlight"><pre>make serve
 </pre></div>
 
 
 <p>这样，通过访问 http://127.0.0.1:8000 你就已经可以看到你的博客页面了！</p>
 <p>调试完毕后你应该关闭之前开启的服务器</p>
-<div class="highlight"><pre><span class="p">.</span><span class="o">/</span><span class="n">develop_server</span><span class="p">.</span><span class="n">sh</span> <span class="n">stop</span>
+<div class="highlight"><pre>./develop_server.sh stop
 </pre></div>
 
 
@@ -180,49 +180,49 @@ by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
 <p>当然此时别人还无法访问到你的页面，下面就教你如何把你的博客放到网上去。</p>
 <h2>在<code>github</code>上创建个人页面</h2>
 <p>首先你要有个<code>github</code>账号。<code>github</code>为每个账号提供一个子域名以供存放个人页面，使用的方法是创建一个新的版本库，命名为</p>
-<div class="highlight"><pre><span class="n">username</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span>
+<div class="highlight"><pre>username.github.io
 </pre></div>
 
 
 <p>其中<code>username</code>必须为你的<code>github</code>用户名，否则将无法启动页面。</p>
 <p>这时你新创建的版本库是空的，你会获得一个地址</p>
-<div class="highlight"><pre><span class="nl">https:</span><span class="c1">//github.com/username/username.github.io.git</span>
+<div class="highlight"><pre>https://github.com/username/username.github.io.git
 </pre></div>
 
 
 <p>先记下来。</p>
 <p>接下来要做的是将你本地<code>output</code>目录下的所有内容都推送到你刚刚建立的远程版本库中。在本地，进到<code>output</code>目录下面</p>
-<div class="highlight"><pre><span class="n">cd</span> <span class="n">output</span>
+<div class="highlight"><pre><span class="nb">cd </span>output
 </pre></div>
 
 
 <p>在这里新建一个本地的版本库</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">init</span>
+<div class="highlight"><pre>git init
 </pre></div>
 
 
 <p>建议按照<code>github</code>的惯例添加一个新的<code>readme</code>文档</p>
-<div class="highlight"><pre><span class="n">touch</span> <span class="n">README</span><span class="p">.</span><span class="n">md</span>
+<div class="highlight"><pre>touch README.md
 </pre></div>
 
 
 <p>接下来可以将目录下面所有的文件都添加进缓存区</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">add</span> <span class="p">.</span>
+<div class="highlight"><pre>git add .
 </pre></div>
 
 
 <p>可以提交了</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="err">&#39;</span><span class="n">First</span> <span class="n">commit</span><span class="err">&#39;</span>
+<div class="highlight"><pre>git commit -m <span class="s1">&#39;First commit&#39;</span>
 </pre></div>
 
 
 <p>下面将你的本地仓库和远程仓库关联起来，还记的之前获得的一个地址吧，用在这里</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="o">:</span><span class="c1">//github.com/username/username.github.io.git</span>
+<div class="highlight"><pre>git remote add origin https://github.com/username/username.github.io.git
 </pre></div>
 
 
 <p>最后将本地仓库推送到<code>github</code>上就好，由于是第一次，用上<code>-u</code>字段</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">master</span>
+<div class="highlight"><pre>git push -u origin master
 </pre></div>
 
 
@@ -237,27 +237,27 @@ by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
 <h1>锦上添花</h1>
 <h2>使用主题</h2>
 <p><code>pelican</code>目前提供了数款主题可供选择。先到<code>pelican</code>这个项目的<code>github</code>页面上把主题的版本库<code>clone</code>到本地，在你选定的本地目录下面</p>
-<div class="highlight"><pre><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="o">:</span><span class="c1">//github.com/getpelican/pelican-themes.git</span>
+<div class="highlight"><pre>git clone https://github.com/getpelican/pelican-themes.git
 </pre></div>
 
 
 <p>进<code>pelican-themes</code>目录</p>
-<div class="highlight"><pre><span class="n">cd</span> <span class="n">pelican</span><span class="o">-</span><span class="n">themes</span>
+<div class="highlight"><pre><span class="nb">cd </span>pelican-themes
 </pre></div>
 
 
 <p>你可以浏览该目录下的文件，每个子目录存放了一个主题，里面会留有一个截图供你预览。比如我看中了<code>bootstrap</code>这一款，使用命令</p>
-<div class="highlight"><pre><span class="n">pelican</span><span class="o">-</span><span class="n">themes</span> <span class="o">-</span><span class="n">i</span> <span class="n">bootstrap</span>
+<div class="highlight"><pre>pelican-themes -i bootstrap
 </pre></div>
 
 
 <p>安装该主题。这时使用命令</p>
-<div class="highlight"><pre><span class="n">pelican</span><span class="o">-</span><span class="n">themes</span> <span class="o">-</span><span class="n">l</span>
+<div class="highlight"><pre>pelican-themes -l
 </pre></div>
 
 
 <p>查看已安装主题，应该就能看到刚刚安装的<code>bootstrap</code>主题了。这还不够，你还需要在<code>pelicanconf.py</code>文档中加上一句</p>
-<div class="highlight"><pre><span class="n">THEME</span> <span class="o">=</span> <span class="err">&#39;</span><span class="n">bootstrap</span><span class="err">&#39;</span>
+<div class="highlight"><pre><span class="n">THEME</span> <span class="o">=</span> <span class="s">&#39;bootstrap&#39;</span>
 </pre></div>
 
 
