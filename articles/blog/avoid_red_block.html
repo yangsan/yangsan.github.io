@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>煎挠橙的blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="煎挠橙">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="../../theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="../../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../../theme/local.css" rel="stylesheet">
+    <link href="../../theme/pygments.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="../..">煎挠橙的blog</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            
+            <li><a href="../../pages/about-me.html">About me</a></li>
+            <li><a href="../../pages/todolist.html">Todolist</a></li>
+        </ul>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+    <div class='article'>
+        <div class="content-title">
+            <h1>去掉pelican页面代码块中的红框</h1>
+2014-01-22
+
+by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
+ 
+
+
+        </div>
+	
+        <div><p>刚开始用pelican生成博客页面的时候发现代码块中经常有一些红框，很碍眼，就像这样</p>
+<div class="highlight"><pre><span class="nl">Title:</span> <span class="err">去掉</span><span class="n">pelican</span><span class="err">页面代码中的红框</span>
+<span class="nl">Date:</span> <span class="mi">2014</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">22</span>
+</pre></div>
+
+
+<p>后来看到同样用pelican的<a href="http://frantic1048.com/qu-diao-pelicansheng-cheng-de-dai-ma-qu-kuai-zhong-de-hong-kuang.html">Frantic</a>指出，这个红框框主要时为了显示出代码高亮时遇到的错误，是由主题里面<code>pygment.css</code>这个文件规定的。进去查看可以找到这样一句</p>
+<div class="highlight"><pre><span class="nc">.highligt</span> <span class="nc">.err</span> <span class="p">{</span><span class="k">border</span><span class="o">:</span> <span class="n">lpx</span> <span class="k">solid</span> <span class="m">#FF0000</span><span class="p">}</span> <span class="o">/</span><span class="nt">Error</span><span class="o">/</span>
+</pre></div>
+
+
+<p>如果不喜欢这个效果，可以把这句注释掉。</p>
+<p>不过其实也没有必要这样，正如前面所提到的，出现红框框是因为处理代码高亮时遇到了错误，所以你把它弄对就好了。</p>
+<p>pelican的代码高亮用的是<code>pygment</code>的系统，平时能见到的语言种类都是支持的，不过需要你在代码块前面声明一下，也即加上<code>:::语言名</code>，这样就能正常的高亮了。</p>
+<p>比如前面带</p></div>
+	
+        <hr>
+    	   
+        <h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'yangsan'; 
+    var disqus_title = '去掉pelican页面代码块中的红框';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+        </div>
+        
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Site
+                </li>
+            
+                <li><a href="../../archives.html">Archives</a>
+                <li><a href="../../tags.html">Tags</a>
+                <li><a href="yangsan.github.io/" rel="alternate">Atom feed</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+                <li><a href="../../category/blog.html">blog</a></li>
+                <li><a href="../../category/linux.html">linux</a></li>
+                <li><a href="../../category/matplotlib.html">matplotlib</a></li>
+                <li><a href="../../category/python.html">python</a></li>
+                   
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Links
+                </li>
+            
+                <li><a href="http://getpelican.com/">Pelican</a></li>
+                <li><a href="http://python.org/">Python.org</a></li>
+                <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+            </ul>
+            </div>
+
+
+            <div class="social">
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Social
+                </li>
+           
+                <li><a href="http://weibo.com/kevinyoungc">微博</a></li>
+                <li><a href="https://github.com/yangsan">github</a></li>
+            </ul>
+            </div>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="../..">煎挠橙的blog</a> &copy; 煎挠橙 2012</p>
+</footer>
+
+</div> <!-- /container -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
+<script>var _gaq=[['_setAccount','UA-46467923-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+ 
+</body>
+</html>
