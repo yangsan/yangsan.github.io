@@ -58,8 +58,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="../articles/linux/setup-ubuntu.html"><h1>ubuntu的简单配置</h1></a>
-2014-01-15
+            <a href="../articles/python/weibo_in_line.html"><h1>一个用python写的命令行发微博工具开发记录</h1></a>
+2014-01-27
 
 by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
  
@@ -68,42 +68,30 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
  
         </div>
         
-        <div><p>接触ubuntu不过两个月，之前装了一个试玩，熟练之后越发的喜欢了，准备把工作环境迁移过来。不过之前只给了ubuntu 30g的磁盘空间，明显不够用，而且gnome3各种反人类，昨天心血来潮把原来的系统删了，扩了一下磁盘，重装。今天重新配置，顺便写在这里，后面方便查阅。</p>
-<h1>装系统</h1>
-<h3>分区</h3>
-<p>我搞的是双系统，windows虽然讨厌，但还真离不开。没装ubuntu之前，硬盘分了两个区，c盘是主分区，用来装系统，剩下的扩展分区是一个d盘，存数据。</p>
-<p>要再装个ubuntu的话就得再分一个区出来，做法很简单，（如果有的话）在windows下面，找到磁盘管理器，在原来的d盘上右键，压缩磁盘，跳出来的对话框可以调整大小，我弄了130g出来，点确定，过一会儿就能看到多了一个130g的空闲分区，windows下面的操作就到此为止了。</p>
-<p>注意虽然压缩磁盘对原有的数据没影响，但磁盘操作都有丢数据的风险，最好提前做好备份。</p>
-<h3>做u盘安装盘</h3>
-<p>先去找一个顺眼的ubuntu的iso镜像，官网上就能下，这次我选了xubuntu，就是ubuntu换了张皮，但很多细节做的很舒服。</p>
-<p>而后google一下UNetbootin，是个跨平台的ubuntu安装盘制作工具。找个空u盘，插电脑上，4g的就够了。进UNetbootin，把刚才的iso镜像选上，点ok过一会儿就制作好了。</p>
-<p>如果没有别的事儿就可以重启了，记得狂按F12，选从USB设备启动，后面跟着提示走。</p>
-<p>关于ubuntu的文件系统和分区问题，不懂建议还是先找本书看看，并不复杂。</p>
-<h1>配置搜狗输入法</h1>
-<p>ubuntu似乎内置了iBus输入法，把语言支持弄好就可以用了，但也只是能用而已。</p>
-<p>好消息是，最近有高手把搜狗输入法移植了过来，不用考虑了，装吧。</p>
-<p>首先把iBus卸载了</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get remove ibus
-</pre></div>
-
-
-<p>接着在<code>sources.list</code>添加源</p>
-<div class="highlight"><pre>deb http://ppa.launchpad.net/fcitx-team/nightly/ubuntu quantal main 
-deb-src http://ppa.launchpad.net/fcitx-team/nightly/ubuntu quantal main
-</pre></div>
-
-
-<p>在终端中，输入</p>
-<div class="highlight"><pre>sudo apt-get update
-sudo apt-get install fcitx fcitx-config-gtk fcitx-sunpinyin fcitx-googlepinyin fcitx-module-cloudpinyin  fcitx-sogoupinyin
-</pre></div>
-
-
-<p>后一句的意思是安装fcitx输入法，安装fcitx输入法配置工具，安装搜狗输入法。</p>
-<p>装好以后在系统语言设置里面把fcitx设置为默认输入法，在fcitx的配置工具里把搜狗输入法挪到第二位。注销一下，大功告成。</p>
-<p>这篇博客就是用搜狗写的，很舒服，不枉一番折腾。</p>
-<h1>编辑器——vim</h1>
-<p>另外写了一个帖子，在<a href="../articles/linux/setupvim.html">这里</a>。</p></div>
+        <div><h1>源起</h1>
+<p>一个常见的情景：工作中有感而发，想要吐槽两句，下意识的打开浏览器，进入新浪微博页面，然后就没有知觉了。十几分钟后清醒过来，发现自己光顾着看微博，不仅之前想说的东西已经忘了，自己的工作也耽搁了，不禁懊恼万分，决心好好工作；若干分钟后上面的场景再次上演。</p>
+<p>因为最近在终端里呆的时间比较多，正好又在学习python，就希望试着用python写一个命令行里的发微博工具，只能写，不能看，工作吐槽两不误。</p>
+<h1>准备工作</h1>
+<p>前期主要花时间看文档，找参考。</p>
+<p>首先，新浪开放平台的<a href="http://open.weibo.com/wiki/%E9%A6%96%E9%A1%B5">官方文档</a>是必要的参考资料。</p>
+<p>另外，新浪推荐了来自<a href="http://weibo.com/liaoxuefeng">廖雪峰</a>的pythonSDK，直接安装就能使用，不过因为追求独立性和扩展性，代码有些庞杂，反正我看不懂。</p>
+<p>在别处找到了一个更轻量级的<a href="http://lxyu.github.io/weibo/">脚本</a>，正如该项目所说的，使用了<code>requests</code>而不是<code>urllib</code>做相关的http操作，极大的简化了代码，提高了可读性。我主要以此为参开。</p>
+<h1>思路</h1>
+<p>此次希望通过命令行的方式发送微博，这个实际上属于微博客户端的范畴，根据官方的文档，实现起来主要需要两个步骤：</p>
+<ul>
+<li>身份认证，其实也就是登陆一下</li>
+<li>调用API</li>
+</ul>
+<p>下面详细的介绍。</p>
+<h1>开工</h1>
+<h2>OAutho2.0用户身份鉴权</h2>
+<p>请求连接
+https://api.weibo.com/oauth2/authorize?clientid=yourclientid&amp;responsetype=code&amp;redirect-uri=re</p>
+<h2>调用api发微博</h2>
+<p>to do</p>
+<ul>
+<li>先把request的文档看了吧</li>
+</ul></div>
         <hr />
     </div>
 		
@@ -111,7 +99,7 @@ sudo apt-get install fcitx fcitx-config-gtk fcitx-sunpinyin fcitx-googlepinyin f
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
-    <li class="active"><a href="../tag/linux.html">1</a></li>
+    <li class="active"><a href="../tag/wei-bo.html">1</a></li>
 
     <li class="next disabled"><a href="#">&rarr; Next</a></li>
 
