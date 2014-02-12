@@ -141,6 +141,35 @@ Slug: build_your_blog
 
 这样，通过访问 http://127.0.0.1:8000 你就已经可以看到你的博客页面了！
 
+不过这样光是调试就得开两个终端，稍麻烦，`pelican`实际上还提供了一个命令，可以代替上面两个
+
+    :::bash
+    make devserver
+
+我这儿一开始用这个命令一直报错，注意到这个命令要调用路径下的`develop_server.sh`这个脚本，但这个脚本本身没有执行权限，一般而言用下面的命令改一下它的权限就行
+
+    :::bash
+    chmod u+x develop_server.sh
+
+可是我这儿不知为何根本改不了，没办法就在`Makefile`上下功夫。打开`Makefile`找到下面几句
+
+    :::make
+    devserver:
+    ifdef PORT
+        $(BASEDIR)/develop_server.sh restart $(PORT)
+    else
+        $(BASEDIR)/develop_server.sh restart
+    endif
+
+改成下面的样子就可以了
+
+    :::make
+    devserver:
+    ifdef PORT
+        bash $(BASEDIR)/develop_server.sh restart $(PORT)
+    else
+        bash $(BASEDIR)/develop_server.sh restart
+    endif
 
 调试完毕后你应该关闭之前开启的服务器
 

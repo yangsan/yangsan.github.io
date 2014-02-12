@@ -171,6 +171,36 @@ by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
 
 
 <p>这样，通过访问 http://127.0.0.1:8000 你就已经可以看到你的博客页面了！</p>
+<p>不过这样光是调试就得开两个终端，稍麻烦，<code>pelican</code>实际上还提供了一个命令，可以代替上面两个</p>
+<div class="highlight"><pre>make devserver
+</pre></div>
+
+
+<p>我这儿一开始用这个命令一直报错，注意到这个命令要调用路径下的<code>develop_server.sh</code>这个脚本，但这个脚本本身没有执行权限，一般而言用下面的命令改一下它的权限就行</p>
+<div class="highlight"><pre>chmod u+x develop_server.sh
+</pre></div>
+
+
+<p>可是我这儿不知为何根本改不了，没办法就在<code>Makefile</code>上下功夫。打开<code>Makefile</code>找到下面几句</p>
+<div class="highlight"><pre><span class="nf">devserver</span><span class="o">:</span>
+<span class="cp">ifdef PORT</span>
+    <span class="k">$(</span>BASEDIR<span class="k">)</span>/develop_server.sh restart <span class="k">$(</span>PORT<span class="k">)</span>
+<span class="cp">else</span>
+    <span class="k">$(</span>BASEDIR<span class="k">)</span>/develop_server.sh restart
+<span class="cp">endif</span>
+</pre></div>
+
+
+<p>改成下面的样子就可以了</p>
+<div class="highlight"><pre><span class="nf">devserver</span><span class="o">:</span>
+<span class="cp">ifdef PORT</span>
+    bash <span class="k">$(</span>BASEDIR<span class="k">)</span>/develop_server.sh restart <span class="k">$(</span>PORT<span class="k">)</span>
+<span class="cp">else</span>
+    bash <span class="k">$(</span>BASEDIR<span class="k">)</span>/develop_server.sh restart
+<span class="cp">endif</span>
+</pre></div>
+
+
 <p>调试完毕后你应该关闭之前开启的服务器</p>
 <div class="highlight"><pre>./develop_server.sh stop
 </pre></div>
