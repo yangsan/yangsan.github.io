@@ -293,4 +293,6 @@ Slug: build_your_blog
 
 用你自己的'shortname'替换进去，剩下的交给`pelican`。
 
+#自动化
+
 
