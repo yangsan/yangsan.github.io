@@ -63,26 +63,53 @@ by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
         </div>
 	
         <div><h1>源起</h1>
-<p>最近在学写shell脚本搞自动化，遵照“发现你时常重复的工作流程，将其自动化”的精神，我发现一个常有的情景是：工作、浏览网页时需要百度/google一个关键词，或者在豆瓣/新浪爱问上搜索一本书。</p>
-<p>本身用加了浏览器的插件这些事情不算麻烦，不过多接触浏览器一秒钟就多一分被干扰（常在电脑前工作的同志应该懂的）的，能在命令行解决最好，也权当练习了。</p>
+<p>最近在学写shell脚本搞自动化，遵照“发现时常重复的工作流程，将其自动化”的精神，我注意到一个常有的情景是：工作、浏览网页时需要百度/google一个关键词，或者在豆瓣/新浪爱问上搜索一本书。</p>
+<p>本身用加了插件的浏览器这些事情不算麻烦，不过多接触浏览器一秒钟就多一分被干扰（常在电脑前工作的同志应该懂的）的机会，所以能在命令行解决最好，也权当练习了。</p>
 <h1>思路</h1>
 <p>解决思路也很简单，在命令行里输入</p>
-<div class="highlight"><pre>webbrowser http://
+<div class="highlight"><pre>webbrowser http://example.com
 </pre></div>
 
 
 <p>就可以新打开一个浏览器标签，并打开相应的网页，一般的网页直接将网址填上去就好。</p>
 <p>但这里考虑的是查询的问题，所以网址后面还要加上query的部分，这块不需要太多的知识，下面举例说明。</p>
 <h2>栗子</h2>
-<p>以豆瓣读书为例，直接在浏览器中登陆其页面：<a href="book.douban.com">book.douban.com</a>，在搜索框里随便填一个关键词，我填了“追风筝的人”，点搜索，注意跳转后的结果页面的地址变成了</p>
+<p>以豆瓣读书为例，直接在浏览器中登陆其页面：<a href="http://book.douban.com">book.douban.com</a>，在搜索框里随便填一个关键词，比如“追风筝的人”，点搜索，注意跳转后的结果页面的地址变成了</p>
 <div class="highlight"><pre><span class="nl">http:</span><span class="c1">//book.douban.com/subject_search?search_text=追风筝的人&amp;cat=1001</span>
 </pre></div>
 
 
-<p>问好后面的就是http请求中query的部分，而且也很好理解，<code>search_text=</code>后面的就是关键词了，这时我们将“追风筝的人”几个字换成“尘埃落定”，再按下回车，跳转到的页面正是搜索“尘埃落定”的结果。</p>
+<p>问号后面的就是http请求中query的部分，而且也很好理解，<code>search_text=</code>后面的就是刚填的关键词了，这时我们将“追风筝的人”几个字换成“尘埃落定”，再按下回车，跳转到的页面正是搜索“尘埃落定”的结果。</p>
 <p>所以下面要做的，就是在本地把整个http请求组织好，然后送到浏览器里去。</p>
 <h1>脚本部分</h1>
-<p>暂时以函数的形式写在<code>.bashrc</code>文件里。</p></div>
+<p>暂时以函数的形式写在<code>.bashrc</code>文件里。</p>
+<p>还是以豆瓣为例：</p>
+<div class="highlight"><pre><span class="c">#定义db函数</span>
+db<span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="nv">$1</span> <span class="o">]</span> <span class="c">#检查是否有参数（也就是关键词）传递进来</span>
+    <span class="k">then </span>
+<span class="k">        </span><span class="nv">query</span><span class="o">=</span><span class="s2">&quot;$1&quot;</span>
+        <span class="k">for </span>arg in <span class="k">${</span><span class="p">*:</span><span class="nv">2</span><span class="k">}</span>
+        <span class="k">do</span>
+<span class="k">            </span>query+<span class="o">=</span><span class="s2">&quot;+&quot;</span>
+            query+<span class="o">=</span><span class="s2">&quot;$arg&quot;</span>
+        <span class="k">done</span> <span class="c">#这一部分主要将传递进来的若干个关键词用+串联起来，这是query的格式</span>
+        <span class="c">#下面就可以启动浏览器了，我用的是chromium</span>
+        chromium-browser <span class="s2">&quot;book.douban.com/subject_search?search_text=$query&amp;cat=1001&quot;</span>
+    <span class="k">else</span> <span class="c">#没有关键词的情况下就打开豆瓣主页</span>
+        chromium-browser <span class="s2">&quot;www.douban.com&quot;</span>
+    <span class="k">fi</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>实现的结果就是在命令行中输入</p>
+<div class="highlight"><pre>db 书名
+</pre></div>
+
+
+<p>就自动打开相应的豆瓣读书的搜索页面。</p>
+<p>类似的还可以对baidu、google和新浪爱问做相同的处理。不过新浪爱问的话对中文处理有问题，结果是乱码，这个可能涉及到编码问题，暂时没法处理，其他的都测试有效，运转良好。</p></div>
 	
         <hr>
     	   
