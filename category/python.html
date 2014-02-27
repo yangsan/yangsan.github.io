@@ -58,8 +58,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="../articles/python/weibo_in_line.html"><h1>一个用python写的命令行发微博工具开发记录</h1></a>
-2014-01-27
+            <a href="../articles/python/pip_pypi_mirror.html"><h1>给pip换国内的pypi镜像</h1></a>
+2014-02-27
 
 by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
  
@@ -68,66 +68,29 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
  
         </div>
         
-        <div><h1>源起</h1>
-<p>一个常见的情景：工作中有感而发，想要吐槽两句，下意识的打开浏览器，进入新浪微博页面，然后就没有知觉了。十几分钟后清醒过来，发现自己光顾着看微博，不仅之前想说的东西已经忘了，自己的工作也耽搁了，不禁懊恼万分，决心好好工作；若干分钟后上面的场景再次上演。</p>
-<p>因为最近在终端里呆的时间比较多，正好又在学习python，就希望试着用python写一个命令行里的发微博工具，只能写，不能看，工作吐槽两不误。</p>
-<h1>准备工作</h1>
-<p>前期主要花时间看文档，找参考。</p>
-<p>首先，新浪开放平台的<a href="http://open.weibo.com/wiki/%E9%A6%96%E9%A1%B5">官方文档</a>是必要的参考资料。</p>
-<p>另外，新浪推荐了来自<a href="http://weibo.com/liaoxuefeng">廖雪峰</a>的<a href="http://michaelliao.github.io/sinaweibopy/">python SDK</a>，直接安装就能使用，不过因为追求独立性和扩展性，代码有些庞杂，反正我没看懂。</p>
-<p>在别处找到了一个更轻量级的<a href="http://lxyu.github.io/weibo/">脚本</a>，正如该项目所说的，使用了<code>requests</code>而不是<code>urllib</code>做相关的<code>http</code>操作，极大的简化了代码，提高了可读性。我主要以此为参考。</p>
-<h1>思路</h1>
-<p>此次希望通过命令行发送微博，这个实际上属于三方微博客户端的范畴，根据官方的文档，实现起来主要需要两个步骤：</p>
+        <div><p>今天发现<a href="https://pypi.python.org/pypi">pypi.python.org</a>挂了，用<code>pip</code>搜索安装都不正常，索性换个国内的镜像试试。</p>
+<h2>镜像地址</h2>
+<p>根据<a href="http://www.pypi-mirrors.org/">这个</a>网站的说法，目前国内的镜像主要有</p>
 <ul>
-<li>身份认证</li>
-<li>调用API</li>
+<li><a href="http://pypi.douban.com/">豆瓣</a></li>
+<li><a href="http://pypi.hustunique.com/">华中科技大</a> </li>
 </ul>
-<p>下面详细的介绍。</p>
-<h1>开工</h1>
-<h2>OAuth2.0用户身份鉴权</h2>
-<p>如前面所说，这里要做一个第三方的微博客户端，所以在这个语境中主要有三个主体：1.用户，2.新浪微博，3.三方客户端。</p>
-<p>一般我们登陆微博页面的行为只牵扯到1和2，这个简单明了。但如果想通过三方客户端来实现微博服务的话，则相当于在1和2之间夹了一个3，3势必要有更改用户内容的能力才行。可是又不能把账户密码提供给三方客户端，这时就要用到OAuth服务了。</p>
-<p>OAuth服务的作用在于让三方客户端通过用户的授权在不知道用户账户密码的情况下访问用户微博数据。</p>
-<p>这里以豆瓣读书的同步功能为例介绍OAuth的用户身份鉴权是如果运作的。</p>
-<h3>豆瓣读书</h3>
-<p>豆瓣读书提供了与新浪微博同步的功能，也即在豆瓣标记了一本“已读”书目之后会自动发送一条微博到新浪。</p>
-<p>要实现这个服务，首先需要用户来<a href="http://book.douban.com/settings/sync">设置</a>账号关联。</p>
-<p>用户通过点击设置页面的“关联”选项提出关联（也就是授权）请求，这时根据OAuth协议会跳转到新浪的一个授权页面，上面只有一个简单的登陆对话框，登陆之后该页面消失，而豆瓣的页面提示已经关联完成。注意到整个过程中，用户只是重新登陆了一下新浪微博，豆瓣是无法获知用户的账户密码的。</p>
-<p>这整个过程背后的运作是这样的：</p>
-<ol>
-<li>
-<p>在豆瓣的页面提出关联请求的时候，豆瓣组织了一个<code>https</code>请求，引导用户跳转至如下页面</p>
-<div class="highlight"><pre><span class="nl">https:</span><span class="c1">//api.weibo.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&amp;response_type=code&amp;redirect_uri=YOUR_REGISTERED_REDIRECT_URI</span>
+<p>推荐电信/联通用户用前者，教育网用户用后者。</p>
+<h2>用法</h2>
+<h4>单次下载可以指定镜像</h4>
+<div class="highlight"><pre><span class="nv">$pip</span> install -i http://pypi.hustunique.com/simple &lt;package name&gt;
 </pre></div>
 
 
-<p>这个格式是新浪要求的该页面也就是那个简易的登陆页面。实际使用时，这个连接里面<code>YOUR_CLIENT_ID</code>要替换成三方应用的<code>app_key</code>，<code>YOUR_REGISTERED_REDIRECT_URI</code>要替换成经过验证的回转目录，这点后面还有详细解释，豆瓣的话当然就跳转回豆瓣了。</p>
-</li>
-<li>
-<p>在上述页面登陆授权成功后则会跳转会刚才提到的回转地址：</p>
-<div class="highlight"><pre><span class="nl">http:</span><span class="c1">//YOUR_REGISTERED_REDIRECT_URI?code=CODE</span>
+<h4>全局设定</h4>
+<p>在<code>~/.pip/pip.conf</code>配置文件中加上</p>
+<div class="highlight"><pre><span class="k">[global]</span>
+<span class="na">index-url</span> <span class="o">=</span> <span class="s">http://pypi.hustunique.com/simple</span>
 </pre></div>
 
 
-<p>注意到同时也获得了一个<code>CODE</code>，它是一串数字。</p>
-</li>
-<li>
-<p>上面的<code>CODE</code>被豆瓣获得以后就可以换取一个<code>Access Token</code>。方法是发送如下的<code>http</code>请求：</p>
-<div class="highlight"><pre><span class="nl">https:</span><span class="c1">//api.weibo.com/oauth2/access_token?client_id=YOUR_CLIENT_ID&amp;client_secret=YOUR_CLIENT_SECRET&amp;grant_type=authorization_code&amp;redirect_uri=YOUR_REGISTERED_REDIRECT_URI&amp;code=CODE</span>
-</pre></div>
-
-
-<p>里面的相应内容要做替换，其他与前面一致的不再介绍，<code>YOUR_CLIENT_SECRET</code>要替换成三方应用的<code>app_secret</code>。</p>
-</li>
-<li>
-<p>所谓的<code>Acess Token</code>就在上一步<code>http</code>请求的返回值中包含着，这样只要这个<code>Token</code>不过期，豆瓣就能在不知道用户账户密码的情况下发送微博。具体的操作请求格式可以参考新浪官方的<a href="http://open.weibo.com/wiki/%E5%BE%AE%E5%8D%9AAPI">API</a>。</p>
-</li>
-</ol>
-<p>其他的网站或者三方客户端通过授权发送微博的过程都和这个差不多。下面介绍一下如何做一个自己的客户端。</p>
-<h3>自己的三方客户端</h3>
-<p>首先需要在<a href="http://open.weibo.com/">微博开放平台</a>上根据自己的需要创建一个<code>app</code>，我选了桌面客户端应用。接着按要求填写应用的名称、应用地址等信息。</p>
-<p>创建成功后要求你对刚才填写的应用地址进行验证，而这个地址也就是前面提到的回转地址。</p>
-<p>验证成功后你会得到一个<code>app_key</code>，一个<code>app_secret</code>，这时你的身份虽然还没有通过审核，但已经可以使用这个应用进行相关操作了。</p></div>
+<p>地址最后的simple一定不能忘了。</p>
+<p>改过之后速度有所提升，重要的是稳定多了。</p></div>
         <hr />
     </div>
 		
@@ -138,7 +101,32 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
  
 
     <div class='article'>
-        <a href="../articles/python/python_enviroment.html"><h2>ubuntu下python虚拟环境的配置问题</h2></a>
+        <a href="../articles/python/weibo_in_line.html"><h2>一个用python写的命令行发微博工具开发记录</h2></a>
+        <div class= "well small"> 2014-01-27
+
+by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
+ 
+
+
+ </div>
+        <div class="summary"><h1>源起</h1>
+<p>一个常见的情景：工作中有感而发，想要吐槽两句，下意识的打开浏览器，进入新浪微博页面，然后就没有知觉了。十几分钟后清醒过来，发现自己光顾着看微博，不仅之前想说的东西已经忘了，自己的工作也耽搁了，不禁懊恼万分，决心好好工作；若干分钟后上面的场景再次上演。</p>
+<p>因为最近在终端里呆的时间比较多，正好又在学习python，就希望试着用python写一个命令行里的发微博工具，只能写，不能看，工作吐槽两不误。</p>
+<h1>准备工作</h1>
+<p>前期主要花时间看文档，找参考。</p>
+<p>首先，新浪开放平台的<a href="http://open.weibo.com/wiki/%E9%A6%96%E9%A1%B5">官方文档</a>是必要的参考资料。</p>
+<p>另外，新浪推荐了来自<a href="http://weibo.com/liaoxuefeng">廖雪峰</a>的<a href="http://michaelliao.github.io/sinaweibopy/">python SDK</a>，直接安装就能使用，不过因为追求独立性和扩展性，代码有些庞杂，反正我没看懂。</p>
+<p>在别处找到了一个更轻量级的<a href="http://lxyu.github.io/weibo/">脚本</a>，正如该项目所说的，使用了<code>requests</code>而不是<code>urllib</code>做相关的<code>http</code>操作，极大的简化了代码，提高了可读性。我主要以此为参考 ...</p> <a class="btn btn-info xsmall" href="../articles/python/weibo_in_line.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../articles/python/python_enviroment_setup.html"><h2>ubuntu下python虚拟环境的配置问题</h2></a>
         <div class= "well small"> 2014-01-15
 
 by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
@@ -158,14 +146,14 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 </pre></div>
 
 
-<p>下面，Canopy默认情况下则把环境装在了</p>
+<p>而Canopy默认情况下则把环境装在了</p>
 <div class="highlight"><pre>/home/Enthought/Canopy
 </pre></div>
 
 
-<p>下，两者没有什么关联。</p>
+<p>两者没有什么关联。</p>
 <p>而之前提到的将Canopy设置为系统默认python环境，则是Canopy在<code>~/.bashrc</code>文件最后加了一句</p>
-<div class="highlight"><pre><span class="nv">VIRTUAL_ENV_DISABLE_PROMPT</span><span class="o">=</span>1 <span class="nb">source ...</span></pre></div> <a class="btn btn-info xsmall" href="../articles/python/python_enviroment.html">read more</a></div>
+<div class="highlight"><pre><span class="nv">VIRTUAL_ENV_DISABLE_PROMPT</span><span class="o">=</span>1 <span class="nb">source</span> ~/Enthought/Canopy_32bit ...</pre></div> <a class="btn btn-info xsmall" href="../articles/python/python_enviroment_setup.html">read more</a></div>
     </div>	
 				
 <div class="pagination">

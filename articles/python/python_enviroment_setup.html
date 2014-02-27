@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>煎挠橙的blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="煎挠橙">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="../../theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="../../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../../theme/local.css" rel="stylesheet">
+    <link href="../../theme/pygments.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="../..">煎挠橙的blog</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            
+            <li><a href="../../pages/about-me.html">About me</a></li>
+            <li><a href="../../pages/todolist.html">Todolist</a></li>
+        </ul>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+    <div class='article'>
+        <div class="content-title">
+            <h1>ubuntu下python虚拟环境的配置问题</h1>
+2014-01-15
+
+by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
+ 
+
+
+        </div>
+	
+        <div><p>昨天重做了一下系统，今天配置的时候有些新收获，写在这里。</p>
+<h1>Enthought Canopy</h1>
+<p>自己用python首要是做计算的，昨天试着自己配置一下几个常用的包，弄了半天卡在依赖关系上了，没办法又用回<a href="https://www.enthought.com/">Enthought</a>的Canopy。</p>
+<p>Canopy是一个集成环境，把IDE和扩展包管理器等东西绑在了一起，做计算用的包也都有，装完所有东西都齐活了可以直接使用，非常舒服，后续的升级维护也很方便。</p>
+<p>但有一个问题是Canopy会推荐你将其设置为系统默认的python环境，好处是你在终端里面也可以用Canopy下面的包，这样就免得你再次配置，非常方便。问题是，如果后面用python做其他方面的开发，直接就乱套了。</p>
+<h3>Canopy的虚拟环境</h3>
+<p>Canopy采用了虚拟环境，所以并不影响系统本身的python环境，思路大致是把机器的环境复制一份出来放在其他路径下，运行维护就跟机器的环境再不相关了。</p>
+<p>如果你也安装了Canopy，可以看一下，一般机器的python环境都在</p>
+<div class="highlight"><pre>/usr/lib/python2.7
+</pre></div>
+
+
+<p>而Canopy默认情况下则把环境装在了</p>
+<div class="highlight"><pre>/home/Enthought/Canopy
+</pre></div>
+
+
+<p>两者没有什么关联。</p>
+<p>而之前提到的将Canopy设置为系统默认python环境，则是Canopy在<code>~/.bashrc</code>文件最后加了一句</p>
+<div class="highlight"><pre><span class="nv">VIRTUAL_ENV_DISABLE_PROMPT</span><span class="o">=</span>1 <span class="nb">source</span> ~/Enthought/Canopy_32bit/User/bin/activate
+</pre></div>
+
+
+<p>这样你每次开终端都是自动进入Canopy的虚拟环境下，这时如果做一些其他的工作，直接就和Canopy这套东西搅在一起了，后面会有匪夷所思的情况出现，之前因为不懂，我为此吐血三升。</p>
+<p>所以建议如果还有别的要用到python的地方，就把这句话注释掉，或者在Canopy的配置菜单里，把<code>set as default</code>的选项勾选掉，二者干的其实是一件事情。</p>
+<h1>python的虚拟环境</h1>
+<p>我在重新配置pelican的时候注意到文档里面推荐把它装到一个虚拟环境里去。实际上推荐每一个新项目都放在独立的虚拟环境中，这样互不干扰最好。此外如果没有<code>root</code>权限，使用虚拟环境也是一个不错的方案。</p>
+<p>做法其实也很简单，主要用到<a href="http://www.virtualenv.org/">virtualenv</a>这个包，可以装到系统的python环境中</p>
+<div class="highlight"><pre><span class="nv">$sudo</span> pip install virtualenv
+</pre></div>
+
+
+<h3>基本用法</h3>
+<p>需要一个新的虚拟环境的时候就</p>
+<div class="highlight"><pre><span class="nv">$virtualenv</span> ENV
+</pre></div>
+
+
+<p>这样实际上创建了<code>ENV/lib/pythonx.x/site-packages</code>，之后这个虚拟环境激活的状态下所有的包都是安装到这里的。</p>
+<p>同时也创建了<code>ENV/bin/python</code>，这是一个python的解释器，如果你运行它，用的将是这个虚拟的环境。比如</p>
+<div class="highlight"><pre><span class="nv">$path</span>/to/ENV/bin/pip
+</pre></div>
+
+
+<p>当然，为了方便，也可以</p>
+<div class="highlight"><pre><span class="nv">$source</span> bin/activate
+</pre></div>
+
+
+<p>这这样做的结果实际上是修改了环境变量，从而将虚拟环境下的python解释器设为默认的，并且随后再安装其他的包也自动放到了虚拟环境下，后面就可以像正常的用法那样使用python了。</p>
+<p>具体的实现方法可以参考<code>/bin/activate</code>脚本的内容。</p>
+<p>如果想取消刚才的更改，可以</p>
+<div class="highlight"><pre><span class="nv">$deactivate</span>
+</pre></div>
+
+
+<h3>额外的东西</h3>
+<p>参考<code>activate</code>脚本的内容，实际上可以自己手动更改环境变量得到同样的结果，但不建议这么做————除非你清楚自己在干什么。用<code>virtualenv</code>是一种省事且安全的做法。</p>
+<p>但是，关于<code>activate</code>和<code>deactivate</code>等这些看似完美的设定也有<a href="https://gist.github.com/datagrok/2199506">争议</a>，有兴趣的可以参考一下。</p></div>
+	
+        <hr>
+    	   
+        <h2>Comments</h2>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'yangsan'; 
+    var disqus_title = 'ubuntu下python虚拟环境的配置问题';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+        </div>
+        
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Site
+                </li>
+            
+                <li><a href="../../archives.html">Archives</a>
+                <li><a href="../../tags.html">Tags</a>
+                <li><a href="yangsan.github.io/" rel="alternate">Atom feed</a></li>
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+                <li><a href="../../category/bash.html">bash</a></li>
+                <li><a href="../../category/blog.html">blog</a></li>
+                <li><a href="../../category/booknotes.html">booknotes</a></li>
+                <li><a href="../../category/linux.html">linux</a></li>
+                <li><a href="../../category/matplotlib.html">matplotlib</a></li>
+                <li><a href="../../category/python.html">python</a></li>
+                   
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Links
+                </li>
+            
+                <li><a href="http://getpelican.com/">Pelican</a></li>
+                <li><a href="http://python.org/">Python.org</a></li>
+                <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+            </ul>
+            </div>
+
+
+            <div class="social">
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Social
+                </li>
+           
+                <li><a href="http://weibo.com/kevinyoungc">微博</a></li>
+                <li><a href="https://github.com/yangsan">github</a></li>
+            </ul>
+            </div>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="../..">煎挠橙的blog</a> &copy; 煎挠橙 2012</p>
+</footer>
+
+</div> <!-- /container -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
+<script>var _gaq=[['_setAccount','UA-46467923-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+ 
+</body>
+</html>
