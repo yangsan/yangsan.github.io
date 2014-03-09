@@ -9,14 +9,14 @@
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
-    <script src="./theme/html5.js"></script>
+    <script src="../theme/html5.js"></script>
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="./theme/bootstrap.min.css" rel="stylesheet">
-    <link href="./theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="./theme/local.css" rel="stylesheet">
-    <link href="./theme/pygments.css" rel="stylesheet">
+    <link href="../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../theme/local.css" rel="stylesheet">
+    <link href="../theme/pygments.css" rel="stylesheet">
 
 </head>
 
@@ -32,13 +32,13 @@
              <span class="icon-bar"></span>
          </a>
 
-        <a class="brand" href=".">煎挠橙的blog</a>
+        <a class="brand" href="..">煎挠橙的blog</a>
 
         <div class="nav-collapse">
         <ul class="nav">
             
-            <li><a href="./pages/about-me.html">About me</a></li>
-            <li><a href="./pages/todolist.html">Todolist</a></li>
+            <li><a href="../pages/about-me.html">About me</a></li>
+            <li><a href="../pages/todolist.html">Todolist</a></li>
         </ul>
         </div>
         
@@ -58,10 +58,10 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="./articles/c/howto_install_gsl.html"><h1>Linux安装gsl库</h1></a>
+            <a href="../articles/c/howto_install_gsl.html"><h1>Linux安装gsl库</h1></a>
 2014-03-09
 
-by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
+by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
  
 
 
@@ -158,153 +158,13 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
         <hr />
     </div>
 		
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./articles/python/pip_pypi_mirror.html"><h2>给pip换国内的pypi镜像</h2></a>
-        <div class= "well small"> 2014-02-27
-
-by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
- 
-
-
- </div>
-        <div class="summary"><p>今天发现<a href="https://pypi.python.org/pypi">pypi.python.org</a>挂了，用<code>pip</code>搜索安装都不正常，索性换个国内的镜像试试。</p>
-<h2>镜像地址</h2>
-<p>根据<a href="http://www.pypi-mirrors.org/">这个</a>网站的说法，目前国内的镜像主要有</p>
-<ul>
-<li><a href="http://pypi.douban.com/">豆瓣</a></li>
-<li><a href="http://pypi.hustunique.com/">华中科技大</a> </li>
-</ul>
-<p>推荐电信/联通用户用前者，教育网用户用后者。</p>
-<h2>用法</h2>
-<h4>单次下载可以指定镜像</h4>
-<div class="highlight"><pre><span class="nv">$pip</span> install -i http://pypi.hustunique.com/simple &lt;package name&gt;
-</pre></div>
-
-
-<h4>全局设定</h4>
-<p>在<code>~/.pip/pip.conf</code>配置文件中加上</p>
-<div class="highlight"><pre><span class="k">[global]</span>
-<span class="na">index-url</span> <span class="o">=</span> <span class="s">http://pypi.hustunique.com/simple</span>
-</pre></div>
-
-
-<p>地址最后的simple一定不能忘了。</p>
-<p>改过之后速度有所提升，重要的是稳定多了。</p> <a class="btn btn-info xsmall" href="./articles/python/pip_pypi_mirror.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./articles/linux/set_up_python_on_clusters.html"><h2>无root权限的情况下在集群上配置个人python环境</h2></a>
-        <div class= "well small"> 2014-02-27
-
-by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
- 
-
-
- </div>
-        <div class="summary"><p>昨天刚问管理员师兄要了个服务器的账户，准备折腾一番。因为所里面用<code>python</code>的人不多，环境基本没配置，仅有的标准<code>python</code>库也很老了。</p>
-<p>而且因为服务器上惊人的预装了<code>SuSE Linux</code>（What？），连源都没有，我磨了半天嘴皮子管理员师兄还是拒绝给上面的<code>python</code>升级，还说让我随便改一下环境变量就好了。</p>
-<p>于是我折腾了4个小时，很“随意”的搞定了。这里做一个备份，省的回头忘了。</p>
-<h1>解决思路</h1>
-<ol>
-<li>在我的<code>/home</code>下先装一个<code>python 2.7.6</code>版本</li>
-<li>用<code>virtualenv</code>隔离一个python环境出来</li>
-<li>修改一下<code>bash</code>的配置文件，每次登陆时都把默认的<code>python</code>环境指向本地</li>
-</ol>
-<p>这样处理过后</p>
-<ol>
-<li>我得到了一个想要的<code>python</code>版本</li>
-<li>不需要<code>root</code>权限</li>
-<li>使用了虚拟环境 ...</li></ol> <a class="btn btn-info xsmall" href="./articles/linux/set_up_python_on_clusters.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./articles/bash/hacks_on_search_in_line.html"><h2>通过在bash配置文件里定义函数实现在命令行快速搜索互联网</h2></a>
-        <div class= "well small"> 2014-02-13
-
-by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
- 
-
-
- </div>
-        <div class="summary"><h1>源起</h1>
-<p>最近在学写shell脚本搞自动化，遵照“发现时常重复的工作流程，将其自动化”的精神，我注意到一个常有的情景是：工作、浏览网页时需要百度/google一个关键词，或者在豆瓣/新浪爱问上搜索一本书。</p>
-<p>本身用加了插件的浏览器这些事情不算麻烦，不过多接触浏览器一秒钟就多一分被干扰（常在电脑前工作的同志应该懂的）的机会，所以能在命令行解决最好，也权当练习了。</p>
-<h1>思路</h1>
-<p>解决思路也很简单，在命令行里输入</p>
-<div class="highlight"><pre>webbrowser http://example.com
-</pre></div>
-
-
-<p>就可以新打开一个浏览器标签，并打开相应的网页，一般的网页直接将网址填上去就好。</p>
-<p>但这里考虑的是查询的问题，所以网址后面还要加上query的部分，这块不需要太多的知识，下面举例说明。</p>
-<h3>栗子</h3>
-<p>以豆瓣读书为例，直接在浏览器中登陆其页面：<a href="http://book.douban.com">book.douban.com</a>，在搜索框里随便填一个关键词，比如“追风筝的人”，点搜索，注意跳转后的结果页面的地址变成了</p>
-<div class="highlight"><pre><span class="nl">http:</span><span class="c1">//book.douban.com/subject_search?search_text=追风筝的人 ...</span></pre></div> <a class="btn btn-info xsmall" href="./articles/bash/hacks_on_search_in_line.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./articles/booknotes/duan-she-li.html"><h2>《断舍离》阅读笔记</h2></a>
-        <div class= "well small"> 2014-02-05
-
-by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
- 
-
-
- </div>
-        <div class="summary"><p>书的观点不错，但废话太多，结构不清，我自己精简组织了一下。</p>
-<p><img alt="" src="https://raw.github.com/yangsan/pics-for-blog/master/s26872396.jpg" /></p>
-<h1>试图解决的问题</h1>
-<p>对与大多数人来说久居的屋子满是杂物、凌乱不堪的情景是很常见的，正是为了应对这个问题，山下英子（作者）提出断舍离的理念，最终的目的也不是单纯的为了整理好房间，而是为了达到一种更舒适更自在的生活状态。</p>
-<p>在我看来不仅仅是收拾屋子，对于我臃肿不堪的浏览器书签、一些不太好的生活习惯、甚至是不再相熟的朋友，断舍离的理念都是适用的。</p>
-<h1>舍</h1>
-<p>顾名思义，“舍”就是扔，要扔掉没用的东西。</p>
-<p>山下英子提到了一个标准，从两个维度上进行考量一个物品是否有用：</p>
-<ul>
-<li>
-<p>在审视人与物的关系时，主语必须是“我”，也即只有这个东西必须是我还能用到的才有保留的价值；一个东西没有坏、还能用但我再也不会用了（比如再也不会穿的旧衣服），那它就是没有用的，应该扔掉</p>
-</li>
-<li>
-<p>此外这个有用必须时针对当下而言的，过去的旧物和应对未来的储备是招致很多问题的元凶，只有当下切切实实要用到的东西，才有价值保留，物品应该在正确的时间出现在正确的地点，否则就是麻烦</p>
-</li>
-</ul>
-<p>如果希望过上新的生活，扔掉不需要的东西是第一步，但物品是死的，这意味着它们不会自己离开。如果自己不能主动的进行这个与自然相仿的淘汰的过程，那么住处变成一个仓库或者说垃圾场只是时间问题。</p>
-<h1>断</h1>
-<p>断是决断，与舍的出相对，意味着要把持好入口 ...</p> <a class="btn btn-info xsmall" href="./articles/booknotes/duan-she-li.html">read more</a></div>
-    </div>	
-				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
-    <li class="active"><a href="./index.html">1</a></li>
-    <li class=""><a href="./index2.html">2</a></li>
-    <li class=""><a href="./index3.html">3</a></li>
+    <li class="active"><a href="../tag/clang.html">1</a></li>
 
-    <li class="next"><a href="./index2.html">Next &rarr;</a></li>
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
 
 </ul>
 </div>
@@ -320,8 +180,8 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
                 Site
                 </li>
             
-                <li><a href="./archives.html">Archives</a>
-                <li><a href="./tags.html">Tags</a>
+                <li><a href="../archives.html">Archives</a>
+                <li><a href="../tags.html">Tags</a>
                 <li><a href="yangsan.github.io/" rel="alternate">Atom feed</a></li>
             </ul>
             </div>
@@ -333,13 +193,13 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
                 Categories
                 </li>
                 
-                <li><a href="./category/bash.html">bash</a></li>
-                <li><a href="./category/blog.html">blog</a></li>
-                <li><a href="./category/booknotes.html">booknotes</a></li>
-                <li><a href="./category/c.html">c</a></li>
-                <li><a href="./category/linux.html">linux</a></li>
-                <li><a href="./category/matplotlib.html">matplotlib</a></li>
-                <li><a href="./category/python.html">python</a></li>
+                <li><a href="../category/bash.html">bash</a></li>
+                <li><a href="../category/blog.html">blog</a></li>
+                <li><a href="../category/booknotes.html">booknotes</a></li>
+                <li><a href="../category/c.html">c</a></li>
+                <li><a href="../category/linux.html">linux</a></li>
+                <li><a href="../category/matplotlib.html">matplotlib</a></li>
+                <li><a href="../category/python.html">python</a></li>
                    
             </ul>
             </div>
@@ -375,7 +235,7 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
     </div>     </div> 
 <footer>
 <br />
-<p><a href=".">煎挠橙的blog</a> &copy; 煎挠橙 2012</p>
+<p><a href="..">煎挠橙的blog</a> &copy; 煎挠橙 2012</p>
 </footer>
 
 </div> <!-- /container -->

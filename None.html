@@ -58,8 +58,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="./articles/python/pip_pypi_mirror.html"><h1>给pip换国内的pypi镜像</h1></a>
-2014-02-27
+            <a href="./articles/c/howto_install_gsl.html"><h1>Linux安装gsl库</h1></a>
+2014-03-09
 
 by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
  
@@ -68,7 +68,112 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
  
         </div>
         
-        <div><p>今天发现<a href="https://pypi.python.org/pypi">pypi.python.org</a>挂了，用<code>pip</code>搜索安装都不正常，索性换个国内的镜像试试。</p>
+        <div><p>用python做计算，虽然优化花了很大功夫，但速度仍旧不够理想，所以我又开始学习c语言了。c本身并不以计算能力见长，但运行效率没问题，相关的库也很完善，平常能用到的都有涉及，这里记录一下gsl（GNU scientific lib）的安装和配置过程。</p>
+<h1>下载安装</h1>
+<p>因为是开源库，直接在<a href="http://www.gnu.org/software/gsl/">官网</a>下载就好，只有几兆，体积不大。</p>
+<p>我选了最新的版本，得到了一个压缩包<code>gls-1.16.tar.gz</code></p>
+<p>老规矩，先解压，再进解压目录</p>
+<div class="highlight"><pre><span class="nv">$ </span>tar zxvf gsl-1.16.tar.gz
+<span class="nv">$ </span><span class="nb">cd </span>gsl-1.16
+</pre></div>
+
+
+<p>接下来是安装的常规流程，值得注意的是默认安装目录为<code>/usr/local/include</code>和<code>/usr/local/lib</code>，这个先记住，随后有用。我在服务器上装了一遍，把库装在了本地，所以命令如下</p>
+<div class="highlight"><pre><span class="nv">$ </span>./configure --prefix<span class="o">=</span>/home/kevin/.local
+<span class="nv">$ </span>make
+<span class="nv">$ </span>sudo make install
+</pre></div>
+
+
+<p>如果没什么差错的话在安装目录的<code>/include</code>下面就可以看到<code>gsl</code>的库了。</p>
+<h1>编译，链接和环境变量</h1>
+<p>上面装完还没有万事大吉，c的库使用起来完全没有python那么便利，还需要一些设置。</p>
+<h3>编译</h3>
+<p>官方文档给力一个调用gsl贝塞尔函数的例子</p>
+<div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;gsl/gsl_sf_bessel.h&gt;</span>
+
+<span class="kt">int</span>
+<span class="nf">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">double</span> <span class="n">x</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">y</span> <span class="o">=</span> <span class="n">gsl_sf_bessel_J0</span> <span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;J0(%g) = %.18e</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>调用方法就是在开头处加上<code>#include &lt;gsl/gsl_sf_bessel.h&gt;</code>，如果默认情况下编译不通过，则需要加上一个路径的flag，如果你把库装在了别的地方，则需要进行修改</p>
+<div class="highlight"><pre><span class="nv">$ </span>gcc -Wall -I/usr/local/include -c example.c -o example.o
+</pre></div>
+
+
+<h3>链接库</h3>
+<p>紧接着则要进行库连接（我真希望我知道自己在说什么，但确实不知道）</p>
+<div class="highlight"><pre><span class="nv">$ </span>gcc -L/usr/local/lib example.o -lgsl -lgslcblas -o example
+</pre></div>
+
+
+<p>这样就生成了一个可执行文件，但这样做显然不够geek，下面介绍用make工具来进行自动化操作。</p>
+<h3>Makefile</h3>
+<p>在放<code>.c</code>源文件的目录下面新建一个<code>Makefile</code>，内容如下：</p>
+<div class="highlight"><pre><span class="nv">CFLAGS</span><span class="o">=</span>-Wall -g -DNDEBUG
+<span class="nv">CC</span><span class="o">=</span>gcc
+<span class="nv">MACPORTS</span> <span class="o">=</span> /usr/local
+<span class="nv">CPPFLAGS</span> <span class="o">=</span> -I<span class="k">$(</span>MACPORTS<span class="k">)</span>/include
+<span class="nv">LDFLAGS</span> <span class="o">=</span> -L<span class="k">$(</span>MACPORTS<span class="k">)</span>/lib
+<span class="nv">LDLIBS</span> <span class="o">=</span> -lgsl -lgslcblas
+
+<span class="nf">%</span><span class="o">:</span><span class="m">%.o</span>
+    <span class="k">$(</span>CC<span class="k">)</span> <span class="k">$(</span>LDFLAGS<span class="k">)</span> <span class="nv">$&lt;</span> -o <span class="nv">$@</span>  <span class="k">$(</span>LOADLIBS<span class="k">)</span> <span class="k">$(</span>LDLIBS<span class="k">)</span>
+
+<span class="nf">%.o</span><span class="o">:</span><span class="m">%.c</span>
+    <span class="k">$(</span>CC<span class="k">)</span> <span class="k">$(</span>CFLAGS<span class="k">)</span> <span class="k">$(</span>CPPFLAGS<span class="k">)</span> -c <span class="nv">$&lt;</span> -o <span class="nv">$@</span>
+</pre></div>
+
+
+<p><strong>注意:</strong>写<code>Makefile</code>的时候一定要把里面的两个tab换成真tab，我这网页上的很可能是四个空格，会导致make出现bug。当然，请顺便也把路径改了。</p>
+<p>妥当以后在源文件目录下可以直接</p>
+<div class="highlight"><pre>make example
+</pre></div>
+
+
+<p>生成可执行文件，并且example可以换成你的文件名。</p>
+<p>到这儿还没完，不出意外你执行刚才的<code>./example</code>时会报错，还需要修改一下环境变量来使程序正常运行。</p>
+<h3>环境变量</h3>
+<p>很简单</p>
+<div class="highlight"><pre><span class="nv">$ LD_LIBRARY_PATH</span><span class="o">=</span>/usr/local/lib
+<span class="nv">$ </span><span class="nb">export </span>LD_LIBRARY_PATH
+<span class="nv">$ </span>./example
+</pre></div>
+
+
+<p>这样运行就无误了，正确结果应该是</p>
+<div class="highlight"><pre><span class="nv">$ </span>J0<span class="o">(</span>5<span class="o">)</span> <span class="o">=</span> -1.775967713143382920e-01
+</pre></div>
+
+
+<p>当然为了方便，我把环境变量写进<code>.bashrc</code>里了。</p></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="./articles/python/pip_pypi_mirror.html"><h2>给pip换国内的pypi镜像</h2></a>
+        <div class= "well small"> 2014-02-27
+
+by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>今天发现<a href="https://pypi.python.org/pypi">pypi.python.org</a>挂了，用<code>pip</code>搜索安装都不正常，索性换个国内的镜像试试。</p>
 <h2>镜像地址</h2>
 <p>根据<a href="http://www.pypi-mirrors.org/">这个</a>网站的说法，目前国内的镜像主要有</p>
 <ul>
@@ -90,10 +195,9 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
 
 
 <p>地址最后的simple一定不能忘了。</p>
-<p>改过之后速度有所提升，重要的是稳定多了。</p></div>
-        <hr />
-    </div>
-		
+<p>改过之后速度有所提升，重要的是稳定多了。</p> <a class="btn btn-info xsmall" href="./articles/python/pip_pypi_mirror.html">read more</a></div>
+    </div>	
+				
 
  
         
@@ -192,31 +296,6 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
 <p>断是决断，与舍的出相对，意味着要把持好入口 ...</p> <a class="btn btn-info xsmall" href="./articles/booknotes/duan-she-li.html">read more</a></div>
     </div>	
 				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./articles/python/weibo_in_line.html"><h2>一个用python写的命令行发微博工具开发记录</h2></a>
-        <div class= "well small"> 2014-01-27
-
-by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
- 
-
-
- </div>
-        <div class="summary"><h1>源起</h1>
-<p>一个常见的情景：工作中有感而发，想要吐槽两句，下意识的打开浏览器，进入新浪微博页面，然后就没有知觉了。十几分钟后清醒过来，发现自己光顾着看微博，不仅之前想说的东西已经忘了，自己的工作也耽搁了，不禁懊恼万分，决心好好工作；若干分钟后上面的场景再次上演。</p>
-<p>因为最近在终端里呆的时间比较多，正好又在学习python，就希望试着用python写一个命令行里的发微博工具，只能写，不能看，工作吐槽两不误。</p>
-<h1>准备工作</h1>
-<p>前期主要花时间看文档，找参考。</p>
-<p>首先，新浪开放平台的<a href="http://open.weibo.com/wiki/%E9%A6%96%E9%A1%B5">官方文档</a>是必要的参考资料。</p>
-<p>另外，新浪推荐了来自<a href="http://weibo.com/liaoxuefeng">廖雪峰</a>的<a href="http://michaelliao.github.io/sinaweibopy/">python SDK</a>，直接安装就能使用，不过因为追求独立性和扩展性，代码有些庞杂，反正我没看懂。</p>
-<p>在别处找到了一个更轻量级的<a href="http://lxyu.github.io/weibo/">脚本</a>，正如该项目所说的，使用了<code>requests</code>而不是<code>urllib</code>做相关的<code>http</code>操作，极大的简化了代码，提高了可读性。我主要以此为参考 ...</p> <a class="btn btn-info xsmall" href="./articles/python/weibo_in_line.html">read more</a></div>
-    </div>	
-				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
@@ -257,6 +336,7 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
                 <li><a href="./category/bash.html">bash</a></li>
                 <li><a href="./category/blog.html">blog</a></li>
                 <li><a href="./category/booknotes.html">booknotes</a></li>
+                <li><a href="./category/c.html">c</a></li>
                 <li><a href="./category/linux.html">linux</a></li>
                 <li><a href="./category/matplotlib.html">matplotlib</a></li>
                 <li><a href="./category/python.html">python</a></li>
