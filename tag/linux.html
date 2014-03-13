@@ -58,8 +58,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="../articles/linux/set_up_python_on_clusters.html"><h1>无root权限的情况下在集群上配置个人python环境</h1></a>
-2014-02-27
+            <a href="../articles/latex/chinese_latex_ubuntu.html"><h1>在ubuntu上编译中文latex文档</h1></a>
+2014-03-13
 
 by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
  
@@ -68,7 +68,119 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
  
         </div>
         
-        <div><p>昨天刚问管理员师兄要了个服务器的账户，准备折腾一番。因为所里面用<code>python</code>的人不多，环境基本没配置，仅有的标准<code>python</code>库也很老了。</p>
+        <div><p>tex大名不再多说，作为需要编译的文档，外加原生不支持中文这样的设定，给人感觉难用是正常的。今天咬咬牙看了些资料，发现在前人的努力下编译中文已经是很简单的事情了，虽然原理依旧复杂，需要注意的地方依旧很多。</p>
+<p>具体的解决方案为XeLaTeX + xeCJK + ctex。</p>
+<p>在windows平台下还是建议使用ctex套件，该套件把引擎编辑器等等东西一起打了包，一次安装无痛使用。</p>
+<p>linux下面则因为字体配置方案不统一的问题需要一些配置，下面是具体方法。</p>
+<h1>texlive</h1>
+<p>后端推荐使用texlive2012，可以找一个光盘镜像挂载起来，在挂载目录下直接</p>
+<div class="highlight"><pre>sudo ./install-tl
+</pre></div>
+
+
+<p>注意安装完成以后根据提示往<code>.bashrc</code>里面添加一下环境变量</p>
+<div class="highlight"><pre><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/texlive/2012/bin/x86_64-linux:<span class="nv">$PATH</span>
+<span class="nb">export </span><span class="nv">MANPATH</span><span class="o">=</span>/usr/local/texlive/2012/texmf/doc/man:<span class="nv">$MANPATH</span>
+<span class="nb">export </span><span class="nv">INFOPATH</span><span class="o">=</span>/usr/local/texlive/2012/texmf/doc/info:<span class="nv">$INFOPATH</span>
+</pre></div>
+
+
+<p>这样texlive就算安装配置好了，CJK、ctex宏包和XeTeX引擎都内置在其中，稍后会用到。</p>
+<h1>安装中文字体</h1>
+<p>因为版权问题texlive没有携带诸如宋体、黑体等的win字体，不过我们可以直接去windows系统的<code>windows/fonts/</code>目录下面拷贝<code>sim*.ttf</code>（宋体是simsum.ttc）出来。</p>
+<p>拷出来的字体放在<code>/usr/share/fonts/windows</code>下面，更改一下权限</p>
+<div class="highlight"><pre>sudo chmod 644 /usr/share/fonts/windows/*
+</pre></div>
+
+
+<p>接着刷新字体缓存</p>
+<div class="highlight"><pre>sudo <span class="nb">fc</span>-cache -fv
+</pre></div>
+
+
+<p>字体安装成功后可以通过一下命令查看</p>
+<div class="highlight"><pre><span class="nb">fc</span>-list :lang<span class="o">=</span>zh
+</pre></div>
+
+
+<p>上面显示出的结果才是系统所识别的字体名字，先记住。</p>
+<h3>配置中文字体</h3>
+<p>因为众多linux发行版中的字体名称不不统一所以texlive默认的配置往往无法正常工作，这就需要手动去更改配置。</p>
+<div class="highlight"><pre>sudo vim /usr/local/texlive/2012/texmf-dist/latex/ctex/fontset/ctex-xecjk-winfonts.def
+</pre></div>
+
+
+<p>根据刚刚查看到的系统安装的字体情况，将以上配置文件中不合适的部分如<code>ItalicFont={[simkai.ttf]}</code>改为<code>={KaiTi}</code>。这样字体就配置完成了。</p>
+<h1>测试</h1>
+<div class="highlight"><pre>touch test.tex
+</pre></div>
+
+
+<p>测试文件的内容为</p>
+<div class="highlight"><pre><span class="k">\documentclass</span><span class="na">[UTF8]</span><span class="nb">{</span>ctexart<span class="nb">}</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+测试中文
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+
+
+<p>不出意外的话<code>pdflatex</code>引擎能够成功编译上面的文档。</p>
+<p>其中的<code>ctexart</code>是LaTeX中article文档类的中文本地化版本，如果你想使用其他的文档类，也可以这样</p>
+<div class="highlight"><pre><span class="k">\documentclass</span><span class="na">[UTF8]</span><span class="nb">{</span>article<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>ctex<span class="nb">}</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+测试中文
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+
+
+<p>二者效果一致，在编译时ctex在底层调用CJK，并添加了很多本地化的成分，比如“Figure 1”会变成“图 1”等，方便不少。</p>
+<p>调用字体则可以用<code>\heiti</code>、<code>\kaishu</code>这些。</p>
+<h1>另一个选项：XeTeX</h1>
+<p>上面的方案虽然解决了中文的编译问题，但限制是只支持win下面经典的六套字体，具体原因则牵扯了版权技术等等的问题，我也没搞太明白。</p>
+<p>这样的情况下可以任意调用系统字体的XeTeX引擎横空出世，并且包含在各大tex的发行版中，装了texlive的就可以直接调用。</p>
+<p>值得注意的一点是，XeTeX给予Unicode，要求它的源文件编码必须是utf8（业界良心），win用户在保存文件的时候注意一下编码。</p>
+<p>下面测试一下：</p>
+<div class="highlight"><pre><span class="k">\documentclass</span><span class="nb">{</span>article<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>xeCJK<span class="nb">}</span>
+<span class="k">\setCJKmainfont</span><span class="nb">{</span>微软雅黑<span class="nb">}</span> <span class="c">%我按照前面的方法装了微软雅黑字体，没有可以选文泉驿正黑，或是任何系统字体</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+测试中文！
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+
+
+<p>编译时用<code>xelatex</code>，调用xeCJK宏包，直接生成pdf。</p>
+<p>其实还可以这样</p>
+<div class="highlight"><pre><span class="k">\documentclass</span><span class="nb">{</span>ctexart<span class="nb">}</span>
+<span class="k">\setCJKmainfont</span><span class="nb">{</span>微软雅黑<span class="nb">}</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+测试中文
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+
+
+<p>依旧使用<code>xelatex</code>编译，这样做的虽然看似用了CJK的底层，但实际上XeTeX引擎下ctex调用的还是xeCJK的宏包。</p>
+<p>这样写的好处是如果没有指定字体或者指定的字体不存在，将使用宋体黑体等，不影响编译，兼容性好。</p></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../articles/linux/set_up_python_on_clusters.html"><h2>无root权限的情况下在集群上配置个人python环境</h2></a>
+        <div class= "well small"> 2014-02-27
+
+by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>昨天刚问管理员师兄要了个服务器的账户，准备折腾一番。因为所里面用<code>python</code>的人不多，环境基本没配置，仅有的标准<code>python</code>库也很老了。</p>
 <p>而且因为服务器上惊人的预装了<code>SuSE Linux</code>（What？），连源都没有，我磨了半天嘴皮子管理员师兄还是拒绝给上面的<code>python</code>升级，还说让我随便改一下环境变量就好了。</p>
 <p>于是我折腾了4个小时，很“随意”的搞定了。这里做一个备份，省的回头忘了。</p>
 <h1>解决思路</h1>
@@ -81,67 +193,9 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 <ol>
 <li>我得到了一个想要的<code>python</code>版本</li>
 <li>不需要<code>root</code>权限</li>
-<li>使用了虚拟环境，不怕折腾</li>
-<li>和一般的<code>python</code>环境用法无异</li>
-</ol>
-<p>基本就满足了日常的使用需求。</p>
-<h1>具体步骤</h1>
-<h3>在用户home下安装python</h3>
-<p>先去官网的<a href="http://www.python.org/download/releases/2.7.6/">下载页面</a>找一个源代码的包，下载下来。
-比如得到了<code>Python-2.7.6.tgz</code>这个包。</p>
-<div class="highlight"><pre><span class="nv">$tar</span> zxvf Python-2.7.6.tgz
-<span class="nv">$cd</span> Python-2.7.6
-<span class="nv">$.</span>/configure --prefix<span class="o">=</span>/home/kevin/.local
-<span class="nv">$make</span>
-<span class="nv">$make</span> install
-</pre></div>
-
-
-<p>这样就在本地安装好了一个<code>python</code>环境，运行的时候可以</p>
-<div class="highlight"><pre><span class="nv">$/</span>home/kevin/.local/bin/python
-</pre></div>
-
-
-<p>并且与系统默认的<code>python</code>环境没有冲突。</p>
-<p>当然这样很不方便，所以还有一些工作要做。</p>
-<h3>创建一个python的虚拟环境</h3>
-<p>这里要用到<code>virtualenv</code>这个包，更多的信息可以参考<a href="../articles/python/python_enviroment_setup.html">这里</a>。</p>
-<p>去<a href="https://pypi.python.org">pypi</a>上找一个<code>virtualenv</code>的源码包，下载下来。
-比如得到了<code>virtualenv-1.11.4.tar.gz</code>这个包。</p>
-<div class="highlight"><pre><span class="nv">$tar</span> zxvf virtualenv-1.11.4.tar.gz
-<span class="nv">$cd</span> virtualenv-1.11.4
-</pre></div>
-
-
-<p>主要用到里面<code>virtualenv.py</code>这个文件。</p>
-<div class="highlight"><pre><span class="nv">$/</span>home/kevin/.local/bin/python virtualenv.py MY_VIRTUAL_ENV
-</pre></div>
-
-
-<p>这样，将可以在你指定的目录下得到一个复制于刚刚安装在<code>/home</code>下的<code>python</code>环境。</p>
-<p>以上的做法实际上是在不安装<code>virtualenv</code>的情况下使用它，之所以要这样，是为了避开系统默认python环境的干扰。</p>
-<p>当然，如果刚才的命令改为</p>
-<div class="highlight"><pre><span class="nv">$python</span> virtualenv.py MY_VIRTUAL_ENV
-</pre></div>
-
-
-<p>得到的就是系统默认<code>python</code>环境的拷贝。</p>
-<h3>将虚拟环境设置为系统的默认python环境</h3>
-<p>若想使用虚拟环境，首先要将其激活，做法是将<code>MY_VIRTUAL_ENV/BIN/</code>目录下的<code>activate</code>脚本<code>source</code>一下</p>
-<div class="highlight"><pre><span class="nv">$source</span> MY_VIRTUAL_ENV/bib/activate
-</pre></div>
-
-
-<p>为了省事，可以将上面的命令写进<code>.bashrc</code>文件，这样每次进入bash shell就自动激活了这个虚拟环境，随后就可以平时一样使用python的解释器了。</p>
-<p>ps：如果想去掉激活了虚拟环境后终端标题前面的提示信息，需要将变量<code>VIRTUAL_ENV_DISABLE_PROMPT</code>的值设定为非零，具体可以这样写</p>
-<div class="highlight"><pre><span class="n">VIRTUAL_ENV_DISABLE_PROMPT</span><span class="o">=</span><span class="mi">1</span> <span class="n">source</span> <span class="n">MY_VIRTUAL_ENV</span><span class="o">/</span><span class="n">bib</span><span class="o">/</span><span class="n">activate</span>
-</pre></div>
-
-
-<p>这样就没有任何异常了。</p></div>
-        <hr />
-    </div>
-		
+<li>使用了虚拟环境 ...</li></ol> <a class="btn btn-info xsmall" href="../articles/linux/set_up_python_on_clusters.html">read more</a></div>
+    </div>	
+				
 
  
         
@@ -207,6 +261,7 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
                 <li><a href="../category/blog.html">blog</a></li>
                 <li><a href="../category/booknotes.html">booknotes</a></li>
                 <li><a href="../category/c.html">c</a></li>
+                <li><a href="../category/latex.html">latex</a></li>
                 <li><a href="../category/linux.html">linux</a></li>
                 <li><a href="../category/matplotlib.html">matplotlib</a></li>
                 <li><a href="../category/python.html">python</a></li>

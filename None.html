@@ -58,8 +58,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="./articles/c/howto_install_gsl.html"><h1>Linux安装gsl库</h1></a>
-2014-03-09
+            <a href="./articles/latex/chinese_latex_ubuntu.html"><h1>在ubuntu上编译中文latex文档</h1></a>
+2014-03-13
 
 by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
  
@@ -68,7 +68,119 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
  
         </div>
         
-        <div><p>用python做计算，虽然优化花了很大功夫，但速度仍旧不够理想，所以我又开始学习c语言了。c本身并不以计算能力见长，但运行效率没问题，相关的库也很完善，平常能用到的都有涉及，这里记录一下gsl（GNU scientific lib）的安装和配置过程。</p>
+        <div><p>tex大名不再多说，作为需要编译的文档，外加原生不支持中文这样的设定，给人感觉难用是正常的。今天咬咬牙看了些资料，发现在前人的努力下编译中文已经是很简单的事情了，虽然原理依旧复杂，需要注意的地方依旧很多。</p>
+<p>具体的解决方案为XeLaTeX + xeCJK + ctex。</p>
+<p>在windows平台下还是建议使用ctex套件，该套件把引擎编辑器等等东西一起打了包，一次安装无痛使用。</p>
+<p>linux下面则因为字体配置方案不统一的问题需要一些配置，下面是具体方法。</p>
+<h1>texlive</h1>
+<p>后端推荐使用texlive2012，可以找一个光盘镜像挂载起来，在挂载目录下直接</p>
+<div class="highlight"><pre>sudo ./install-tl
+</pre></div>
+
+
+<p>注意安装完成以后根据提示往<code>.bashrc</code>里面添加一下环境变量</p>
+<div class="highlight"><pre><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/texlive/2012/bin/x86_64-linux:<span class="nv">$PATH</span>
+<span class="nb">export </span><span class="nv">MANPATH</span><span class="o">=</span>/usr/local/texlive/2012/texmf/doc/man:<span class="nv">$MANPATH</span>
+<span class="nb">export </span><span class="nv">INFOPATH</span><span class="o">=</span>/usr/local/texlive/2012/texmf/doc/info:<span class="nv">$INFOPATH</span>
+</pre></div>
+
+
+<p>这样texlive就算安装配置好了，CJK、ctex宏包和XeTeX引擎都内置在其中，稍后会用到。</p>
+<h1>安装中文字体</h1>
+<p>因为版权问题texlive没有携带诸如宋体、黑体等的win字体，不过我们可以直接去windows系统的<code>windows/fonts/</code>目录下面拷贝<code>sim*.ttf</code>（宋体是simsum.ttc）出来。</p>
+<p>拷出来的字体放在<code>/usr/share/fonts/windows</code>下面，更改一下权限</p>
+<div class="highlight"><pre>sudo chmod 644 /usr/share/fonts/windows/*
+</pre></div>
+
+
+<p>接着刷新字体缓存</p>
+<div class="highlight"><pre>sudo <span class="nb">fc</span>-cache -fv
+</pre></div>
+
+
+<p>字体安装成功后可以通过一下命令查看</p>
+<div class="highlight"><pre><span class="nb">fc</span>-list :lang<span class="o">=</span>zh
+</pre></div>
+
+
+<p>上面显示出的结果才是系统所识别的字体名字，先记住。</p>
+<h3>配置中文字体</h3>
+<p>因为众多linux发行版中的字体名称不不统一所以texlive默认的配置往往无法正常工作，这就需要手动去更改配置。</p>
+<div class="highlight"><pre>sudo vim /usr/local/texlive/2012/texmf-dist/latex/ctex/fontset/ctex-xecjk-winfonts.def
+</pre></div>
+
+
+<p>根据刚刚查看到的系统安装的字体情况，将以上配置文件中不合适的部分如<code>ItalicFont={[simkai.ttf]}</code>改为<code>={KaiTi}</code>。这样字体就配置完成了。</p>
+<h1>测试</h1>
+<div class="highlight"><pre>touch test.tex
+</pre></div>
+
+
+<p>测试文件的内容为</p>
+<div class="highlight"><pre><span class="k">\documentclass</span><span class="na">[UTF8]</span><span class="nb">{</span>ctexart<span class="nb">}</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+测试中文
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+
+
+<p>不出意外的话<code>pdflatex</code>引擎能够成功编译上面的文档。</p>
+<p>其中的<code>ctexart</code>是LaTeX中article文档类的中文本地化版本，如果你想使用其他的文档类，也可以这样</p>
+<div class="highlight"><pre><span class="k">\documentclass</span><span class="na">[UTF8]</span><span class="nb">{</span>article<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>ctex<span class="nb">}</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+测试中文
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+
+
+<p>二者效果一致，在编译时ctex在底层调用CJK，并添加了很多本地化的成分，比如“Figure 1”会变成“图 1”等，方便不少。</p>
+<p>调用字体则可以用<code>\heiti</code>、<code>\kaishu</code>这些。</p>
+<h1>另一个选项：XeTeX</h1>
+<p>上面的方案虽然解决了中文的编译问题，但限制是只支持win下面经典的六套字体，具体原因则牵扯了版权技术等等的问题，我也没搞太明白。</p>
+<p>这样的情况下可以任意调用系统字体的XeTeX引擎横空出世，并且包含在各大tex的发行版中，装了texlive的就可以直接调用。</p>
+<p>值得注意的一点是，XeTeX给予Unicode，要求它的源文件编码必须是utf8（业界良心），win用户在保存文件的时候注意一下编码。</p>
+<p>下面测试一下：</p>
+<div class="highlight"><pre><span class="k">\documentclass</span><span class="nb">{</span>article<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>xeCJK<span class="nb">}</span>
+<span class="k">\setCJKmainfont</span><span class="nb">{</span>微软雅黑<span class="nb">}</span> <span class="c">%我按照前面的方法装了微软雅黑字体，没有可以选文泉驿正黑，或是任何系统字体</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+测试中文！
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+
+
+<p>编译时用<code>xelatex</code>，调用xeCJK宏包，直接生成pdf。</p>
+<p>其实还可以这样</p>
+<div class="highlight"><pre><span class="k">\documentclass</span><span class="nb">{</span>ctexart<span class="nb">}</span>
+<span class="k">\setCJKmainfont</span><span class="nb">{</span>微软雅黑<span class="nb">}</span>
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+测试中文
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+
+
+<p>依旧使用<code>xelatex</code>编译，这样做的虽然看似用了CJK的底层，但实际上XeTeX引擎下ctex调用的还是xeCJK的宏包。</p>
+<p>这样写的好处是如果没有指定字体或者指定的字体不存在，将使用宋体黑体等，不影响编译，兼容性好。</p></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="./articles/c/howto_install_gsl.html"><h2>Linux安装gsl库</h2></a>
+        <div class= "well small"> 2014-03-09
+
+by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>用python做计算，虽然优化花了很大功夫，但速度仍旧不够理想，所以我又开始学习c语言了。c本身并不以计算能力见长，但运行效率没问题，相关的库也很完善，平常能用到的都有涉及，这里记录一下gsl（GNU scientific lib）的安装和配置过程。</p>
 <h1>下载安装</h1>
 <p>因为是开源库，直接在<a href="http://www.gnu.org/software/gsl/">官网</a>下载就好，只有几兆，体积不大。</p>
 <p>我选了最新的版本，得到了一个压缩包<code>gls-1.16.tar.gz</code></p>
@@ -78,86 +190,9 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
 </pre></div>
 
 
-<p>接下来是安装的常规流程，值得注意的是默认安装目录为<code>/usr/local/include</code>和<code>/usr/local/lib</code>，这个先记住，随后有用。我在服务器上装了一遍，把库装在了本地，所以命令如下</p>
-<div class="highlight"><pre><span class="nv">$ </span>./configure --prefix<span class="o">=</span>/home/kevin/.local
-<span class="nv">$ </span>make
-<span class="nv">$ </span>sudo make install
-</pre></div>
-
-
-<p>如果没什么差错的话在安装目录的<code>/include</code>下面就可以看到<code>gsl</code>的库了。</p>
-<h1>编译，链接和环境变量</h1>
-<p>上面装完还没有万事大吉，c的库使用起来完全没有python那么便利，还需要一些设置。</p>
-<h3>编译</h3>
-<p>官方文档给力一个调用gsl贝塞尔函数的例子</p>
-<div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;gsl/gsl_sf_bessel.h&gt;</span>
-
-<span class="kt">int</span>
-<span class="nf">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="kt">double</span> <span class="n">x</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="n">y</span> <span class="o">=</span> <span class="n">gsl_sf_bessel_J0</span> <span class="p">(</span><span class="n">x</span><span class="p">);</span>
-    <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;J0(%g) = %.18e</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>调用方法就是在开头处加上<code>#include &lt;gsl/gsl_sf_bessel.h&gt;</code>，如果默认情况下编译不通过，则需要加上一个路径的flag，如果你把库装在了别的地方，则需要进行修改</p>
-<div class="highlight"><pre><span class="nv">$ </span>gcc -Wall -I/usr/local/include -c example.c -o example.o
-</pre></div>
-
-
-<h3>链接库</h3>
-<p>紧接着则要进行库连接（我真希望我知道自己在说什么，但确实不知道）</p>
-<div class="highlight"><pre><span class="nv">$ </span>gcc -L/usr/local/lib example.o -lgsl -lgslcblas -o example
-</pre></div>
-
-
-<p>这样就生成了一个可执行文件，但这样做显然不够geek，下面介绍用make工具来进行自动化操作。</p>
-<h3>Makefile</h3>
-<p>在放<code>.c</code>源文件的目录下面新建一个<code>Makefile</code>，内容如下：</p>
-<div class="highlight"><pre><span class="nv">CFLAGS</span><span class="o">=</span>-Wall -g -DNDEBUG
-<span class="nv">CC</span><span class="o">=</span>gcc
-<span class="nv">MACPORTS</span> <span class="o">=</span> /usr/local
-<span class="nv">CPPFLAGS</span> <span class="o">=</span> -I<span class="k">$(</span>MACPORTS<span class="k">)</span>/include
-<span class="nv">LDFLAGS</span> <span class="o">=</span> -L<span class="k">$(</span>MACPORTS<span class="k">)</span>/lib
-<span class="nv">LDLIBS</span> <span class="o">=</span> -lgsl -lgslcblas
-
-<span class="nf">%</span><span class="o">:</span><span class="m">%.o</span>
-    <span class="k">$(</span>CC<span class="k">)</span> <span class="k">$(</span>LDFLAGS<span class="k">)</span> <span class="nv">$&lt;</span> -o <span class="nv">$@</span>  <span class="k">$(</span>LOADLIBS<span class="k">)</span> <span class="k">$(</span>LDLIBS<span class="k">)</span>
-
-<span class="nf">%.o</span><span class="o">:</span><span class="m">%.c</span>
-    <span class="k">$(</span>CC<span class="k">)</span> <span class="k">$(</span>CFLAGS<span class="k">)</span> <span class="k">$(</span>CPPFLAGS<span class="k">)</span> -c <span class="nv">$&lt;</span> -o <span class="nv">$@</span>
-</pre></div>
-
-
-<p><strong>注意:</strong>写<code>Makefile</code>的时候一定要把里面的两个tab换成真tab，我这网页上的很可能是四个空格，会导致make出现bug。当然，请顺便也把路径改了。</p>
-<p>妥当以后在源文件目录下可以直接</p>
-<div class="highlight"><pre>make example
-</pre></div>
-
-
-<p>生成可执行文件，并且example可以换成你的文件名。</p>
-<p>到这儿还没完，不出意外你执行刚才的<code>./example</code>时会报错，还需要修改一下环境变量来使程序正常运行。</p>
-<h3>环境变量</h3>
-<p>很简单</p>
-<div class="highlight"><pre><span class="nv">$ LD_LIBRARY_PATH</span><span class="o">=</span>/usr/local/lib
-<span class="nv">$ </span><span class="nb">export </span>LD_LIBRARY_PATH
-<span class="nv">$ </span>./example
-</pre></div>
-
-
-<p>这样运行就无误了，正确结果应该是</p>
-<div class="highlight"><pre><span class="nv">$ </span>J0<span class="o">(</span>5<span class="o">)</span> <span class="o">=</span> -1.775967713143382920e-01
-</pre></div>
-
-
-<p>当然为了方便，我把环境变量写进<code>.bashrc</code>里了。</p></div>
-        <hr />
-    </div>
-		
+<p>接下来是安装的常规流程，值得注意的是默认安装目录为<code>/usr/local/include</code>和<code>/usr/local/lib</code>，这个先记住，随后有用。我在服务器上装了一遍 ...</p> <a class="btn btn-info xsmall" href="./articles/c/howto_install_gsl.html">read more</a></div>
+    </div>	
+				
 
  
         
@@ -260,42 +295,6 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
 <div class="highlight"><pre><span class="nl">http:</span><span class="c1">//book.douban.com/subject_search?search_text=追风筝的人 ...</span></pre></div> <a class="btn btn-info xsmall" href="./articles/bash/hacks_on_search_in_line.html">read more</a></div>
     </div>	
 				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./articles/booknotes/duan-she-li.html"><h2>《断舍离》阅读笔记</h2></a>
-        <div class= "well small"> 2014-02-05
-
-by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
- 
-
-
- </div>
-        <div class="summary"><p>书的观点不错，但废话太多，结构不清，我自己精简组织了一下。</p>
-<p><img alt="" src="https://raw.github.com/yangsan/pics-for-blog/master/s26872396.jpg" /></p>
-<h1>试图解决的问题</h1>
-<p>对与大多数人来说久居的屋子满是杂物、凌乱不堪的情景是很常见的，正是为了应对这个问题，山下英子（作者）提出断舍离的理念，最终的目的也不是单纯的为了整理好房间，而是为了达到一种更舒适更自在的生活状态。</p>
-<p>在我看来不仅仅是收拾屋子，对于我臃肿不堪的浏览器书签、一些不太好的生活习惯、甚至是不再相熟的朋友，断舍离的理念都是适用的。</p>
-<h1>舍</h1>
-<p>顾名思义，“舍”就是扔，要扔掉没用的东西。</p>
-<p>山下英子提到了一个标准，从两个维度上进行考量一个物品是否有用：</p>
-<ul>
-<li>
-<p>在审视人与物的关系时，主语必须是“我”，也即只有这个东西必须是我还能用到的才有保留的价值；一个东西没有坏、还能用但我再也不会用了（比如再也不会穿的旧衣服），那它就是没有用的，应该扔掉</p>
-</li>
-<li>
-<p>此外这个有用必须时针对当下而言的，过去的旧物和应对未来的储备是招致很多问题的元凶，只有当下切切实实要用到的东西，才有价值保留，物品应该在正确的时间出现在正确的地点，否则就是麻烦</p>
-</li>
-</ul>
-<p>如果希望过上新的生活，扔掉不需要的东西是第一步，但物品是死的，这意味着它们不会自己离开。如果自己不能主动的进行这个与自然相仿的淘汰的过程，那么住处变成一个仓库或者说垃圾场只是时间问题。</p>
-<h1>断</h1>
-<p>断是决断，与舍的出相对，意味着要把持好入口 ...</p> <a class="btn btn-info xsmall" href="./articles/booknotes/duan-she-li.html">read more</a></div>
-    </div>	
-				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
@@ -337,6 +336,7 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
                 <li><a href="./category/blog.html">blog</a></li>
                 <li><a href="./category/booknotes.html">booknotes</a></li>
                 <li><a href="./category/c.html">c</a></li>
+                <li><a href="./category/latex.html">latex</a></li>
                 <li><a href="./category/linux.html">linux</a></li>
                 <li><a href="./category/matplotlib.html">matplotlib</a></li>
                 <li><a href="./category/python.html">python</a></li>
