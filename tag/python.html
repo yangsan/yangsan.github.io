@@ -167,6 +167,7 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
  </div>
         <div class="summary"><p>昨天重做了一下系统，今天配置的时候有些新收获，写在这里。</p>
 <h1>Enthought Canopy</h1>
+<p><em>注：下面有更新，Enthought Canopy现在并非首选。</em></p>
 <p>自己用python首要是做计算的，昨天试着自己配置一下几个常用的包，弄了半天卡在依赖关系上了，没办法又用回<a href="https://www.enthought.com/">Enthought</a>的Canopy。</p>
 <p>Canopy是一个集成环境，把IDE和扩展包管理器等东西绑在了一起，做计算用的包也都有，装完所有东西都齐活了可以直接使用，非常舒服，后续的升级维护也很方便。</p>
 <p>但有一个问题是Canopy会推荐你将其设置为系统默认的python环境，好处是你在终端里面也可以用Canopy下面的包，这样就免得你再次配置，非常方便。问题是，如果后面用python做其他方面的开发，直接就乱套了。</p>
@@ -184,7 +185,7 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 
 <p>两者没有什么关联。</p>
 <p>而之前提到的将Canopy设置为系统默认python环境，则是Canopy在<code>~/.bashrc</code>文件最后加了一句</p>
-<div class="highlight"><pre><span class="nv">VIRTUAL_ENV_DISABLE_PROMPT</span><span class="o">=</span>1 <span class="nb">source</span> ~/Enthought/Canopy_32bit ...</pre></div> <a class="btn btn-info xsmall" href="../articles/python/python_enviroment_setup.html">read more</a></div>
+<div class="highlight"><pre><span class="nv">VIRTUAL_ENV_DISABLE_PROMPT ...</span></pre></div> <a class="btn btn-info xsmall" href="../articles/python/python_enviroment_setup.html">read more</a></div>
     </div>	
 				
 

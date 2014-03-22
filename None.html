@@ -139,7 +139,7 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
 <h1>另一个选项：XeTeX</h1>
 <p>上面的方案虽然解决了中文的编译问题，但限制是只支持win下面经典的六套字体，具体原因则牵扯了版权技术等等的问题，我也没搞太明白。</p>
 <p>这样的情况下可以任意调用系统字体的XeTeX引擎横空出世，并且包含在各大tex的发行版中，装了texlive的就可以直接调用。</p>
-<p>值得注意的一点是，XeTeX给予Unicode，要求它的源文件编码必须是utf8（业界良心），win用户在保存文件的时候注意一下编码。</p>
+<p>值得注意的一点是，XeTeX基于Unicode，要求它的源文件编码必须是utf8（业界良心），win用户在保存文件的时候注意一下编码。</p>
 <p>下面测试一下：</p>
 <div class="highlight"><pre><span class="k">\documentclass</span><span class="nb">{</span>article<span class="nb">}</span>
 <span class="k">\usepackage</span><span class="nb">{</span>xeCJK<span class="nb">}</span>

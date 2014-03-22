@@ -286,7 +286,7 @@ Slug: build_your_blog
 
 到[官方页面](www.disqus.com)上注册一个账号。找到'Add Disqus to your site'选项，在跳转后的页面上填写的网站名字，你填写的名字也将是你的'shortname'，记好了。
 
-接下来在你的`pelicanconf.py`文档中添加一下字段
+接下来在你的`pelicanconf.py`文档中添加以下字段
 
     :::python
 	DISQUS_SITENAME = shortname
@@ -295,4 +295,69 @@ Slug: build_your_blog
 
 #自动化
 
+熟练之后会发觉整个工作流程实际上只有一下几步：
 
+1. 进入装了`pelican`的python虚拟环境
+2. 打开`pelican`的本地调试功能
+3. 打开博客的本地页面
+4. `cd`到存放博客的content目录下面
+5. 用`vim`编辑文章，调试
+6. 使用`git`将生成的网站推送到服务器上
+
+虽然不多，但是用过一段时间后还是觉得繁琐，恰巧我是在ubuntu下面维护这个博客的，不搞搞自动化怎么过瘾，折腾了一下差不多可以了，下面是步骤。
+
+##期望
+
+最终的实现效果大致是这样的：在终端中输入“blog”字段，自动完成上面提到的1-4步，编辑文章自然要手动，这个没的说，最后的推送部分最好也手动完成，commits还是要认真写的。
+
+##实现
+
+###1.
+
+一开始先写了一个bash的脚本完成1,2两步，为什么要这样随后说，内容如下
+
+    :::bash
+    #!/bin/bash
+
+    . ~/virtualenvs/pelican/bin/activate #打开虚拟环境
+    cd /media/kevin/MainDisk/1/blog/ #cd到我的博客目录下面
+    bash develop_server.sh restart #打开pelican的自动监测-更新-本地端口功能
+    read answer #防止新打开的窗口被关闭
+
+第一行主要是把python虚拟环境的配置脚本source一下，关于虚拟环境更多的信息可以参考[这一篇]({filename}../python/enviromentsetup.md)。
+
+第二行则是进入到我的blog目录下面，因为相应的Makefile和bash脚本都在这里放着。
+
+第三行的作用则和前面提到的`make devserver`一样，实际上如果你去查看Makefile的话，会发现输入`make devserver`执行的就是这一条命令，我不想绕弯就直接写成这样了。
+
+第四行则作用则有点像你在windows下面编译c程序，因为跳出来的窗口在程序运行完之后就自动关闭，便往往在最后留一个等待输入的命令让程序先等着。
+
+接着将该脚本保存为`runpelicanserver.sh`，更改其权限以便能够直接运行
+
+    :::bash
+    $ chmod u+x runpelicanserver.sh
+
+并将其放在PATH环境变量中包括的路径下面，这样随时随地都可以调用。
+
+###2.
+
+剩下的工作我选择在`.bashrc`文件中编写function来完成，添加以下字段：
+
+    :::bash
+    blog(){
+        xfce4-terminal -e runpelicanserver.sh &
+        xfce4-terminal --working-directory=/media/kevin/MainDisk/1/blog/content/
+        google-chrome 127.0.0.1:8000 &
+    }
+
+因为我使用的是xubuntu发行版，默认的终端是xfce4-terminal，你在使用这套东西之前应该先确认一下自己的系统配置。
+
+这个func叫blog，每次我在终端中键入`blog`字段时，大括号里面的命令会被依次执行。
+
+第一行表示重新打开一个终端窗口，`-e`字段表示执行后面的命令，也即`runpelicanserver.sh`脚本，最后的`&`表示后台运行，因为新打开 的窗口是原来窗口的子进程，如果不后台运行的话关闭原来的窗口也会影响到新窗口的行为。要注意`runpelicanserver.sh`一定要放在环境变量下，不然就要加上完整的路径名。
+
+第二行则表示重新打开一个终端窗口，其工作路径为我的博客路径，方便稍后编辑文章。
+
+最后一行则表示使用`chrome`打开本地调试页面。
+
+整个工作完成之后就可以达到预期的目的了。不过我遇到的一个问题是在运行`runpelicanserver.sh`时常常无法顺利打开`pelican`的本地调试端口，导致本地的页面打不开，原因不明，所以不得不重新跑一下脚本，这也是为什么把它独立出来的缘故。

@@ -88,3 +88,9 @@ ps：如果想去掉激活了虚拟环境后终端标题前面的提示信息，
     VIRTUAL_ENV_DISABLE_PROMPT=1 source MY_VIRTUAL_ENV/bib/activate
 
 这样就没有任何异常了。
+
+#不折腾的方法
+
+其实最后的生产环境中我并没有采用上面的方案，因为最后无论如何都没法成功在服务器上装好Numba，抱着试一试的想法用了Anaconda，结果就好了，具体情况可以参考[这篇]({filename}../python/enviromentsetup.md)。
+
+当然不能说上面这番折腾没有意义，整个过程中还是学到了很多东西，但最后我确实是用着Anaconda做生产的。

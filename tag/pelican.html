@@ -305,13 +305,63 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 <p>由于<code>pelican</code>生成的是静态页面，没有数据库的支持所以本身无法实现评论的功能，不过我们还有第三方的服务可以选择。</p>
 <p>这里推荐<code>disqus</code>，功能齐备，免费。</p>
 <p>到<a href="www.disqus.com">官方页面</a>上注册一个账号。找到'Add Disqus to your site'选项，在跳转后的页面上填写的网站名字，你填写的名字也将是你的'shortname'，记好了。</p>
-<p>接下来在你的<code>pelicanconf.py</code>文档中添加一下字段</p>
+<p>接下来在你的<code>pelicanconf.py</code>文档中添加以下字段</p>
 <div class="highlight"><pre><span class="n">DISQUS_SITENAME</span> <span class="o">=</span> <span class="n">shortname</span>
 </pre></div>
 
 
 <p>用你自己的'shortname'替换进去，剩下的交给<code>pelican</code>。</p>
-<h1>自动化</h1></div>
+<h1>自动化</h1>
+<p>熟练之后会发觉整个工作流程实际上只有一下几步：</p>
+<ol>
+<li>进入装了<code>pelican</code>的python虚拟环境</li>
+<li>打开<code>pelican</code>的本地调试功能</li>
+<li>打开博客的本地页面</li>
+<li><code>cd</code>到存放博客的content目录下面</li>
+<li>用<code>vim</code>编辑文章，调试</li>
+<li>使用<code>git</code>将生成的网站推送到服务器上</li>
+</ol>
+<p>虽然不多，但是用过一段时间后还是觉得繁琐，恰巧我是在ubuntu下面维护这个博客的，不搞搞自动化怎么过瘾，折腾了一下差不多可以了，下面是步骤。</p>
+<h2>期望</h2>
+<p>最终的实现效果大致是这样的：在终端中输入“blog”字段，自动完成上面提到的1-4步，编辑文章自然要手动，这个没的说，最后的推送部分最好也手动完成，commits还是要认真写的。</p>
+<h2>实现</h2>
+<h3>1.</h3>
+<p>一开始先写了一个bash的脚本完成1,2两步，为什么要这样随后说，内容如下</p>
+<div class="highlight"><pre><span class="c">#!/bin/bash</span>
+
+. ~/virtualenvs/pelican/bin/activate <span class="c">#打开虚拟环境</span>
+<span class="nb">cd</span> /media/kevin/MainDisk/1/blog/ <span class="c">#cd到我的博客目录下面</span>
+bash develop_server.sh restart <span class="c">#打开pelican的自动监测-更新-本地端口功能</span>
+<span class="nb">read </span>answer <span class="c">#防止新打开的窗口被关闭</span>
+</pre></div>
+
+
+<p>第一行主要是把python虚拟环境的配置脚本source一下，关于虚拟环境更多的信息可以参考<a href="../articles/python/python_enviroment_setup.html">这一篇</a>。</p>
+<p>第二行则是进入到我的blog目录下面，因为相应的Makefile和bash脚本都在这里放着。</p>
+<p>第三行的作用则和前面提到的<code>make devserver</code>一样，实际上如果你去查看Makefile的话，会发现输入<code>make devserver</code>执行的就是这一条命令，我不想绕弯就直接写成这样了。</p>
+<p>第四行则作用则有点像你在windows下面编译c程序，因为跳出来的窗口在程序运行完之后就自动关闭，便往往在最后留一个等待输入的命令让程序先等着。</p>
+<p>接着将该脚本保存为<code>runpelicanserver.sh</code>，更改其权限以便能够直接运行</p>
+<div class="highlight"><pre><span class="nv">$ </span>chmod u+x runpelicanserver.sh
+</pre></div>
+
+
+<p>并将其放在PATH环境变量中包括的路径下面，这样随时随地都可以调用。</p>
+<h3>2.</h3>
+<p>剩下的工作我选择在<code>.bashrc</code>文件中编写function来完成，添加以下字段：</p>
+<div class="highlight"><pre>blog<span class="o">(){</span>
+    xfce4-terminal -e runpelicanserver.sh &amp;
+    xfce4-terminal --working-directory<span class="o">=</span>/media/kevin/MainDisk/1/blog/content/
+    google-chrome 127.0.0.1:8000 &amp;
+<span class="o">}</span>
+</pre></div>
+
+
+<p>因为我使用的是xubuntu发行版，默认的终端是xfce4-terminal，你在使用这套东西之前应该先确认一下自己的系统配置。</p>
+<p>这个func叫blog，每次我在终端中键入<code>blog</code>字段时，大括号里面的命令会被依次执行。</p>
+<p>第一行表示重新打开一个终端窗口，<code>-e</code>字段表示执行后面的命令，也即<code>runpelicanserver.sh</code>脚本，最后的<code>&amp;</code>表示后台运行，因为新打开 的窗口是原来窗口的子进程，如果不后台运行的话关闭原来的窗口也会影响到新窗口的行为。要注意<code>runpelicanserver.sh</code>一定要放在环境变量下，不然就要加上完整的路径名。</p>
+<p>第二行则表示重新打开一个终端窗口，其工作路径为我的博客路径，方便稍后编辑文章。</p>
+<p>最后一行则表示使用<code>chrome</code>打开本地调试页面。</p>
+<p>整个工作完成之后就可以达到预期的目的了。不过我遇到的一个问题是在运行<code>runpelicanserver.sh</code>时常常无法顺利打开<code>pelican</code>的本地调试端口，导致本地的页面打不开，原因不明，所以不得不重新跑一下脚本，这也是为什么把它独立出来的缘故。</p></div>
         <hr />
     </div>
 		
