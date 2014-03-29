@@ -81,7 +81,12 @@ markdown的逻辑则是，摒弃一切可能的干扰，只保留最基本的文
 如果想实时的查看文章转换过后的样式，需要一个chrome插件来配合，名字是Markdown Preview Plus，装完记得
 
 1. 在chrome的插件管理页面下把把它下面的"Allow access to file URLs"勾上，否则无法正常访问本地的文件
+
+![](https://raw.github.com/yangsan/pics-for-blog/master/markdownpreview.png)
+
 2. 在该插件的选项中把"Enable auto-reload"勾上，这样每次你保存文件都会自动更新结果
+
+![](https://raw.github.com/yangsan/pics-for-blog/master/reload.png)
 
 配置完成以后这边用vim写文章，那边把保存的文件拖进chrome就可以看到成品了。
 
