@@ -58,6 +58,70 @@
  
 
     <div class='article'>
+        <a href="./articles/python/python_enviroment_setup.html"><h2>ubuntu下python虚拟环境的配置问题</h2></a>
+        <div class= "well small"> 2014-01-15
+
+by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>昨天重做了一下系统，今天配置的时候有些新收获，写在这里。</p>
+<h1>Enthought Canopy</h1>
+<p><em>注：下面有更新，Enthought Canopy现在并非首选。</em></p>
+<p>自己用python首要是做计算的，昨天试着自己配置一下几个常用的包，弄了半天卡在依赖关系上了，没办法又用回<a href="https://www.enthought.com/">Enthought</a>的Canopy。</p>
+<p>Canopy是一个集成环境，把IDE和扩展包管理器等东西绑在了一起，做计算用的包也都有，装完所有东西都齐活了可以直接使用，非常舒服，后续的升级维护也很方便。</p>
+<p>但有一个问题是Canopy会推荐你将其设置为系统默认的python环境，好处是你在终端里面也可以用Canopy下面的包，这样就免得你再次配置，非常方便。问题是，如果后面用python做其他方面的开发，直接就乱套了。</p>
+<h3>Canopy的虚拟环境</h3>
+<p>Canopy采用了虚拟环境，所以并不影响系统本身的python环境，思路大致是把机器的环境复制一份出来放在其他路径下，运行维护就跟机器的环境再不相关了。</p>
+<p>如果你也安装了Canopy，可以看一下，一般机器的python环境都在</p>
+<div class="highlight"><pre>/usr/lib/python2.7
+</pre></div>
+
+
+<p>而Canopy默认情况下则把环境装在了</p>
+<div class="highlight"><pre>/home/Enthought/Canopy
+</pre></div>
+
+
+<p>两者没有什么关联。</p>
+<p>而之前提到的将Canopy设置为系统默认python环境，则是Canopy在<code>~/.bashrc</code>文件最后加了一句</p>
+<div class="highlight"><pre><span class="nv">VIRTUAL_ENV_DISABLE_PROMPT ...</span></pre></div> <a class="btn btn-info xsmall" href="./articles/python/python_enviroment_setup.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="./articles/linux/setup-ubuntu.html"><h2>ubuntu的简单配置</h2></a>
+        <div class= "well small"> 2014-01-15
+
+by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>接触ubuntu不过两个月，之前装了一个试玩，熟练之后越发的喜欢了，准备把工作环境迁移过来。不过之前只给了ubuntu 30g的磁盘空间，明显不够用，而且gnome3各种反人类，昨天心血来潮把原来的系统删了，扩了一下磁盘，重装。今天重新配置，顺便写在这里，后面方便查阅。</p>
+<h1>装系统</h1>
+<h3>分区</h3>
+<p>我搞的是双系统，windows虽然讨厌，但还真离不开。没装ubuntu之前，硬盘分了两个区，c盘是主分区，用来装系统，剩下的扩展分区是一个d盘，存数据。</p>
+<p>要再装个ubuntu的话就得再分一个区出来，做法很简单，（如果有的话）在windows下面，找到磁盘管理器，在原来的d盘上右键，压缩磁盘，跳出来的对话框可以调整大小，我弄了130g出来，点确定，过一会儿就能看到多了一个130g的空闲分区，windows下面的操作就到此为止了。</p>
+<p>注意虽然压缩磁盘对原有的数据没影响，但磁盘操作都有丢数据的风险，最好提前做好备份。</p>
+<h3>做u盘安装盘</h3>
+<p>先去找一个顺眼的ubuntu的iso镜像，官网上就能下，这次我选了xubuntu，就是ubuntu换了张皮，但很多细节做的很舒服。</p>
+<p>而后google一下UNetbootin，是个跨平台的ubuntu安装盘制作工具。找个空u盘，插电脑上 ...</p> <a class="btn btn-info xsmall" href="./articles/linux/setup-ubuntu.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
         <a href="./articles/matplotlib/aDelaunaytrigen.html"><h2>用Matplotlib做一个交互式的德劳尼三角生成器</h2></a>
         <div class= "well small"> 2013-12-30
 
@@ -156,41 +220,6 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
 <p>你至少应该能够配置<code>python</code>的环境，能够顺利的安装 ...</p> <a class="btn btn-info xsmall" href="./articles/blog/build_your_blog.html">read more</a></div>
     </div>	
 				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./articles/blog/why_I_write_blog.html"><h2>我为什么要写博客</h2></a>
-        <div class= "well small"> 2013-12-14
-
-by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
- 
-
-
- </div>
-        <div class="summary"><p>主要原因有三个：</p>
-<ul>
-<li>提高写作能力</li>
-<li>迫使自己阅读、思考</li>
-<li>打造个人品牌</li>
-</ul>
-<hr />
-<h2>1.提高写作能力</h2>
-<p>提高写作能力的方法无他，唯有多写。</p>
-<p>写作能力的提升意味着更好的交流与沟通能力，不管是学习工作亦或者生活都有重要意义。</p>
-<h2>2.迫使自己阅读思考</h2>
-<p>对于维护一个博客来讲，只是想写是远远不够的。你必须不断地不补充新的知识，新的体验才能保证你有的写。</p>
-<p>另一方面，一篇文章写的不好唯一的原因就是没想好。所以当你试图让自己的文章质量保持在一个水平线以上，并且意识到贴在网上的文章将被所有人一览无余的时候，你将不得不逼迫自己去思考组织书写。</p>
-<h2>3.打造个人品牌</h2>
-<p>将你的所有思考放到网上，将有更大的机会帮你找到志同道合的人，而且也再没有单一的一份简历能比你悉心经营多年的博客更能说明你的能力和心性。</p>
-<hr />
-<p>扩展阅读：</p>
-<p><a href="./articles/blog/build_your_blog.html">我是如何搭建起这个博客的</a></p> <a class="btn btn-info xsmall" href="./articles/blog/why_I_write_blog.html">read more</a></div>
-    </div>	
-				
 <div class="pagination">
 <ul>
     <li class="prev"><a href="./pages/about-me2.html">&larr; Previous</a></li>
@@ -198,8 +227,9 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
     <li class=""><a href="./pages/about-me.html">1</a></li>
     <li class=""><a href="./pages/about-me2.html">2</a></li>
     <li class="active"><a href="./pages/about-me3.html">3</a></li>
+    <li class=""><a href="./pages/about-me4.html">4</a></li>
 
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+    <li class="next"><a href="./pages/about-me4.html">Next &rarr;</a></li>
 
 </ul>
 </div>

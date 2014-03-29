@@ -58,6 +58,68 @@
  
 
     <div class='article'>
+        <a href="./articles/linux/set_up_python_on_clusters.html"><h2>无root权限的情况下在集群上配置个人python环境</h2></a>
+        <div class= "well small"> 2014-02-27
+
+by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>昨天刚问管理员师兄要了个服务器的账户，准备折腾一番。因为所里面用<code>python</code>的人不多，环境基本没配置，仅有的标准<code>python</code>库也很老了。</p>
+<p>而且因为服务器上惊人的预装了<code>SuSE Linux</code>（What？），连源都没有，我磨了半天嘴皮子管理员师兄还是拒绝给上面的<code>python</code>升级，还说让我随便改一下环境变量就好了。</p>
+<p>于是我折腾了4个小时，很“随意”的搞定了。这里做一个备份，省的回头忘了。</p>
+<h1>解决思路</h1>
+<ol>
+<li>在我的<code>/home</code>下先装一个<code>python 2.7.6</code>版本</li>
+<li>用<code>virtualenv</code>隔离一个python环境出来</li>
+<li>修改一下<code>bash</code>的配置文件，每次登陆时都把默认的<code>python</code>环境指向本地</li>
+</ol>
+<p>这样处理过后</p>
+<ol>
+<li>我得到了一个想要的<code>python</code>版本</li>
+<li>不需要<code>root</code>权限</li>
+<li>使用了虚拟环境 ...</li></ol> <a class="btn btn-info xsmall" href="./articles/linux/set_up_python_on_clusters.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="./articles/bash/hacks_on_search_in_line.html"><h2>通过在bash配置文件里定义函数实现在命令行快速搜索互联网</h2></a>
+        <div class= "well small"> 2014-02-13
+
+by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
+ 
+
+
+ </div>
+        <div class="summary"><h1>源起</h1>
+<p>最近在学写shell脚本搞自动化，遵照“发现时常重复的工作流程，将其自动化”的精神，我注意到一个常有的情景是：工作、浏览网页时需要百度/google一个关键词，或者在豆瓣/新浪爱问上搜索一本书。</p>
+<p>本身用加了插件的浏览器这些事情不算麻烦，不过多接触浏览器一秒钟就多一分被干扰（常在电脑前工作的同志应该懂的）的机会，所以能在命令行解决最好，也权当练习了。</p>
+<h1>思路</h1>
+<p>解决思路也很简单，在命令行里输入</p>
+<div class="highlight"><pre>webbrowser http://example.com
+</pre></div>
+
+
+<p>就可以新打开一个浏览器标签，并打开相应的网页，一般的网页直接将网址填上去就好。</p>
+<p>但这里考虑的是查询的问题，所以网址后面还要加上query的部分，这块不需要太多的知识，下面举例说明。</p>
+<h3>栗子</h3>
+<p>以豆瓣读书为例，直接在浏览器中登陆其页面：<a href="http://book.douban.com">book.douban.com</a>，在搜索框里随便填一个关键词，比如“追风筝的人”，点搜索，注意跳转后的结果页面的地址变成了</p>
+<div class="highlight"><pre><span class="nl">http:</span><span class="c1">//book.douban.com/subject_search?search_text=追风筝的人 ...</span></pre></div> <a class="btn btn-info xsmall" href="./articles/bash/hacks_on_search_in_line.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
         <a href="./articles/booknotes/duan-she-li.html"><h2>《断舍离》阅读笔记</h2></a>
         <div class= "well small"> 2014-02-05
 
@@ -136,70 +198,6 @@ Text，不过没有上手。编辑器之神vim的大名倒是早有耳闻，不�
 <p>我把我的配置文件贴在下面 ...</p> <a class="btn btn-info xsmall" href="./articles/linux/setupvim.html">read more</a></div>
     </div>	
 				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./articles/python/python_enviroment_setup.html"><h2>ubuntu下python虚拟环境的配置问题</h2></a>
-        <div class= "well small"> 2014-01-15
-
-by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
- 
-
-
- </div>
-        <div class="summary"><p>昨天重做了一下系统，今天配置的时候有些新收获，写在这里。</p>
-<h1>Enthought Canopy</h1>
-<p><em>注：下面有更新，Enthought Canopy现在并非首选。</em></p>
-<p>自己用python首要是做计算的，昨天试着自己配置一下几个常用的包，弄了半天卡在依赖关系上了，没办法又用回<a href="https://www.enthought.com/">Enthought</a>的Canopy。</p>
-<p>Canopy是一个集成环境，把IDE和扩展包管理器等东西绑在了一起，做计算用的包也都有，装完所有东西都齐活了可以直接使用，非常舒服，后续的升级维护也很方便。</p>
-<p>但有一个问题是Canopy会推荐你将其设置为系统默认的python环境，好处是你在终端里面也可以用Canopy下面的包，这样就免得你再次配置，非常方便。问题是，如果后面用python做其他方面的开发，直接就乱套了。</p>
-<h3>Canopy的虚拟环境</h3>
-<p>Canopy采用了虚拟环境，所以并不影响系统本身的python环境，思路大致是把机器的环境复制一份出来放在其他路径下，运行维护就跟机器的环境再不相关了。</p>
-<p>如果你也安装了Canopy，可以看一下，一般机器的python环境都在</p>
-<div class="highlight"><pre>/usr/lib/python2.7
-</pre></div>
-
-
-<p>而Canopy默认情况下则把环境装在了</p>
-<div class="highlight"><pre>/home/Enthought/Canopy
-</pre></div>
-
-
-<p>两者没有什么关联。</p>
-<p>而之前提到的将Canopy设置为系统默认python环境，则是Canopy在<code>~/.bashrc</code>文件最后加了一句</p>
-<div class="highlight"><pre><span class="nv">VIRTUAL_ENV_DISABLE_PROMPT ...</span></pre></div> <a class="btn btn-info xsmall" href="./articles/python/python_enviroment_setup.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./articles/linux/setup-ubuntu.html"><h2>ubuntu的简单配置</h2></a>
-        <div class= "well small"> 2014-01-15
-
-by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
- 
-
-
- </div>
-        <div class="summary"><p>接触ubuntu不过两个月，之前装了一个试玩，熟练之后越发的喜欢了，准备把工作环境迁移过来。不过之前只给了ubuntu 30g的磁盘空间，明显不够用，而且gnome3各种反人类，昨天心血来潮把原来的系统删了，扩了一下磁盘，重装。今天重新配置，顺便写在这里，后面方便查阅。</p>
-<h1>装系统</h1>
-<h3>分区</h3>
-<p>我搞的是双系统，windows虽然讨厌，但还真离不开。没装ubuntu之前，硬盘分了两个区，c盘是主分区，用来装系统，剩下的扩展分区是一个d盘，存数据。</p>
-<p>要再装个ubuntu的话就得再分一个区出来，做法很简单，（如果有的话）在windows下面，找到磁盘管理器，在原来的d盘上右键，压缩磁盘，跳出来的对话框可以调整大小，我弄了130g出来，点确定，过一会儿就能看到多了一个130g的空闲分区，windows下面的操作就到此为止了。</p>
-<p>注意虽然压缩磁盘对原有的数据没影响，但磁盘操作都有丢数据的风险，最好提前做好备份。</p>
-<h3>做u盘安装盘</h3>
-<p>先去找一个顺眼的ubuntu的iso镜像，官网上就能下，这次我选了xubuntu，就是ubuntu换了张皮，但很多细节做的很舒服。</p>
-<p>而后google一下UNetbootin，是个跨平台的ubuntu安装盘制作工具。找个空u盘，插电脑上 ...</p> <a class="btn btn-info xsmall" href="./articles/linux/setup-ubuntu.html">read more</a></div>
-    </div>	
-				
 <div class="pagination">
 <ul>
     <li class="prev"><a href="./pages/about-me.html">&larr; Previous</a></li>
@@ -207,6 +205,7 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
     <li class=""><a href="./pages/about-me.html">1</a></li>
     <li class="active"><a href="./pages/about-me2.html">2</a></li>
     <li class=""><a href="./pages/about-me3.html">3</a></li>
+    <li class=""><a href="./pages/about-me4.html">4</a></li>
 
     <li class="next"><a href="./pages/about-me3.html">Next &rarr;</a></li>
 

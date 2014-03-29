@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>yangsan.github.io/index.html</loc>
-<lastmod>2014-03-22T20:45:17-00:00</lastmod>
+<lastmod>2014-03-29T20:22:56-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>yangsan.github.io/archives.html</loc>
-<lastmod>2014-03-22T20:45:17-00:00</lastmod>
+<lastmod>2014-03-29T20:22:56-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>yangsan.github.io/tags.html</loc>
-<lastmod>2014-03-22T20:45:17-00:00</lastmod>
+<lastmod>2014-03-29T20:22:56-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>yangsan.github.io/categories.html</loc>
-<lastmod>2014-03-22T20:45:17-00:00</lastmod>
+<lastmod>2014-03-29T20:22:56-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -43,6 +43,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2013-12-12T00:00:00-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.3</priority>
+</url>
+
+<url>
+<loc>yangsan.github.io/articles/latex/pandoc_markdown_pdf.html</loc>
+<lastmod>2014-03-29T00:00:00-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+
+<url>
+<loc>yangsan.github.io/articles/latex/why_use_markdown.html</loc>
+<lastmod>2014-03-29T00:00:00-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
 </url>
 
 <url>
@@ -173,7 +187,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>yangsan.github.io/category/latex.html</loc>
-<lastmod>2014-03-13T00:00:00-00:00</lastmod>
+<lastmod>2014-03-29T00:00:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -242,8 +256,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>yangsan.github.io/tag/ubuntu.html</loc>
-<lastmod>2014-01-16T00:00:00-00:00</lastmod>
+<loc>yangsan.github.io/tag/pandoc.html</loc>
+<lastmod>2014-03-29T00:00:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -299,7 +313,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>yangsan.github.io/tag/markdown.html</loc>
-<lastmod>2013-12-15T00:00:00-00:00</lastmod>
+<lastmod>2014-03-29T00:00:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -333,6 +347,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>yangsan.github.io/tag/ubuntu.html</loc>
+<lastmod>2014-01-16T00:00:00-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>yangsan.github.io/tag/bash.html</loc>
 <lastmod>2014-02-13T00:00:00-00:00</lastmod>
 <changefreq>daily</changefreq>
@@ -341,7 +362,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>yangsan.github.io/pages/about-me.html</loc>
-<lastmod>2014-03-13T00:00:00-00:00</lastmod>
+<lastmod>2014-03-29T00:00:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
