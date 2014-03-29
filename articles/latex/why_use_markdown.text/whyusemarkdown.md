@@ -76,6 +76,8 @@ markdown的逻辑则是，摒弃一切可能的干扰，只保留最基本的文
 
 我个人工作环境在ubuntu下，没事就在vim里面不出来。vim虽然是神一样的编辑器但对于中文写作来说没有什么优势，跟记事本差不多，我这里看起来大概是这个样子的。
 
+![](https://raw.github.com/yangsan/pics-for-blog/master/markdown.png)
+
 如果想实时的查看文章转换过后的样式，需要一个chrome插件来配合，名字是Markdown Preview Plus，装完记得
 
 1. 在chrome的插件管理页面下把把它下面的"Allow access to file URLs"勾上，否则无法正常访问本地的文件
