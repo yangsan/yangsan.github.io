@@ -2,10 +2,11 @@ Title: 用Matplotlib做一个交互式的德劳尼三角生成器
 Date: 2013-12-30
 Tags: python, matplotlib, 可视化
 Slug: aDelaunaytrigen
+Modified: 2014-4-25
 
 正在看的一篇文献里用到了德劳尼三角形的算法来界定包含了一些点的空间，搜索了一下，[这里](http://www.cs.cornell.edu/Info/People/chew/Delaunay.html)有一个在线的小程序，让你可以通过鼠标在演示界面上点击的形式确定点的位置并动态的生成德劳尼三角形。
 
-唯一的问题在于这个小程序是`java`写的，而我不懂`java`，遂准备用`python`自己写一个，随后也方便给同事们展示。
+唯一的问题在于这个小程序是`java`写的，而我不懂`java`，遂用`python`自己写一个，也方便h后面给同事们展示。
 
 ##Matplotlib的Event
 
@@ -43,40 +44,45 @@ Slug: aDelaunaytrigen
 
 ##德劳尼三角化
 
-数学上，德劳尼三角化是针对一个点集而言的，通过构造三角形划分空间的一种方法。平面上一个点集的德劳尼三角化保证了每个三角形外切圆里面都不含有其他的点，实际上使得形成的三角形的所有角都最大化。
+数学上，德劳尼三角化是针对一个点集通过构造三角形划分空间的一种方法。该方法保证了每个三角形外切圆里面都不含有其他的点（这么说不太严格），实际上使得形成的三角形的所有角都最大化。
 
-可能是由于德劳尼三角化的用途比较广泛，只是随便搜了一下就发现`scipy`已经提供了现成的包`scipy.spatial.Delaunay`，你只需要把点集的坐标送进去，结果就出来了。实在太容易了，搞得我怪不好意思的。
+由于德劳尼三角化的用途比较广泛，我发现`scipy`已经提供了现成的包`scipy.spatial.Delaunay`，你只需要把点集的坐标送进去，结果就出来了。
 
 官方文档可以参考[这里](http://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html)。
 
 ##代码实现
 
+    :::python
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from scipy.spatial import Delaunay
 
-	:::Python	
-	import matplotlib.pyplot as plt
-	import numpy as np
-	from scipy.spatial import Delaunay 
 
-	points = []	#创建一个空列表用于存放点的坐标 
+    #定义一个类来封装数据，避免使用全局变量
+    class DrawDelaunay(object):
+        def __init__(self):
+            self.points = []  # 创建一个空列表用于存放点的坐标
+            self.fig = plt.figure()
+            self.ax = self.fig.add_subplot(111)
+            self.ax.set_xlim([0, 10])
+            self.ax.set_ylim([0, 10])
+            self.cid = self.fig.canvas.mpl_connect('button_press_event', self.click)
 
-	fig = plt.figure()
-	ax = fig.add_subplot(111)
-	ax.set_xlim([0,10])
-	ax.set_ylim([0,10])
+        def click(self, event):  # the function to run everytime click the plane
+            self.ax.cla()  # 每次画新图之前先把老的清除，要不然会堆叠在一起
+            self.ax.set_xlim([0, 10])
+            self.ax.set_ylim([0, 10])
 
-	def click(event):	#定义事件触发的函数，也就是实际上画图的部分
-    		global ax,points	#使用全局函数传递参数，我知道这是懒省事，别打...
-    		ax.cla()	#每次画新图之前先把老的清除，要不然会堆叠在一起
-    		ax.set_xlim([0,10])
-    		ax.set_ylim([0,10])
-    		points.append([event.xdata,event.ydata])	#将每次得到的点击位置加入到列表中
-		pointsarray = np.asarray(points)	#把列表转换成ndarray
-    		if len(points)>=3:       #Delaunay这个包只能在多于三个点的情况下工作
-        		tri = Delaunay(pointsarray)
-        		ax.triplot(pointsarray[:,0],pointsarray[:,1],tri.simplices)	#把得到的三角形画出来
-    		ax.plot(pointsarray[:,0],pointsarray[:,1],'ro')		#把每个点也标出来
-    		ax.figure.canvas.draw()		#每次点击都重画一下
-    
-	cid = fig.canvas.mpl_connect('button_press_event',click)	#链接的声明
+            self.points.append([event.xdata, event.ydata])  # 将每次得到的点击位置加入到列表中
+            pointsarray = np.asarray(self.points)  # 将每次得到的点击位置加入到列表中
+            if len(self.points) >= 3:
+                tri = Delaunay(pointsarray)  # Delaunay这个包只能在多于三个点的情况下工作
+                self.ax.triplot(pointsarray[:, 0], pointsarray[:, 1], tri.simplices)  # 把得到的三角形画出来
+            self.ax.plot(pointsarray[:, 0], pointsarray[:, 1], 'ro')  # 把每个点也标记出来
 
-	plt.show()
+            self.ax.figure.canvas.draw()  # 每次都重画一下  
+
+
+    if __name__ == "__main__":
+        draw = DrawDelaunay()
+        plt.show()

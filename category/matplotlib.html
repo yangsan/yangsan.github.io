@@ -69,7 +69,7 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
         </div>
         
         <div><p>正在看的一篇文献里用到了德劳尼三角形的算法来界定包含了一些点的空间，搜索了一下，<a href="http://www.cs.cornell.edu/Info/People/chew/Delaunay.html">这里</a>有一个在线的小程序，让你可以通过鼠标在演示界面上点击的形式确定点的位置并动态的生成德劳尼三角形。</p>
-<p>唯一的问题在于这个小程序是<code>java</code>写的，而我不懂<code>java</code>，遂准备用<code>python</code>自己写一个，随后也方便给同事们展示。</p>
+<p>唯一的问题在于这个小程序是<code>java</code>写的，而我不懂<code>java</code>，遂用<code>python</code>自己写一个，也方便h后面给同事们展示。</p>
 <h2>Matplotlib的Event</h2>
 <p>其实这样的交互式程序应该用<code>GUI</code>包来完成，为此我甚至把<code>Tkinter</code>的文档都翻了一遍，偶然的机会我注意到常被用来画图的<code>matplotlib</code>居然也可以实现交互功能，简直喜出望外。</p>
 <p>官方的文档请参考<a href="http://matplotlib.org/1.3.1/users/event_handling.html">这里</a>，除了必要的介绍还有几个例子供学习。显然<code>matplotlib</code>提供的交互功能与真正的<code>GUI</code>包比起来孱弱很多，不过能在作图的过程中加上一两个交互的特性确实是锦上添花的事情。</p>
@@ -99,37 +99,43 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 
 
 <h2>德劳尼三角化</h2>
-<p>数学上，德劳尼三角化是针对一个点集而言的，通过构造三角形划分空间的一种方法。平面上一个点集的德劳尼三角化保证了每个三角形外切圆里面都不含有其他的点，实际上使得形成的三角形的所有角都最大化。</p>
-<p>可能是由于德劳尼三角化的用途比较广泛，只是随便搜了一下就发现<code>scipy</code>已经提供了现成的包<code>scipy.spatial.Delaunay</code>，你只需要把点集的坐标送进去，结果就出来了。实在太容易了，搞得我怪不好意思的。</p>
+<p>数学上，德劳尼三角化是针对一个点集通过构造三角形划分空间的一种方法。该方法保证了每个三角形外切圆里面都不含有其他的点（这么说不太严格），实际上使得形成的三角形的所有角都最大化。</p>
+<p>由于德劳尼三角化的用途比较广泛，我发现<code>scipy</code>已经提供了现成的包<code>scipy.spatial.Delaunay</code>，你只需要把点集的坐标送进去，结果就出来了。</p>
 <p>官方文档可以参考<a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html">这里</a>。</p>
 <h2>代码实现</h2>
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="kn">import</span> <span class="n">Delaunay</span>
 
-<span class="n">points</span> <span class="o">=</span> <span class="p">[]</span> <span class="c">#创建一个空列表用于存放点的坐标</span>
 
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+<span class="c">#定义一个类来封装数据，避免使用全局变量</span>
+<span class="k">class</span> <span class="nc">DrawDelaunay</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c"># 创建一个空列表用于存放点的坐标</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">mpl_connect</span><span class="p">(</span><span class="s">&#39;button_press_event&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">click</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>   <span class="c">#定义事件触发的函数，也就是实际上画图的部分</span>
-        <span class="k">global</span> <span class="n">ax</span><span class="p">,</span><span class="n">points</span>    <span class="c">#使用全局函数传递参数，我知道这是懒省事，别打...</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>    <span class="c">#每次画新图之前先把老的清除，要不然会堆叠在一起</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
-        <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">event</span><span class="o">.</span><span class="n">xdata</span><span class="p">,</span><span class="n">event</span><span class="o">.</span><span class="n">ydata</span><span class="p">])</span>    <span class="c">#将每次得到的点击位置加入到列表中</span>
-    <span class="n">pointsarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>    <span class="c">#把列表转换成ndarray</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">3</span><span class="p">:</span>       <span class="c">#Delaunay这个包只能在多于三个点的情况下工作</span>
-            <span class="n">tri</span> <span class="o">=</span> <span class="n">Delaunay</span><span class="p">(</span><span class="n">pointsarray</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">triplot</span><span class="p">(</span><span class="n">pointsarray</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">pointsarray</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">tri</span><span class="o">.</span><span class="n">simplices</span><span class="p">)</span> <span class="c">#把得到的三角形画出来</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pointsarray</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">pointsarray</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s">&#39;ro&#39;</span><span class="p">)</span>     <span class="c">#把每个点也标出来</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>     <span class="c">#每次点击都重画一下</span>
+    <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>  <span class="c"># the function to run everytime click the plane</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>  <span class="c"># 每次画新图之前先把老的清除，要不然会堆叠在一起</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
 
-<span class="n">cid</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">mpl_connect</span><span class="p">(</span><span class="s">&#39;button_press_event&#39;</span><span class="p">,</span><span class="n">click</span><span class="p">)</span>    <span class="c">#链接的声明</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">event</span><span class="o">.</span><span class="n">xdata</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">ydata</span><span class="p">])</span>  <span class="c"># 将每次得到的点击位置加入到列表中</span>
+        <span class="n">pointsarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">)</span>  <span class="c"># 将每次得到的点击位置加入到列表中</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">tri</span> <span class="o">=</span> <span class="n">Delaunay</span><span class="p">(</span><span class="n">pointsarray</span><span class="p">)</span>  <span class="c"># Delaunay这个包只能在多于三个点的情况下工作</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">triplot</span><span class="p">(</span><span class="n">pointsarray</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">pointsarray</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">tri</span><span class="o">.</span><span class="n">simplices</span><span class="p">)</span>  <span class="c"># 把得到的三角形画出来</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pointsarray</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">pointsarray</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s">&#39;ro&#39;</span><span class="p">)</span>  <span class="c"># 把每个点也标记出来</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>  <span class="c"># 每次都重画一下</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">draw</span> <span class="o">=</span> <span class="n">DrawDelaunay</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div></div>
         <hr />
     </div>
