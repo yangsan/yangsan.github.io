@@ -58,6 +58,46 @@
  
 
     <div class='article'>
+        <a href="./articles/python/pip_pypi_mirror.html"><h2>给pip换国内的pypi镜像</h2></a>
+        <div class= "well small"> 2014-02-27
+
+by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>今天发现<a href="https://pypi.python.org/pypi">pypi.python.org</a>挂了，用<code>pip</code>搜索安装都不正常，索性换个国内的镜像试试。</p>
+<h2>镜像地址</h2>
+<p>根据<a href="http://www.pypi-mirrors.org/">这个</a>网站的说法，目前国内的镜像主要有</p>
+<ul>
+<li><a href="http://pypi.douban.com/">豆瓣</a></li>
+<li><a href="http://pypi.hustunique.com/">华中科技大</a> </li>
+</ul>
+<p>推荐电信/联通用户用前者，教育网用户用后者。</p>
+<h2>用法</h2>
+<h4>单次下载可以指定镜像</h4>
+<div class="highlight"><pre><span class="nv">$pip</span> install -i http://pypi.hustunique.com/simple &lt;package name&gt;
+</pre></div>
+
+
+<h4>全局设定</h4>
+<p>在<code>~/.pip/pip.conf</code>配置文件中加上</p>
+<div class="highlight"><pre><span class="k">[global]</span>
+<span class="na">index-url</span> <span class="o">=</span> <span class="s">http://pypi.hustunique.com/simple</span>
+</pre></div>
+
+
+<p>地址最后的simple一定不能忘了。</p>
+<p>改过之后速度有所提升，重要的是稳定多了。</p> <a class="btn btn-info xsmall" href="./articles/python/pip_pypi_mirror.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
         <a href="./articles/linux/set_up_python_on_clusters.html"><h2>无root权限的情况下在集群上配置个人python环境</h2></a>
         <div class= "well small"> 2014-02-27
 
@@ -172,30 +212,6 @@ by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
 <p>首先，新浪开放平台的<a href="http://open.weibo.com/wiki/%E9%A6%96%E9%A1%B5">官方文档</a>是必要的参考资料。</p>
 <p>另外，新浪推荐了来自<a href="http://weibo.com/liaoxuefeng">廖雪峰</a>的<a href="http://michaelliao.github.io/sinaweibopy/">python SDK</a>，直接安装就能使用，不过因为追求独立性和扩展性，代码有些庞杂，反正我没看懂。</p>
 <p>在别处找到了一个更轻量级的<a href="http://lxyu.github.io/weibo/">脚本</a>，正如该项目所说的，使用了<code>requests</code>而不是<code>urllib</code>做相关的<code>http</code>操作，极大的简化了代码，提高了可读性。我主要以此为参考 ...</p> <a class="btn btn-info xsmall" href="./articles/python/weibo_in_line.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./articles/linux/setupvim.html"><h2>编辑器之神vim养成</h2></a>
-        <div class= "well small"> 2014-01-16
-
-by <a class="url fn" href="./pages/about-me.html">煎挠橙</a>
- 
-
-
- </div>
-        <div class="summary"><p>坐电脑面前，写文章敲代码，大部分时间是和编辑器交互的，所以编辑器效率高不高，好不好用体验都是最直接的。以前也试过Sublime
-Text，不过没有上手。编辑器之神vim的大名倒是早有耳闻，不过陡峭的学习曲线也不是盖的，所以也一直不敢亵玩。倒是最近转到linux下面，整天泡在终端里不出来，vim来vim去的倒也慢慢的喜欢上了，昨天一咬牙，找了参考自己配置了一番，硬把原本不比windows下面记事本高端的玩意儿武装成了战斗机，最大的感受是，好玩！下面把我的配置写在这里，留作参考。</p>
-<p>开始之前先说说我是怎么上手vim的。窃以为学习使用vim，一开始的生存阶段能否坚持下来是最重要的，而我一开始是从使用chrome的一个叫<a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb">Vimium</a>的插件开始的。装上以后可以用vim的浏览模式看网页，所有操作都可以通过键盘执行，尤其是我经常包着笔记本又懒得带鼠标，简直吊且酷。这无疑是个不错的切入点，有不懂的按一下问号查帮助，很方便。等基本操作熟悉了以后再来学着用vim就自然的多。至于说明书、教程之类的网上很多，这里就不废话了。</p>
-<h1>配置vim</h1>
-<p>vim的配置我认为在于两个方面，一是vim本身提供的各种设置选项，通过写配置文件<code>~/.vimrc</code>来调整，二是安装插件，这个就看想象力了。两者相结合，vim登神。</p>
-<h2>写配置文件</h2>
-<p>我把我的配置文件贴在下面 ...</p> <a class="btn btn-info xsmall" href="./articles/linux/setupvim.html">read more</a></div>
     </div>	
 				
 <div class="pagination">

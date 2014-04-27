@@ -58,8 +58,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="../articles/python/pip_pypi_mirror.html"><h1>给pip换国内的pypi镜像</h1></a>
-2014-02-27
+            <a href="../articles/python/the_power_of_recursion.html"><h1>递归的威力，以project euler 31为例</h1></a>
+2014-04-27
 
 by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
  
@@ -68,7 +68,127 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
  
         </div>
         
-        <div><p>今天发现<a href="https://pypi.python.org/pypi">pypi.python.org</a>挂了，用<code>pip</code>搜索安装都不正常，索性换个国内的镜像试试。</p>
+        <div><p>最近刚开始算法学习，对递归思想非常着迷，做<a href="http://projecteuler.net/">project euler</a>时遇到题目就想用递归处理一下，但总的来说吃力不讨好。倒是今天给我找到一个绝佳的例子，相比于暴力破解，用递归重写后的代码轻巧了许多，可读性也增强了。</p>
+<h1>题目</h1>
+<p>project euler 31题:</p>
+<blockquote>
+<p>In England the currency is made up of pound, £, and pence, p, and there are eight coins in general circulation:</p>
+<p>1p, 2p, 5p, 10p, 20p, 50p, £1 (100p) and £2 (200p).</p>
+<p>It is possible to make £2 in the following way:
+  1×£1 + 1×50p + 2×20p + 1×5p + 1×2p + 3×1p</p>
+<p>How many different ways can £2 be made using any number of coins?</p>
+</blockquote>
+<h1>暴力破解1</h1>
+<p>看到题目最自然的想法是穷举一下所有的组合，检测和是不是200。</p>
+<p>这是非常原始的暴力破解方法，好处是不需要进一步的思考，非常容易写，且保证能得到正确结果。这几点好处——尤其是保证能得到正确结果是后面优化的基石——使得这种粗陋的代码也有写出来的价值。</p>
+<p>当然，缺点是效率不理想，一般不会作为最终版本来使用。这里还好，只用了三四分钟，有时则可能要几个月，那就不得不立刻开始优化了。</p>
+<p>代码：</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">coin</span><span class="p">():</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i100</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">item100</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">i100</span>
+        <span class="k">print</span> <span class="s">&quot;100:&quot;</span><span class="p">,</span> <span class="n">i100</span>
+        <span class="k">for</span> <span class="n">i50</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="n">item50</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="n">i50</span>
+            <span class="k">print</span> <span class="s">&quot;50:&quot;</span><span class="p">,</span> <span class="n">i50</span>
+            <span class="k">for</span> <span class="n">i20</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">):</span>
+                <span class="n">item20</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">i20</span>
+                <span class="k">for</span> <span class="n">i10</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">21</span><span class="p">):</span>
+                    <span class="n">item10</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">i10</span>
+                    <span class="k">for</span> <span class="n">i5</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">41</span><span class="p">):</span>
+                        <span class="n">item5</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">i5</span>
+                        <span class="k">for</span> <span class="n">i2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">101</span><span class="p">):</span>
+                            <span class="n">item2</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">i2</span>
+                            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">201</span><span class="p">):</span>
+                                <span class="k">if</span> <span class="n">item100</span> <span class="o">+</span> <span class="n">item50</span> <span class="o">+</span> <span class="n">item20</span> <span class="o">+</span> <span class="n">item10</span> <span class="o">+</span> <span class="n">item5</span> <span class="o">+</span> <span class="n">item2</span> <span class="o">+</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+                                    <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">counter</span>
+</pre></div>
+
+
+<p>上面的代码没有考虑只取200分的情况，所以得到的结果加上1才是正确答案。</p>
+<h1>暴力破解2</h1>
+<p>project euler前面的题目都比较简单，根据经验，算法得当的话运算时间都可以轻松压在毫秒级，上面的代码算了几分钟是不可忍受的。</p>
+<p>上面的方法显然计算了太多本不需要的计算的可能，所谓优化，不过是不需要算的部分直接不算了，具体到这个问题上，上面是先列举可能，再测试是否符合要求，其实可以反过来处理，你不是要200吗，那就从里面往外减，什么时候减没了算完。</p>
+<p>所以代码可以写成：</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">coin2</span><span class="p">():</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">item200</span> <span class="o">=</span> <span class="mi">200</span>
+    <span class="k">while</span> <span class="n">item200</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">item100</span> <span class="o">=</span> <span class="n">item200</span>
+        <span class="k">while</span> <span class="n">item100</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">item50</span> <span class="o">=</span> <span class="n">item100</span>
+            <span class="k">while</span> <span class="n">item50</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">item20</span> <span class="o">=</span> <span class="n">item50</span>
+                <span class="k">while</span> <span class="n">item20</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">item10</span> <span class="o">=</span> <span class="n">item20</span>
+                    <span class="k">while</span> <span class="n">item10</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">item5</span> <span class="o">=</span> <span class="n">item10</span>
+                        <span class="k">while</span> <span class="n">item5</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">item2</span> <span class="o">=</span> <span class="n">item5</span>
+                            <span class="k">while</span> <span class="n">item2</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                                <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+                                <span class="n">item2</span> <span class="o">-=</span> <span class="mi">2</span>
+                            <span class="n">item5</span> <span class="o">-=</span> <span class="mi">5</span>
+                        <span class="n">item10</span> <span class="o">-=</span> <span class="mi">10</span>
+                    <span class="n">item20</span> <span class="o">-=</span> <span class="mi">20</span>
+                <span class="n">item50</span> <span class="o">-=</span> <span class="mi">50</span>
+            <span class="n">item100</span> <span class="o">-=</span> <span class="mi">100</span>
+        <span class="n">item200</span> <span class="o">-=</span> <span class="mi">200</span>
+    <span class="k">return</span> <span class="n">counter</span>
+</pre></div>
+
+
+<p>好消息是效率提升不少，现在只需要16ms就可以搞定。</p>
+<p>但依旧是8曾循环嵌套，烧脑子可读性差容易出错就不说了，这里问题简单些只要8层就能解决问题，可如果遇到更多的呢？你能写出来解释器也吃不消吧。</p>
+<h1>递归</h1>
+<p>这种问题很适合用递归来处理，先不多说，看代码：</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">coin3</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">target</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">target</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">counter</span> <span class="o">+=</span> <span class="n">coin3</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">target</span><span class="p">)</span>
+        <span class="n">target</span> <span class="o">-=</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">counter</span>
+</pre></div>
+
+
+<p>刚写出来的时候我也不相信，之前繁琐的代码竟然可以变的如此漂亮，但算出来的答案是一样的，不骗你。唯一的缺点是用递归慢一些。</p>
+<h2>那这是怎么正常工作的？</h2>
+<p>设想我们有一个一般化的处理方案，函数<code>coin(l, target)</code>，吃进去一个包含了所有可取的硬币额度和一个最终需要的总数，吐出来的就是所有可能的组合方案，没错这就是我们要的。</p>
+<p>但这个函数怎么写呢？下面一步很关键。</p>
+<p>这里主要用到了分而治之的战略思想。先考虑一个简单的例子，<code>coin([5, 2, 1], 10)</code>，很容易发现有10种可能，问题在于思路是怎么样的。</p>
+<p>一个保证不漏掉可能的思路是先考虑到底有取了多少个5分，显然只能是0或1或2，如果是0的话，问题被简化为求<code>coin([2, 1], 10)</code>，同理，如果是1的话问题简化为<code>coin([2, 1], 5)</code>；最后只需要把几种情况下的可能加起来就是最终结果了。</p>
+<p>这就是递归处理的思路，每次只处理一个候选项，并将简化了的问题通过自己调用自己的方式解决，一路下来正确答案就自己跳出来了。</p>
+<p>唯一需要留心的是这种递归调用终结在什么地方，稍微思考一下就会发现，是整个问题最基础最简单的情形，这样解决起来也不费什么功夫了。</p>
+<h2>再看一眼</h2>
+<p>其实递归的思路和第二版的暴力破解是一样的，但得益于函数可以自我调用这一特点，代码被大大简化了。</p>
+<p>就好比没有循环之前你想求1到100的求和只能老老实实一步一步去写，用上循环则只需要三行。</p>
+<p>用递归的好处在于，问题被一般化了，8曾循环是这样写，100层还是这样写（只要不爆栈的话...）。代码思路变得更加清晰，可读性更好，出错的机会就小了。</p>
+<p>但递归这种思想和人脑的工作方式有悖，所以理解也好、使用也罢并不是那么自然，需要训练。</p>
+<p>不管如何这都是一种强大的处理问题的思路，值得好好斟酌一番。</p>
+<h1>一点补充</h1>
+<p>上面的代码其实还取了一个巧，因为最后一个选项是1，所以不管前面怎么分配，到最后一步时总能找到一个符合要求的结果，所以索性不算了。如果要处理更一般的情况，则还需要一些改动。</p></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../articles/python/pip_pypi_mirror.html"><h2>给pip换国内的pypi镜像</h2></a>
+        <div class= "well small"> 2014-02-27
+
+by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>今天发现<a href="https://pypi.python.org/pypi">pypi.python.org</a>挂了，用<code>pip</code>搜索安装都不正常，索性换个国内的镜像试试。</p>
 <h2>镜像地址</h2>
 <p>根据<a href="http://www.pypi-mirrors.org/">这个</a>网站的说法，目前国内的镜像主要有</p>
 <ul>
@@ -90,10 +210,9 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 
 
 <p>地址最后的simple一定不能忘了。</p>
-<p>改过之后速度有所提升，重要的是稳定多了。</p></div>
-        <hr />
-    </div>
-		
+<p>改过之后速度有所提升，重要的是稳定多了。</p> <a class="btn btn-info xsmall" href="../articles/python/pip_pypi_mirror.html">read more</a></div>
+    </div>	
+				
 
  
         
