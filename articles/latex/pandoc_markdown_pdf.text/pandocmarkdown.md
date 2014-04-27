@@ -13,7 +13,7 @@ Slug: pandoc_markdown_pdf
 
 #但是，为什么是pdf
 
-我在[为什么应该用markdown写作]({filename}../latex/whyusemarkdown.md)中提到微软的`.doc`不是一种理想的格式，同时，我也不认为pdf就更优秀，但我仍旧有足够的理由选择pdf：
+我在[为什么应该用markdown写作]({filename}../latex/whyusemarkdown.md)中提到微软的`.doc`不是一种理想的格式，同时，我也不认为pdf就更优秀，但我仍旧有足够的理由选择编译pdf：
 
 - 逼格当真高
 - 处理得当的话效果非常优雅
@@ -26,19 +26,19 @@ Slug: pandoc_markdown_pdf
 
 当然可以！我写这篇文章就是为了这个。
 
-其实很长一段时间里我是能不碰latex-pdf就不碰的，倒是把markdown当成日常标准每天都在用。很难说是谁先起的意，但当我看到pandoc的时候我明白了，整个生态链的最后一环找到了，此后便是神器在手。
+其实很长一段时间里我是能不碰latex-pdf就不碰的，倒是把markdown当成日常标准每天都在用。很难说是谁先起的意，但当我看到pandoc的时候我明白，整个生态链的最后一环找到了，此后便是神器在手。
 
-思路也很简单，先用markdown写文档，再用pandoc转换输出成pdf，兼顾markdown的清新易用和latex的强大支持。
+思路也很简单，先用markdown写文档，再用pandoc转换输出成pdf，兼顾markdown的易用和latex的强大支持。
 
 下面就看看我是怎么配置的。
 
 *注：我的生产环境为ubunutu，下面的配置都以此为标准，我肯定windows下可以达成同样的效果，但不保证配置同样简单*
 
-#搞好latex
+#搞定latex
 
-要编译生成pdf没有latex是不行的。win用户直接用ctex，一个打包就齐活了，linux用户则推荐使用texlive的后台，为了能处理中文可以参考[在ubuntu上编译中文latex文档]({filename}../latex/texchineseonlinux.md)。
+要编译生成pdf没有latex引擎是不行的。win用户直接用ctex，一个打包就齐活了，linux用户则推荐使用texlive的后台，为了能处理中文可以参考[在ubuntu上编译中文latex文档]({filename}../latex/texchineseonlinux.md)。
 
-其实不管怎么样，保证你电脑上能编译通过中文文档就行。
+最后不管怎么样，保证你电脑上能编译通过中文文档就行。
 
 #安装配置pandoc
 
@@ -111,7 +111,7 @@ pandoc-markdown的语法说明在其[官网](http://johnmacfarlane.net/pandoc/RE
 
 ##数学公式
 
-我经常用到的有两种，一种包含在一对`$`中，如`$\rho$`用在行间，另一种包含在一对`$$`中，如`$$\gamma = \frac{1}{2 \pi}$$`则表示独立的公式行。
+我经常用到的有两种，一种包含在一对`$`中，如`$\rho$`用在行间，另一种包含在一对`$$`中，如`$$\gamma = \frac{1}{2 \pi}$$`则表示独立的公式行。没错，就是这么简单。
 
 上面这些标记直接扔进markdown源文件里，编译之后就变成了优美的样子了。
 

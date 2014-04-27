@@ -76,7 +76,7 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 <li>latex，是一种标记语言以及生成pdf方式，如果你没听说过，或者不知道该如何处理中文，可以参考我这篇：<a href="../articles/latex/chinese_latex_ubuntu.html">在ubuntu上编译中文latex文档</a></li>
 </ul>
 <h1>但是，为什么是pdf</h1>
-<p>我在<a href="../articles/latex/why_use_markdown.html">为什么应该用markdown写作</a>中提到微软的<code>.doc</code>不是一种理想的格式，同时，我也不认为pdf就更优秀，但我仍旧有足够的理由选择pdf：</p>
+<p>我在<a href="../articles/latex/why_use_markdown.html">为什么应该用markdown写作</a>中提到微软的<code>.doc</code>不是一种理想的格式，同时，我也不认为pdf就更优秀，但我仍旧有足够的理由选择编译pdf：</p>
 <ul>
 <li>逼格当真高</li>
 <li>处理得当的话效果非常优雅</li>
@@ -86,13 +86,13 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 <p>当然，因为latex本身极其繁琐恼人，很少有人真的直接手写latex源文件然后去编译pdf的，事实上如果你像我一样用latex写过一学期的场论作业，就会真切的明白为什么这样干逼格高了。</p>
 <h1>那么，能不能不干脏活又效果优雅呢</h1>
 <p>当然可以！我写这篇文章就是为了这个。</p>
-<p>其实很长一段时间里我是能不碰latex-pdf就不碰的，倒是把markdown当成日常标准每天都在用。很难说是谁先起的意，但当我看到pandoc的时候我明白了，整个生态链的最后一环找到了，此后便是神器在手。</p>
-<p>思路也很简单，先用markdown写文档，再用pandoc转换输出成pdf，兼顾markdown的清新易用和latex的强大支持。</p>
+<p>其实很长一段时间里我是能不碰latex-pdf就不碰的，倒是把markdown当成日常标准每天都在用。很难说是谁先起的意，但当我看到pandoc的时候我明白，整个生态链的最后一环找到了，此后便是神器在手。</p>
+<p>思路也很简单，先用markdown写文档，再用pandoc转换输出成pdf，兼顾markdown的易用和latex的强大支持。</p>
 <p>下面就看看我是怎么配置的。</p>
 <p><em>注：我的生产环境为ubunutu，下面的配置都以此为标准，我肯定windows下可以达成同样的效果，但不保证配置同样简单</em></p>
-<h1>搞好latex</h1>
-<p>要编译生成pdf没有latex是不行的。win用户直接用ctex，一个打包就齐活了，linux用户则推荐使用texlive的后台，为了能处理中文可以参考<a href="../articles/latex/chinese_latex_ubuntu.html">在ubuntu上编译中文latex文档</a>。</p>
-<p>其实不管怎么样，保证你电脑上能编译通过中文文档就行。</p>
+<h1>搞定latex</h1>
+<p>要编译生成pdf没有latex引擎是不行的。win用户直接用ctex，一个打包就齐活了，linux用户则推荐使用texlive的后台，为了能处理中文可以参考<a href="../articles/latex/chinese_latex_ubuntu.html">在ubuntu上编译中文latex文档</a>。</p>
+<p>最后不管怎么样，保证你电脑上能编译通过中文文档就行。</p>
 <h1>安装配置pandoc</h1>
 <h2>安装</h2>
 <p><a href="http://code.google.com/p/pandoc/downloads/list">这里</a>有下载列表，找一个合适的。</p>
@@ -145,7 +145,7 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 <p>pandoc-markdown的语法说明在其<a href="http://johnmacfarlane.net/pandoc/README.html">官网</a>，有热心网友已经翻译了<a href="http://pages.tzengyuxio.me/pandoc/">一份</a>出来供参考。</p>
 <p>下面列举我常用的扩展，稍作说明。</p>
 <h2>数学公式</h2>
-<p>我经常用到的有两种，一种包含在一对<code>$</code>中，如<code>$\rho$</code>用在行间，另一种包含在一对<code>$$</code>中，如<code>$$\gamma = \frac{1}{2 \pi}$$</code>则表示独立的公式行。</p>
+<p>我经常用到的有两种，一种包含在一对<code>$</code>中，如<code>$\rho$</code>用在行间，另一种包含在一对<code>$$</code>中，如<code>$$\gamma = \frac{1}{2 \pi}$$</code>则表示独立的公式行。没错，就是这么简单。</p>
 <p>上面这些标记直接扔进markdown源文件里，编译之后就变成了优美的样子了。</p>
 <h2>插入图片和图片的交叉引用</h2>
 <p>插入图片的一般格式为</p>
