@@ -99,6 +99,34 @@ ubuntu下面可以直接sudo安装，如果需要beamer的支持，请参考[这
 
 make会自动检测当前的目录，找到对应的源文件，并将其编译成pdf。
 
+##进一步自动化
+
+我发现自己也有强迫症，喜欢写两句就编译一下看看效果，次数多了觉得老得make *.pdf也很烦人，要是我每次保存都能个给我自动编译一下就好了。
+
+恰巧我用vim写markdown，这事儿还真不难。只需要在`.vimrc`文件中加一句：
+
+    :::vim
+    autocmd BufWritePost *.mkdn make %<.pdf
+
+原理大概是这样的，vim的`autocmd`语句类似一个随时待命的功能，当触发事件发生（这里是BufWritePost，即把文件写进硬盘操作）发生时且pattern（在这里是当前文档后缀为.mkdn）得到匹配的话自动执行后面的命令（这里是make %<.pdf）。
+
+也就是说，如果你正在编辑一个后缀为.mkdn的文件，每次保存vim都会执行`make %<.pdf`命令。这里的`make`是vim自己的命令，效果和在命令行执行`make`一样，同样可以检测出当前目录下的Makefile，后面的`%<.pdf`则是参数，`%<`代表当前文档的名称不带后缀，和Makefile的用法类似。
+
+这里面有些地方需要注意。
+
+首先，默认情况下vim没法正确识别markdown文档，所以还得先在`.vimrc`里面加一句：
+
+    :::vim
+    autocmd BufNewFile,BufRead *.md,*.mkdn,*.markdown :set filetype=markdown
+
+这样，后缀为md、mkdn、markdown的文档都能被正确识别为markdown文档了。
+
+然后一个问题是，我并不是所有的markdown文档都需要编译，但暂时没想出更好的给vim匹配的pattern，只能自己定一个规矩：凡是需要编译成pdf的markdown文档通通使用.mkdn后缀，这样就不会误伤了。
+
+最后，用了这条自动化的命令以后Makefile里面也要把之前的.md后缀改成.mkdn。
+
+最终效果很酷炫的。
+
 #pandoc的markdown扩展
 
 markdown是极简主义的产物，对付日常写作还能胜任，但如果你需要数学公式或者文献引用的支持就无能为力了。
