@@ -24,11 +24,11 @@ Slug: pandoc_markdown_pdf
 
 #那么，能不能不干脏活又效果优雅呢
 
-当然可以！我写这篇文章就是为了这个。
+当然可以！
 
-其实很长一段时间里我是能不碰latex-pdf就不碰的，倒是把markdown当成日常标准每天都在用。很难说是谁先起的意，但当我看到pandoc的时候我明白，整个生态链的最后一环找到了，此后便是神器在手。
+其实很长一段时间里我是能不碰latex-pdf就不碰的，倒是把markdown当成日常标准每天都在用。一个偶然的机会下我看到了pandoc，那一刻我明白，整个生态链的最后一环找到了，此后便是神器在手。
 
-思路也很简单，先用markdown写文档，再用pandoc转换输出成pdf，兼顾markdown的易用和latex的强大支持。
+思路很简单，先用markdown写文档，再用pandoc转换输出成pdf，兼顾markdown的易用和latex的强大支持。
 
 下面就看看我是怎么配置的。
 
@@ -58,6 +58,8 @@ ubuntu下面可以直接sudo安装，如果需要beamer的支持，请参考[这
 
     :::bash
     /usr/share/pandoc-1.10.1/data/templates/default.latex
+
+不同的机器上可能有些小出入。
 
 我这里有一份[修改过的模板](https://gist.github.com/yangsan/9686706)，如果不嫌弃的话可以拿去用。为了能正常使用，请确认自己texlive安装正确，并且字体也没问题。`\setCJKmainfont`那一项上我用了微软雅黑，如果你没装的话就换一个。
 
@@ -177,3 +179,5 @@ pandoc对引用的支持也相当不错。我的话先用文献管理软件生�
 
     :::markdown
     #Reference
+
+需要注意的一点是，处理引用需要`pandoc-citeproc`组件的支持，没有的话会报`pandoc-citeproc not found in path`错误。ubuntu下面sudo安装一下就好。

@@ -85,9 +85,9 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 </ul>
 <p>当然，因为latex本身极其繁琐恼人，很少有人真的直接手写latex源文件然后去编译pdf的，事实上如果你像我一样用latex写过一学期的场论作业，就会真切的明白为什么这样干逼格高了。</p>
 <h1>那么，能不能不干脏活又效果优雅呢</h1>
-<p>当然可以！我写这篇文章就是为了这个。</p>
-<p>其实很长一段时间里我是能不碰latex-pdf就不碰的，倒是把markdown当成日常标准每天都在用。很难说是谁先起的意，但当我看到pandoc的时候我明白，整个生态链的最后一环找到了，此后便是神器在手。</p>
-<p>思路也很简单，先用markdown写文档，再用pandoc转换输出成pdf，兼顾markdown的易用和latex的强大支持。</p>
+<p>当然可以！</p>
+<p>其实很长一段时间里我是能不碰latex-pdf就不碰的，倒是把markdown当成日常标准每天都在用。一个偶然的机会下我看到了pandoc，那一刻我明白，整个生态链的最后一环找到了，此后便是神器在手。</p>
+<p>思路很简单，先用markdown写文档，再用pandoc转换输出成pdf，兼顾markdown的易用和latex的强大支持。</p>
 <p>下面就看看我是怎么配置的。</p>
 <p><em>注：我的生产环境为ubunutu，下面的配置都以此为标准，我肯定windows下可以达成同样的效果，但不保证配置同样简单</em></p>
 <h1>搞定latex</h1>
@@ -105,6 +105,7 @@ by <a class="url fn" href="../pages/about-me.html">煎挠橙</a>
 </pre></div>
 
 
+<p>不同的机器上可能有些小出入。</p>
 <p>我这里有一份<a href="https://gist.github.com/yangsan/9686706">修改过的模板</a>，如果不嫌弃的话可以拿去用。为了能正常使用，请确认自己texlive安装正确，并且字体也没问题。<code>\setCJKmainfont</code>那一项上我用了微软雅黑，如果你没装的话就换一个。</p>
 <h2>命令</h2>
 <p>终于大功告成，将markdown转换成pdf的命令如下：</p>
@@ -195,7 +196,10 @@ blah blah ...
 <p>"citatiion.bib"就是刚生成的BibLaTex文件。</p>
 <p>编译完成后相关的参考文献也会被列在文档的最后，所以建议在有引用的情况下在文章的最后加上</p>
 <div class="highlight"><pre><span class="c">#Reference</span>
-</pre></div></div>
+</pre></div>
+
+
+<p>需要注意的一点是，处理引用需要<code>pandoc-citeproc</code>组件的支持，没有的话会报<code>pandoc-citeproc not found in path</code>错误。ubuntu下面sudo安装一下就好。</p></div>
         <hr />
     </div>
 		
