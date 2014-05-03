@@ -71,13 +71,13 @@ by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
 </ul>
 <p>博客软件用来生成你的博客页面，而生成好的页面则需要放到托管的服务器上才能被别人看到。</p>
 <h2>博客软件</h2>
-<p>这里我选择<code>Pleican</code>作为博客软件主要是出于以下的考虑：</p>
+<p>我选择<code>Pleican</code>作为博客软件主要是出于以下的考虑：</p>
 <ul>
 <li>基于<code>Python</code>，简单易上手</li>
 <li>生成静态页面，不需要数据库，访问速度快，易于维护</li>
 <li>支持<code>markdown</code>标记语言</li>
 </ul>
-<p>和著名的<code>wordpress</code>相比，<code>pelican</code>搭建起来的博客功能和界面会相对单薄一些，但对于我来说绝对够用，况且写博客的初衷也是想把注意力放在内容上，所以工具越简单反而越好。</p>
+<p>和著名的<code>wordpress</code>相比，<code>pelican</code>搭建起来的博客功能和界面会相对单薄一些，但对于我来说绝对够用，况且写博客的初衷也是想把注意力放在内容上，工具越简单越好。</p>
 <h2>托管服务器</h2>
 <p>这里选择<code>github</code>的原因也很简单：</p>
 <ul>
@@ -90,13 +90,14 @@ by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
 <h4>1.<code>python</code>基础</h4>
 <p>你至少应该能够配置<code>python</code>的环境，能够顺利的安装<code>python</code>的插件,了解一些简单的<code>python</code>语法。</p>
 <h4>2.了解<code>Markdown</code></h4>
-<p>如果你没听说过也不要紧，<a href="http://joinwee.com/lesson/10/">这里</a>有一份简短的介绍，详细的语法说明则可以在<a href="http://wowubuntu.com/markdown/">这里</a>找到。</p>
+<p>没听说过不要紧，推荐阅读我的文章<a href="../../articles/latex/why_use_markdown.html">你为什么应该用markdown写文章</a>。</p>
+<p>另外<a href="http://joinwee.com/lesson/10/">这里</a>有一份简短的介绍，详细的语法说明则可以在<a href="http://wowubuntu.com/markdown/">这里</a>找到。</p>
 <h4>3.对<code>git</code>/<code>github</code>有所了解</h4>
 <p>如果不了解也同样没有关系，<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">这个</a>一站式的教程可以帮到你。</p>
 <p>这里多说一点。<code>git</code>本身就是追踪文本的系统，虽然设定上是给程序做版本管理的，但未尝不能拿来管理文章。甚至，我相信<code>git</code>+<code>markdown</code>等轻量级标记语言代表了一种写作的未来。</p>
 <hr />
 <h1>动手</h1>
-<p>这里提一下，我的配置环境是ubuntu13.04。windows则需要多一些折腾，请自行google。</p>
+<p>这里提一下，我的配置环境是ubuntu14.04。windows则需要多一些折腾，请自行google。</p>
 <h2>安装<code>Pelican</code></h2>
 <p>这里假设你已经安装好了python2.x的环境，并装好了<code>pip</code>。可以直接用下面的命令安装<code>pelican</code></p>
 <div class="highlight"><pre>pip install pelican
@@ -133,7 +134,7 @@ by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
 </pre></div>
 
 
-<p><code>pelican</code>的逻辑是，你把写好的用markdown写好的纯文本文档放进<code>content</code>这个目录下面，运行程序，就可以将你的整个博客页面生成到<code>output</code>中去了。</p>
+<p><code>pelican</code>的工作逻辑是，把用markdown写好的纯文本文档放进<code>content</code>这个目录下面，运行程序，就可以将你的整个博客页面生成到<code>output</code>中去了。</p>
 <p>至此，文件系统部分已经配置完成了，接下来可以试着写一篇文档了</p>
 <h2>第一篇博文</h2>
 <p>创建一个叫<code>first.md</code>的文档放到<code>content</code>目录下。<code>Pelican</code>对内容的格式有些要求，每一篇博文的开头都应该是这样的：</p>
@@ -148,8 +149,8 @@ by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
 </pre></div>
 
 
-<p>所以你应该看明白了，必须要通过每篇博文开头的部分来告诉<code>pelican</code>这篇文章的标题、标签、分类等信息，以便最终呈现在博客页面上。其中，标题、时间是必填的，如果缺失则会被<code>pelican</code>忽略掉。</p>
-<h2>生成页面</h2>
+<p>所以你应该看明白了，必须要通过每篇博文开头的部分来告诉<code>pelican</code>这篇文章的标题、标签、分类等信息以便最终呈现在博客页面上。其中，标题、时间是必填的，如果缺失该文章会被<code>pelican</code>忽略掉。</p>
+<h2>生成网页</h2>
 <p>写完你的第一篇博文后，你应该还在<code>content</code>目录下，先回到blog根目录下</p>
 <div class="highlight"><pre><span class="nb">cd</span> ..
 </pre></div>
@@ -165,39 +166,14 @@ by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
 </pre></div>
 
 
-<p>实际上此时如果你去<code>output</code>目录下就会看到生成的页面已经躺在那里了，但为了方便本地的调试，你可以用下面的命令开启一个本地的服务器</p>
+<p>这时如果你去<code>output</code>目录下就会看到生成的页面已经躺在那里了，但为了方便本地调试，你可以用下面的命令开启一个本地的服务器</p>
 <div class="highlight"><pre>make serve
 </pre></div>
 
 
-<p>这样，通过访问 http://127.0.0.1:8000 你就已经可以看到你的博客页面了！</p>
+<p>这样，通过访问 http://127.0.0.1:8000 就能看到你的博客页面了！</p>
 <p>不过这样光是调试就得开两个终端，稍麻烦，<code>pelican</code>实际上还提供了一个命令，可以代替上面两个</p>
 <div class="highlight"><pre>make devserver
-</pre></div>
-
-
-<p>我这儿一开始用这个命令一直报错，注意到这个命令要调用路径下的<code>develop_server.sh</code>这个脚本，但这个脚本本身没有执行权限，一般而言用下面的命令改一下它的权限就行</p>
-<div class="highlight"><pre>chmod u+x develop_server.sh
-</pre></div>
-
-
-<p>可是我这儿不知为何根本改不了，没办法就在<code>Makefile</code>上下功夫。打开<code>Makefile</code>找到下面几句</p>
-<div class="highlight"><pre><span class="nf">devserver</span><span class="o">:</span>
-<span class="cp">ifdef PORT</span>
-    <span class="k">$(</span>BASEDIR<span class="k">)</span>/develop_server.sh restart <span class="k">$(</span>PORT<span class="k">)</span>
-<span class="cp">else</span>
-    <span class="k">$(</span>BASEDIR<span class="k">)</span>/develop_server.sh restart
-<span class="cp">endif</span>
-</pre></div>
-
-
-<p>改成下面的样子就可以了</p>
-<div class="highlight"><pre><span class="nf">devserver</span><span class="o">:</span>
-<span class="cp">ifdef PORT</span>
-    bash <span class="k">$(</span>BASEDIR<span class="k">)</span>/develop_server.sh restart <span class="k">$(</span>PORT<span class="k">)</span>
-<span class="cp">else</span>
-    bash <span class="k">$(</span>BASEDIR<span class="k">)</span>/develop_server.sh restart
-<span class="cp">endif</span>
 </pre></div>
 
 
@@ -206,7 +182,7 @@ by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
 </pre></div>
 
 
-<p>至此，尽管有些丑，但你已经完成了自己博客的创建，随后只需要把你的文章放进<code>content</code>目录下面并运行以上命令就可以轻松生成博客了。如果需要备份，也只需要将<code>content</code>目录下的文件备份好就行，非常省心。</p>
+<p>至此，尽管丑了些，但你已经完成了自己博客的创建，随后只需要把你的文章放进<code>content</code>目录下面并运行以上命令就可以轻松生成博客了。如果需要备份，也只需要将<code>content</code>目录下的文件备份好就行，非常省心。</p>
 <p>当然此时别人还无法访问到你的页面，下面就教你如何把你的博客放到网上去。</p>
 <h2>在<code>github</code>上创建个人页面</h2>
 <p>首先你要有个<code>github</code>账号。<code>github</code>为每个账号提供一个子域名以供存放个人页面，使用的方法是创建一个新的版本库，命名为</p>
@@ -262,7 +238,7 @@ by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
 
 
 <p>应该就能看到你的博客了，没错，它已经正式上线了。此后每次变更博客内容或设置，只需事后将<code>output</code>目录下的内容推送到<code>github</code>就可以了，听上去和做上去都很简单。</p>
-<p>这样，如果你不在意域名的问题，你的博客就算搭建成功了，而且没有花费一分钱！但是基本主题这么丑，博客的各种功能也都还没有这怎么行呢，接着看。</p>
+<p>这样，如果你不在意域名的问题，你的博客就算搭建成功了，而且没有花费一分钱！</p>
 <hr />
 <h1>锦上添花</h1>
 <h2>使用主题</h2>
@@ -276,12 +252,12 @@ by <a class="url fn" href="../../pages/about-me.html">煎挠橙</a>
 </pre></div>
 
 
-<p>你可以浏览该目录下的文件，每个子目录存放了一个主题，里面会留有一个截图供你预览。比如我看中了<code>bootstrap</code>这一款，使用命令</p>
+<p>你可以浏览该目录下的文件，每个子目录存放了一个主题，并有截图供你预览。比如我看中了<code>bootstrap</code>这一款，使用命令</p>
 <div class="highlight"><pre>pelican-themes -i bootstrap
 </pre></div>
 
 
-<p>安装该主题。这时使用命令</p>
+<p>安装该主题。再使用命令</p>
 <div class="highlight"><pre>pelican-themes -l
 </pre></div>
 
@@ -330,10 +306,10 @@ bash develop_server.sh restart <span class="c">#打开pelican的自动监测-更
 </pre></div>
 
 
-<p>第一行主要是把python虚拟环境的配置脚本source一下，关于虚拟环境更多的信息可以参考<a href="../../articles/python/python_enviroment_setup.html">这一篇</a>。</p>
-<p>第二行则是进入到我的blog目录下面，因为相应的Makefile和bash脚本都在这里放着。</p>
+<p>第一行主要是把python虚拟环境的配置脚本source一下，关于虚拟环境更多的信息可以参考<a href="../../articles/python/python_enviroment_setup.html">这一篇</a>。如果你没有在用虚拟环境则不需要这一行。</p>
+<p>第二行进入到我的blog目录下面，因为相应的Makefile和bash脚本都在这里放着。</p>
 <p>第三行的作用则和前面提到的<code>make devserver</code>一样，实际上如果你去查看Makefile的话，会发现输入<code>make devserver</code>执行的就是这一条命令，我不想绕弯就直接写成这样了。</p>
-<p>第四行则作用则有点像你在windows下面编译c程序，因为跳出来的窗口在程序运行完之后就自动关闭，便往往在最后留一个等待输入的命令让程序先等着。</p>
+<p>第四行则作用则有点像你在windows下面编译c程序，因为跳出来的窗口在程序运行完之后就自动关闭，便往往在最后留一个等待输入的命令让程序先待命。</p>
 <p>接着将该脚本保存为<code>runpelicanserver.sh</code>，更改其权限以便能够直接运行</p>
 <div class="highlight"><pre><span class="nv">$ </span>chmod u+x runpelicanserver.sh
 </pre></div>

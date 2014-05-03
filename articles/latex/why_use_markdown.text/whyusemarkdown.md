@@ -1,4 +1,4 @@
-Title: 为什么应该用markdown写作
+Title: 你为什么应该用markdown写作
 Date: 2014-3-29
 Tags: markdown
 Slug: why_use_markdown

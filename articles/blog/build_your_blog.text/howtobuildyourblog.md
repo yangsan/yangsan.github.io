@@ -1,6 +1,6 @@
 Title: 利用Pelican和Github简单迅速地搭建自己的博客
 Date: 2013-12-14
-Modified: 2013-12-15
+Modified: 2014-5-3
 Tags: how to, pelican, github, git, markdown, blog
 Slug: build_your_blog
 
@@ -17,13 +17,13 @@ Slug: build_your_blog
 
 ##博客软件
 
-这里我选择`Pleican`作为博客软件主要是出于以下的考虑：
+我选择`Pleican`作为博客软件主要是出于以下的考虑：
 
 - 基于`Python`，简单易上手
 - 生成静态页面，不需要数据库，访问速度快，易于维护
 - 支持`markdown`标记语言
 
-和著名的`wordpress`相比，`pelican`搭建起来的博客功能和界面会相对单薄一些，但对于我来说绝对够用，况且写博客的初衷也是想把注意力放在内容上，所以工具越简单反而越好。
+和著名的`wordpress`相比，`pelican`搭建起来的博客功能和界面会相对单薄一些，但对于我来说绝对够用，况且写博客的初衷也是想把注意力放在内容上，工具越简单越好。
 
 
 ##托管服务器
@@ -44,7 +44,9 @@ Slug: build_your_blog
 
 ####2.了解`Markdown`
 
-如果你没听说过也不要紧，[这里](http://joinwee.com/lesson/10/)有一份简短的介绍，详细的语法说明则可以在[这里](http://wowubuntu.com/markdown/)找到。
+没听说过不要紧，推荐阅读我的文章[你为什么应该用markdown写文章]({filename}../latex/whyusemarkdown.md)。
+
+另外[这里](http://joinwee.com/lesson/10/)有一份简短的介绍，详细的语法说明则可以在[这里](http://wowubuntu.com/markdown/)找到。
 
 ####3.对`git`/`github`有所了解
 
@@ -56,7 +58,7 @@ Slug: build_your_blog
 
 #动手
 
-这里提一下，我的配置环境是ubuntu13.04。windows则需要多一些折腾，请自行google。
+这里提一下，我的配置环境是ubuntu14.04。windows则需要多一些折腾，请自行google。
 
 ##安装`Pelican`
 
@@ -97,7 +99,7 @@ Slug: build_your_blog
 	├── pelicanconf.py     
 	└── publishconf.py
 
-`pelican`的逻辑是，你把写好的用markdown写好的纯文本文档放进`content`这个目录下面，运行程序，就可以将你的整个博客页面生成到`output`中去了。
+`pelican`的工作逻辑是，把用markdown写好的纯文本文档放进`content`这个目录下面，运行程序，就可以将你的整个博客页面生成到`output`中去了。
 
 至此，文件系统部分已经配置完成了，接下来可以试着写一篇文档了
 
@@ -115,9 +117,9 @@ Slug: build_your_blog
 	这里开始可以书写正文了
 	blabla....
 
-所以你应该看明白了，必须要通过每篇博文开头的部分来告诉`pelican`这篇文章的标题、标签、分类等信息，以便最终呈现在博客页面上。其中，标题、时间是必填的，如果缺失则会被`pelican`忽略掉。
+所以你应该看明白了，必须要通过每篇博文开头的部分来告诉`pelican`这篇文章的标题、标签、分类等信息以便最终呈现在博客页面上。其中，标题、时间是必填的，如果缺失该文章会被`pelican`忽略掉。
 
-##生成页面
+##生成网页
 
 写完你的第一篇博文后，你应该还在`content`目录下，先回到blog根目录下
 
@@ -134,49 +136,24 @@ Slug: build_your_blog
     :::bash
 	make regenerate
 
-实际上此时如果你去`output`目录下就会看到生成的页面已经躺在那里了，但为了方便本地的调试，你可以用下面的命令开启一个本地的服务器
+这时如果你去`output`目录下就会看到生成的页面已经躺在那里了，但为了方便本地调试，你可以用下面的命令开启一个本地的服务器
 
     :::bash
 	make serve
 
-这样，通过访问 http://127.0.0.1:8000 你就已经可以看到你的博客页面了！
+这样，通过访问 http://127.0.0.1:8000 就能看到你的博客页面了！
 
 不过这样光是调试就得开两个终端，稍麻烦，`pelican`实际上还提供了一个命令，可以代替上面两个
 
     :::bash
     make devserver
 
-我这儿一开始用这个命令一直报错，注意到这个命令要调用路径下的`develop_server.sh`这个脚本，但这个脚本本身没有执行权限，一般而言用下面的命令改一下它的权限就行
-
-    :::bash
-    chmod u+x develop_server.sh
-
-可是我这儿不知为何根本改不了，没办法就在`Makefile`上下功夫。打开`Makefile`找到下面几句
-
-    :::make
-    devserver:
-    ifdef PORT
-        $(BASEDIR)/develop_server.sh restart $(PORT)
-    else
-        $(BASEDIR)/develop_server.sh restart
-    endif
-
-改成下面的样子就可以了
-
-    :::make
-    devserver:
-    ifdef PORT
-        bash $(BASEDIR)/develop_server.sh restart $(PORT)
-    else
-        bash $(BASEDIR)/develop_server.sh restart
-    endif
-
 调试完毕后你应该关闭之前开启的服务器
 
     :::bash
 	./develop_server.sh stop
 
-至此，尽管有些丑，但你已经完成了自己博客的创建，随后只需要把你的文章放进`content`目录下面并运行以上命令就可以轻松生成博客了。如果需要备份，也只需要将`content`目录下的文件备份好就行，非常省心。
+至此，尽管丑了些，但你已经完成了自己博客的创建，随后只需要把你的文章放进`content`目录下面并运行以上命令就可以轻松生成博客了。如果需要备份，也只需要将`content`目录下的文件备份好就行，非常省心。
 
 当然此时别人还无法访问到你的页面，下面就教你如何把你的博客放到网上去。
 
@@ -237,7 +214,7 @@ Slug: build_your_blog
 
 应该就能看到你的博客了，没错，它已经正式上线了。此后每次变更博客内容或设置，只需事后将`output`目录下的内容推送到`github`就可以了，听上去和做上去都很简单。
 
-这样，如果你不在意域名的问题，你的博客就算搭建成功了，而且没有花费一分钱！但是基本主题这么丑，博客的各种功能也都还没有这怎么行呢，接着看。
+这样，如果你不在意域名的问题，你的博客就算搭建成功了，而且没有花费一分钱！
 
 ---
 
@@ -255,12 +232,12 @@ Slug: build_your_blog
     :::bash
 	cd pelican-themes
 
-你可以浏览该目录下的文件，每个子目录存放了一个主题，里面会留有一个截图供你预览。比如我看中了`bootstrap`这一款，使用命令
+你可以浏览该目录下的文件，每个子目录存放了一个主题，并有截图供你预览。比如我看中了`bootstrap`这一款，使用命令
 
     :::bash
 	pelican-themes -i bootstrap
 
-安装该主题。这时使用命令
+安装该主题。再使用命令
 
     :::bash
 	pelican-themes -l
@@ -324,13 +301,13 @@ Slug: build_your_blog
     bash develop_server.sh restart #打开pelican的自动监测-更新-本地端口功能
     read answer #防止新打开的窗口被关闭
 
-第一行主要是把python虚拟环境的配置脚本source一下，关于虚拟环境更多的信息可以参考[这一篇]({filename}../python/enviromentsetup.md)。
+第一行主要是把python虚拟环境的配置脚本source一下，关于虚拟环境更多的信息可以参考[这一篇]({filename}../python/enviromentsetup.md)。如果你没有在用虚拟环境则不需要这一行。
 
-第二行则是进入到我的blog目录下面，因为相应的Makefile和bash脚本都在这里放着。
+第二行进入到我的blog目录下面，因为相应的Makefile和bash脚本都在这里放着。
 
 第三行的作用则和前面提到的`make devserver`一样，实际上如果你去查看Makefile的话，会发现输入`make devserver`执行的就是这一条命令，我不想绕弯就直接写成这样了。
 
-第四行则作用则有点像你在windows下面编译c程序，因为跳出来的窗口在程序运行完之后就自动关闭，便往往在最后留一个等待输入的命令让程序先等着。
+第四行则作用则有点像你在windows下面编译c程序，因为跳出来的窗口在程序运行完之后就自动关闭，便往往在最后留一个等待输入的命令让程序先待命。
 
 接着将该脚本保存为`runpelicanserver.sh`，更改其权限以便能够直接运行
 
