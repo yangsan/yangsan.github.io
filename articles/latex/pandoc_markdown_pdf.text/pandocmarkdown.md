@@ -13,12 +13,13 @@ Slug: pandoc_markdown_pdf
 
 #但是，为什么是pdf
 
-我在[为什么应该用markdown写作]({filename}../latex/whyusemarkdown.md)中提到微软的`.doc`不是一种理想的格式，同时，我也不认为pdf就更优秀，但我仍旧有足够的理由选择编译pdf：
+我在[为什么应该用markdown写作]({filename}../latex/whyusemarkdown.md)中提到微软的`.doc`不是一种理想的格式，同时，我也不太喜欢pdf，但我仍旧有足够的理由选择编译pdf：
 
-- 逼格当真高
+- 是单纯且专业的文档展示标准，确保不同设备不同环境下阅读体验的一致
 - 处理得当的话效果非常优雅
 - 是出版业，论文圈里的绝对标准
 - 数学公式，希腊字母的良好支持
+- 逼格当真高
 
 当然，因为latex本身极其繁琐恼人，很少有人真的直接手写latex源文件然后去编译pdf的，事实上如果你像我一样用latex写过一学期的场论作业，就会真切的明白为什么这样干逼格高了。
 
@@ -87,14 +88,14 @@ ubuntu下面可以直接sudo安装，如果需要beamer的支持，请参考[这
     FLAG= -N --toc #如果需要其他的参数，可以添加到这后面
 
     %.pdf : %.md
-        pandoc %(FLAG) --latex-engine xelatex -o $@ $<
+        pandoc $(FLAG) --latex-engine xelatex -o $@ $<
 
     .PHONY: clean
 
     clean:
         rm -f *.pdf
 
-把上面的内容写到一个叫"Makefile"的文件里（一定要把里面的tab改成真tab，直接拷下来可能是四个空格，会出bug），放在你的markdown源文件目录下面，假设你的源文件名叫"test.md"，那么你只需要
+把上面的内容写到一个叫"Makefile"的文件里（一定要把里面的tab改成真tab，直接拷下来可能是四个空格，会报错），放在你的markdown源文件目录下面，假设你的源文件名叫"test.md"，那么你只需要
 
     :::bash
     make test.pdf
@@ -103,18 +104,18 @@ make会自动检测当前的目录，找到对应的源文件，并将其编译�
 
 ##进一步自动化
 
-我发现自己也有强迫症，喜欢写两句就编译一下看看效果，次数多了觉得老得make *.pdf也很烦人，要是我每次保存都能个给我自动编译一下就好了。
+我平常写公式比较多，需要写两句就编译一下看看效果，次数多了觉得老得make *.pdf也很烦人，要是我每次保存都能个给我自动编译一下就好了。
 
 恰巧我用vim写markdown，这事儿还真不难。只需要在`.vimrc`文件中加一句：
 
     :::vim
     autocmd BufWritePost *.mkdn make %<.pdf
 
-原理大概是这样的，vim的`autocmd`语句类似一个随时待命的功能，当触发事件发生（这里是BufWritePost，即把文件写进硬盘操作）发生时且pattern（在这里是当前文档后缀为.mkdn）得到匹配的话自动执行后面的命令（这里是make %<.pdf）。
+原理大概是这样的，vim的`autocmd`语句类似一个随时待命的功能，当触发事件（这里是BufWritePost，即把文件写进硬盘操作）发生时且pattern（在这里是当前文档后缀为.mkdn）得到匹配的话就自动执行后面的命令（这里是make %<.pdf）。
 
-也就是说，如果你正在编辑一个后缀为.mkdn的文件，每次保存vim都会执行`make %<.pdf`命令。这里的`make`是vim自己的命令，效果和在命令行执行`make`一样，同样可以检测出当前目录下的Makefile，后面的`%<.pdf`则是参数，`%<`代表当前文档的名称不带后缀，和Makefile的用法类似。
+也就是说，如果你正在编辑一个后缀为.mkdn的文件，每次保存vim都会执行`make %<.pdf`命令。这里的`make`是vim自己的命令，效果和在命令行执行`make`一样，同样可以检测出当前目录下的Makefile，后面的`%<.pdf`则是参数，`%<`代表当前文档的名称但不带后缀，和Makefile的用法类似。
 
-这里面有些地方需要注意。
+这里面有些地方需要注意：
 
 首先，默认情况下vim没法正确识别markdown文档，所以还得先在`.vimrc`里面加一句：
 
@@ -123,11 +124,11 @@ make会自动检测当前的目录，找到对应的源文件，并将其编译�
 
 这样，后缀为md、mkdn、markdown的文档都能被正确识别为markdown文档了。
 
-然后一个问题是，我并不是所有的markdown文档都需要编译，但暂时没想出更好的给vim匹配的pattern，只能自己定一个规矩：凡是需要编译成pdf的markdown文档通通使用.mkdn后缀，这样就不会误伤了。
+另一个问题是，我并不是所有的markdown文档都需要编译，但暂时没想出更好的给vim匹配的pattern，只能自己定一个规矩：凡是需要编译成pdf的markdown文档通通使用.mkdn后缀，这样就不会误伤了。
 
 最后，用了这条自动化的命令以后Makefile里面也要把之前的.md后缀改成.mkdn。
 
-最终效果很酷炫的。
+最终效果很酷炫。
 
 #pandoc的markdown扩展
 
@@ -181,3 +182,24 @@ pandoc对引用的支持也相当不错。我的话先用文献管理软件生�
     #Reference
 
 需要注意的一点是，处理引用需要`pandoc-citeproc`组件的支持，没有的话会报`pandoc-citeproc not found in path`错误。ubuntu下面sudo安装一下就好。
+
+##关于pdf多说一点
+
+前面提到pandoc将markdown转换为pdf时首先套用模板将.mkdn文件转换成.tex文件，再调用设定好的编译器编译成pdf。
+
+这种意味着你其实可以直接在.mkdn文件里使用latex的标记。
+
+比如我比较喜欢的公式对齐环境：
+
+    :::latex
+    \begin{align*}
+    \end{align*}
+
+或者换页：
+
+    :::latex
+    \newpage
+
+都可以正常编译，相当的灵活。
+
+另外，如果需要什么宏包的支持只要去修改模板就行。比如前面提供的模板我除了修改过字体还添加了公式支持，并对图标目录等标识作了汉化。
